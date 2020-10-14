@@ -16,4 +16,4 @@ en esta consola, colocamos el comando  "git clone https://github.com/jjmadeo/Moz
 
 luego de que esto termine, ejecutamos el siguiente comando  "npm install" 
 
-luego ejecutamos el comando   ng server  -o  y si todo fue bien el proyecto tendria que  abrir solo el navegador.
+luego ejecutamos el comando   ng server  -o  y si todo fue bien el proyecto tendria que  abrir solo el navegador. 
