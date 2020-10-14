@@ -15,6 +15,7 @@ import { IniciarSesionComponent } from './moz/iniciar-sesion/iniciar-sesion.comp
 import { FormsModule } from '@angular/forms';
 import { MenuSmallComponent } from './moz/menu-small/menu-small.component';
 import { MenuResponsiveComponent } from './moz/menu-responsive/menu-responsive.component';
+import { InfoFooterComponent } from './moz/complementos/info-footer/info-footer.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { MenuResponsiveComponent } from './moz/menu-responsive/menu-responsive.c
     IniciarSesionComponent,
     MenuSmallComponent,
     MenuResponsiveComponent,
+    InfoFooterComponent,
     
   ],
   imports: [
