@@ -1,0 +1,46 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+front/Mozapp/dist
+front/Mozapp/tmp
+front/Mozapp/out-tsc
+# Only exists if Bazel was run
+front/Mozapp/bazel-out
+
+# dependencies
+front/Mozapp/node_modules
+
+# profiling files
+chrome-profiler-events*.json
+speed-measure-plugin*.json
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+front/Mozapp/.vscode/*
+front/Mozapp/!.vscode/settings.json
+front/Mozapp/!.vscode/tasks.json
+front/Mozapp/!.vscode/launch.json
+front/Mozapp/!.vscode/extensions.json
+front/Mozapp/.history/*
+
+# misc
+front/Mozapp/.sass-cache
+front/Mozapp/connect.lock
+front/Mozapp/coverage
+front/Mozapp/libpeerconnection.log
+front/Mozapp/npm-debug.log
+front/Mozapp/yarn-error.log
+front/Mozapp/testem.log
+front/Mozapp/typings
+
+# System Files
+front/Mozapp/.DS_Store
+front/Mozapp/Thumbs.db

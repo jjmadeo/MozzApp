@@ -1,0 +1,15 @@
+<nav class="navbar navbar-dark fixed-top  main-menu">
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse menuCustomize " id="navbarCollapse">
+		<ul class="navbar-nav mr-auto">
+			
+            <li class="main-menu__list__element nav-item " *ngFor="let item of elements" (click)="goTo(item);"  [ngClass]="{'selected' :   router.url === item.path}">
+                <span class="hidden-sm.hidden-xs"> {{item.name}}</span>
+            </li>
+			
+		</ul>
+
+    </div>
+</nav>

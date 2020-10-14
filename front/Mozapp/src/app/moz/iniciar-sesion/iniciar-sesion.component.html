@@ -1,0 +1,45 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 pr-0">
+            <app-info-header titulo="Los Hermanos" subTitulo="Nuestra comida nos distingue desde 1813" imgUrl="https://parisbymouth.com/wp-content/uploads/2011/07/Philou-restaurant-banner.jpg" ></app-info-header>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h1>cuerpo Componente</h1>
+
+        </div>
+        <div class="row">
+            <div class="col-12 m-5">
+                    <div class="form-row align-items-center">
+                      <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInput">Name</label>
+                        <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Jane Doe" [(ngModel)]="this.usuario" >
+                      </div>
+                      <div class="col-auto">
+                        <label class="sr-only" for="inlineFormInputGroup">Username</label>
+                        <div class="input-group mb-2">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">@</div>
+                          </div>
+                          <input type="password" class="form-control" id="inlineFormInputGroup" placeholder="Username" [(ngModel)]="this.password" >
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <div class="form-check mb-2">
+                          <input class="form-check-input" type="checkbox" id="autoSizingCheck">
+                          <label class="form-check-label" for="autoSizingCheck">
+                            Remember me
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-auto">
+                        <button type="button" *ngIf="true"  (click)="enviar()" class="btn btn-primary mb-2">enviar</button>
+                      </div>
+                    </div>
+                  
+            </div>
+        </div>
+    </div>
+
+</div>
