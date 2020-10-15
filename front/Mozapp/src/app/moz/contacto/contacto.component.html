@@ -1,12 +1,103 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 pr-0">
-            <app-info-header titulo="Los Hermanos" subTitulo="Nuestra comida nos distingue desde 1813" imgUrl="https://easy.scene7.com/is/image/EasySA/huincha-ratoncitos-desktop-1366x150-10-07-2017-2?$1366x150$" ></app-info-header>
+            <app-info-header titulo="Los Hermanos" subTitulo="Nuestra comida nos distingue desde 1813" imgUrl="../../../assets/head1.jpg" ></app-info-header>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12">
-            <h1>cuerpo Componente</h1>
+    <div class="row m-2">
+        <div class="col-6 ">
+            <div class="card bg-light shadow-lg  bg-white rounded" >
+                <div class="card-header">Contactanos</div>
+                <div class="card-body">
+                 <form  #contacto="ngForm" (ngSubmit)="onSubmit" >
+                    <div class="row">
+                        <div class="col">
+                            <label for="validationServerUsername">Apellido </label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="apellido" #apellido="ngModel"  [(ngModel)]="apellidoData"   required>
+                             <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend3">
+                                    <img *ngIf="apellido.valid && apellido.touched" src="" alt="" srcset="../../../assets/check.png">
+                                    <img *ngIf="!apellido.valid && apellido.touched"src="" alt="" srcset="../../../assets/cancelar.png">
+                                </span>
+                              </div>
+                              
+                            </div>
+                          </div>
+
+                          <div class="col">
+                            <label for="validationServerUsername">Nombre </label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="nombre" #nombre="ngModel"  [(ngModel)]="nombreData"   required>
+                             <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend3">
+                                    <img *ngIf="nombre.valid && nombre.touched" src="" alt="" srcset="../../../assets/check.png">
+                                    <img *ngIf="!nombre.valid  && nombre.touched" src="" alt="" srcset="../../../assets/cancelar.png">
+                                </span>
+                              </div>
+                              
+                            </div>
+                          </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <label for="validationServerUsername">Email </label>
+                            <div class="input-group">
+                                <input type="text" class="form-control " name="email" #email="ngModel"  [(ngModel)]="emailData" required>
+                             <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend3">
+                                    <img *ngIf="email.valid  && email.touched" src="" alt="" srcset="../../../assets/check.png">
+                                    <img *ngIf="!email.valid  && email.touched"src="" alt="" srcset="../../../assets/cancelar.png">
+                                </span>
+                              </div>
+                              
+                            </div>
+                          </div>
+                          <div class="col-4">
+                            <label for="validationServerUsername">Telefono </label>
+                            <div class="input-group">
+                                <input type="text" class="form-control " name="telefono"  #telefono="ngModel"  [(ngModel)]="telefonoData"   required>
+                             <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend3">
+                                    <img *ngIf="telefono.valid  && telefono.touched" src="" alt="" srcset="../../../assets/check.png">
+                                    <img *ngIf="!telefono.valid  && telefono.touched"src="" alt="" srcset="../../../assets/cancelar.png">
+                                </span>
+                              </div>
+                              
+                            </div>
+                          </div>
+                        
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col">
+                            <textarea class="form-control" name="mensaje" rows="3" #mensaje="ngModel"  [(ngModel)]="mensajeData"    [ngClass]="{'bg-danger': !mensaje.valid && mensaje.touched}" style="resize: none;" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col text-left">
+                            <button class="btn btn-success mt-2" (click)="EnviarFormContacto()" [disabled]="!contacto.valid" >Enviar</button>
+                        </div>
+                    </div>
+
+                    
+                 </form>
+
+                </div>
+              </div>
+
+
+        </div>
+        <div class="col-6">
+
+
+        </div>
+    </div>
+    <div class="row m-3">
+        <div class="col-6">
+
 
         </div>
     </div>
