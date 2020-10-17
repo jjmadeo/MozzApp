@@ -1,1 +1,8 @@
-<p>admin-home works!</p>
+<h1>ESTE ES EL HOME DEL ADM, y aca se debe mostrar Lista de usaurios</h1>
+
+<ul>
+    <li *ngFor="let item of listaUser">
+        Usaurio: {{item.usuario}} <br>
+        nombre: {{item.nombre}}
+    </li>
+</ul>

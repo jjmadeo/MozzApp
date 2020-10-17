@@ -22,6 +22,8 @@ import { CajeroHomeComponent } from './moz/aplicacion/cajero-home/cajero-home.co
 import { MesaComponent } from './moz/aplicacion/mesa/mesa/mesa.component';
 import { AltaMesaComponent } from './moz/aplicacion/mesa/alta-mesa/alta-mesa.component';
 import { ComamosComponent } from './moz/comamos/comamos.component';
+import { AdmAuditoriaComponent } from './moz/aplicacion/adm-auditoria/adm-auditoria.component';
+import { AdmPersonasComponent } from './moz/aplicacion/adm-personas/adm-personas.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { ComamosComponent } from './moz/comamos/comamos.component';
     MesaComponent,
     AltaMesaComponent,
     ComamosComponent,
+    AdmAuditoriaComponent,
+    AdmPersonasComponent,
     
     
   ],
