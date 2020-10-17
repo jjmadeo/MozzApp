@@ -1,0 +1,23 @@
+{
+    "carta":{
+        "bebidas":[
+            {
+                "nombre":"Coca-Cola",
+                "descripccion":"",
+                "precio":158.30
+
+            },
+            {
+                "nombre":"Coca-Cola",
+                "descripccion":"",
+                "precio":158.30
+
+            }
+        ],
+        "entradas":[],
+        "guarniciones":[],
+        "minutas":[]
+        
+    }
+        
+}

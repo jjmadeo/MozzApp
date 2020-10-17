@@ -1,0 +1,31 @@
+{
+    "empleados":[
+        {
+            "id":1,
+            "nombre":"Juan Jose",
+            "apellido":"Madeo",
+            "role":"CAJERO",
+            "turno":"M",
+            "usuario":"jjmadeo",
+            "password":"123456"
+        },
+        {
+            "id":2,
+            "nombre":"Salvador",
+            "apellido":"cirino",
+            "role":"MOZO",
+            "turno":"M",
+            "usuario":"scirino",
+            "password":"123456"
+        },
+        {
+            "id":3,
+            "nombre":"Jose",
+            "apellido":"Gomez",
+            "role":"ADM",
+            "turno":"T",
+            "usuario":"jgomez",
+            "password":"123456"
+        }
+    ]
+}

@@ -1,45 +1,62 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 pr-0">
-          <app-info-header titulo="Los Hermanos" subTitulo="Nuestra comida nos distingue desde 1813" imgUrl="https://easy.scene7.com/is/image/EasySA/huincha-ratoncitos-desktop-1366x150-10-07-2017-2?$1366x150$" ></app-info-header>
+          <app-info-header titulo="Los Hermanos" subTitulo="Nuestra comida nos distingue desde 1813" imgUrl="../../../assets/head1.jpg" ></app-info-header>
         </div>
     </div>
     <div class="row">
         <div class="col-12">
-            <h1>cuerpo Componente</h1>
-
-        </div>
-        <div class="row">
-            <div class="col-12 m-5">
-                    <div class="form-row align-items-center">
-                      <div class="col-auto">
-                        <label class="sr-only" for="inlineFormInput">Name</label>
-                        <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Jane Doe" [(ngModel)]="this.usuario" >
-                      </div>
-                      <div class="col-auto">
-                        <label class="sr-only" for="inlineFormInputGroup">Username</label>
-                        <div class="input-group mb-2">
-                          <div class="input-group-prepend">
-                            <div class="input-group-text">@</div>
+          <div class="container">
+            <div class="card bg-light shadow-lg mt-4 bg-white rounded" >
+              <div class="card-header">Ingresar</div>
+              <div class="card-body">
+               <form  #iniciarSesion="ngForm" (ngSubmit)="onSubmit(iniciarSesion)" >
+                  <div class="row">
+                      <div class="col">
+                          <label for="validationServerUsername">Usuario </label>
+                          <div class="input-group">
+                              <input type="text" class="form-control" name="usuario" #usuario="ngModel"  [(ngModel)]="usuarioData"   required>
+                           <div class="input-group-prepend">
+                              <span class="input-group-text" id="inputGroupPrepend3">
+                                  <img *ngIf="usuario.valid && usuario.touched" src="" alt="" srcset="../../../assets/check.png">
+                                  <img *ngIf="!usuario.valid && usuario.touched"src="" alt="" srcset="../../../assets/cancelar.png">
+                              </span>
+                            </div>
+                            
                           </div>
-                          <input type="password" class="form-control" id="inlineFormInputGroup" placeholder="Username" [(ngModel)]="this.password" >
                         </div>
-                      </div>
-                      <div class="col-auto">
-                        <div class="form-check mb-2">
-                          <input class="form-check-input" type="checkbox" id="autoSizingCheck">
-                          <label class="form-check-label" for="autoSizingCheck">
-                            Remember me
-                          </label>
-                        </div>
-                      </div>
-                      <div class="col-auto">
-                        <button type="button" *ngIf="true"  (click)="enviar()" class="btn btn-primary mb-2">enviar</button>
-                      </div>
-                    </div>
-                  
-            </div>
-        </div>
-    </div>
 
+                        <div class="col">
+                          <label for="validationServerUsername">Contraseña </label>
+                          <div class="input-group">
+                              <input type="password" class="form-control" name="password" #password="ngModel"  [(ngModel)]="passwordData"   required>
+                           <div class="input-group-prepend">
+                              <span class="input-group-text" id="inputGroupPrepend3">
+                                  <img *ngIf="password.valid && password.touched" src="" alt="" srcset="../../../assets/check.png">
+                                  <img *ngIf="!password.valid  && password.touched" src="" alt="" srcset="../../../assets/cancelar.png">
+                              </span>
+                            </div>
+                            
+                          </div>
+                        </div>
+
+                  </div>
+                  <div class="row">
+                    
+                  </div>
+                  <div class="row">
+                      <div class="col text-left">
+                          <button class="btn btn-success mt-2"  type="submit" (click)="login()" [disabled]="!iniciarSesion.valid" >Enviar</button>
+                      </div>
+                  </div>
+
+                  
+               </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+       
+    </div>
 </div>

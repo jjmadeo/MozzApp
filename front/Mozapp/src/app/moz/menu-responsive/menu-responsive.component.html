@@ -1,7 +1,11 @@
 <div class="main-menu">
     <ul class="main-menu__list">
-        <li class="main-menu__list__element" *ngFor="let item of elements" (click)="goTo(item);"  [ngClass]="{'selected' :   router.url === item.path}">
+        <li class="main-menu__list__element" *ngFor="let item of elements"  (click)="goTo(item);"  [click]="item.logout" [ngClass]="{'selected' :   router.url === item.path}">
             <span class="hidden-sm.hidden-xs"> {{item.name}}</span>
+        </li>
+
+        <li class="main-menu__list__element" *ngIf="userLogued"  (click)="logout();">
+            <span class="hidden-sm.hidden-xs"> Cerrar Sesion</span>
         </li>
         
     </ul>

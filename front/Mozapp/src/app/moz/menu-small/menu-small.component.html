@@ -8,7 +8,9 @@
             <li class="main-menu__list__element nav-item " *ngFor="let item of elements" (click)="goTo(item);"  [ngClass]="{'selected' :   router.url === item.path}">
                 <span class="hidden-sm.hidden-xs"> {{item.name}}</span>
             </li>
-			
+			<li class="main-menu__list__element nav-item " *ngIf="userLogued"  (click)="logout();">
+                <span class="hidden-sm.hidden-xs"> Cerrar Sesion</span>
+            </li>
 		</ul>
 
     </div>

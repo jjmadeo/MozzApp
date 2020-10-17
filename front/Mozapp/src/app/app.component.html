@@ -2,9 +2,8 @@
 <div class="container-fluid pr-0">
     <div class="row">
         <div class="col-12">
-            <app-menu-small></app-menu-small>
-            <app-menu-responsive></app-menu-responsive>
-            <!-- <app-menu></app-menu> -->
+            <app-menu-small [items]='elements' [user]='userLogued' ></app-menu-small>
+            <app-menu-responsive [items]='elements' [user]='userLogued' ></app-menu-responsive>
         </div>
     </div>
     <div class="row">
@@ -18,8 +17,8 @@
     
     
 </div>
-<app-info-footer></app-info-footer>
+<!-- <app-info-footer></app-info-footer> -->
 
 
-<app-loader></app-loader>
+<app-loader ></app-loader>
 

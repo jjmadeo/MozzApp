@@ -16,6 +16,9 @@ import { FormsModule } from '@angular/forms';
 import { MenuSmallComponent } from './moz/menu-small/menu-small.component';
 import { MenuResponsiveComponent } from './moz/menu-responsive/menu-responsive.component';
 import { InfoFooterComponent } from './moz/complementos/info-footer/info-footer.component';
+import { AdminHomeComponent } from './moz/aplicacion/admin-home/admin-home.component';
+import { MozoHomeComponent } from './moz/aplicacion/mozo-home/mozo-home.component';
+import { CajeroHomeComponent } from './moz/aplicacion/cajero-home/cajero-home.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { InfoFooterComponent } from './moz/complementos/info-footer/info-footer.
     MenuSmallComponent,
     MenuResponsiveComponent,
     InfoFooterComponent,
+    AdminHomeComponent,
+    MozoHomeComponent,
+    CajeroHomeComponent,
     
   ],
   imports: [

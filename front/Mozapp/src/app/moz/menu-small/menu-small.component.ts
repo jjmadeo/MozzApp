@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit  } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,30 +7,43 @@ import { Router } from '@angular/router';
   styleUrls: ['./menu-small.component.css']
 })
 export class MenuSmallComponent implements OnInit {
+  @Input("items")menuOptions: any[];
+  @Input("user") userLogued:any;
 
-  elements: any[];
+  elements:any[];
 
   constructor(
     private router:Router
   ) {
-    this.elements = [
-      // {name:'MENU.INIT', path:'/itecban', icon:'ico_home_sm.png'},
-      {name: 'Home', path: '/home', icon: '', counter: null},
-      {name: 'Nosotros', path: '/nosotros', icon: '', counter: null},
-      {name: 'Contacto', path: '/contacto', icon: '', counter: null},
-      {name: 'Coma Aqui!', path: '/comer', icon: '', counter: null},
-      {name: 'Trabajo Aqui!', path: '/ingresar', icon: '', counter: null}
-
-    ];
+    
 
    }
 
     
 
   ngOnInit(): void {    
+
+  this.elements = this.recargarMenu(this.menuOptions,this.userLogued)
+
+  }
+  ngOnChanges(){
+    this.elements = this.recargarMenu(this.menuOptions,this.userLogued)
+
   }
 
 
+ 
+
+recargarMenu(array,user){
+ return  array.filter(item=>item.role.toUpperCase() === (user?.role.toUpperCase() === null || user?.role.toUpperCase() === undefined?"":user?.role.toUpperCase() ) ||  item.role.toUpperCase() ==='*' )
+
+
+}
+
+logout(){
+  localStorage.removeItem("sesion")
+  this.router.navigate(['/home']);
+}
 
   goTo(element) {
     const link = [element.path];
