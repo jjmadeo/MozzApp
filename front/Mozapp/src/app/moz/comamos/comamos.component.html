@@ -1,0 +1,52 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 pr-0">
+          <app-info-header titulo="Los Hermanos" subTitulo="Nuestra comida nos distingue desde 1813" imgUrl="../../../assets/head1.jpg" ></app-info-header>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="container mt-5">
+            
+                <div class="row">
+                    <div class="col">
+                        <div class="card text-center">
+                            <div class="card-header">
+                              Benvenido
+                            </div>
+                            <div class="card-body">
+                                <h3>Ingresa el codigo, de tu mesa</h3>
+                                <form #altaMesa="ngForm">
+                                <div class="container">
+                                    <div class="row m-3">
+                                        <div class="col">
+                                            <input  #nombre="ngModel" placeholder=' Ej:Pedido de "Pedreo"'   [(ngModel)]="nombreData"  name="nombre"   type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="row m-3">
+                                        <div class="col">
+                                            <input type="text" class="form-control"  name="nmesa" [ngClass]="{'is-valid': nmesa.valid && nmesa.touched,'is-invalid': !nmesa.valid && nmesa.touched }"  #nmesa="ngModel"  [(ngModel)]="nmesaData"   required>
+                                        </div>
+                                    </div>
+                                    <div class="row m-3">
+                                        <div class="col">
+                                            <button class="btn btn-success" [disabled]='!altaMesa.form.valid' (click)="validarMesa()" >Comenzar pedido</button>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </form>
+                            </div>
+                            <div class="card-footer text-muted">
+                             ¿Que tenes ganas de comer?
+                            </div>
+                          </div>
+                    </div>
+                </div>
+
+            </div>
+            
+          
+        </div>
+       
+    </div>
+</div>

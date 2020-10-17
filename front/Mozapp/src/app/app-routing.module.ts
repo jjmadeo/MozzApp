@@ -7,18 +7,23 @@ import { IniciarSesionComponent } from "./moz/iniciar-sesion/iniciar-sesion.comp
 import { AdminHomeComponent } from './moz/aplicacion/admin-home/admin-home.component';
 import { MozoHomeComponent } from './moz/aplicacion/mozo-home/mozo-home.component';
 import { CajeroHomeComponent } from './moz/aplicacion/cajero-home/cajero-home.component';
+import { ComamosComponent } from './moz/comamos/comamos.component';
+import { AltaMesaComponent } from './moz/aplicacion/mesa/alta-mesa/alta-mesa.component';
 
 
 const routes: Routes = [
     {path:'',component:HomeComponent},
     {path:'contacto',component:ContactoComponent},
     {path:'nosotros',component:NosotrosComponent},
-    {path:'comer',component:ContactoComponent},
+    {path:'comer',component:ComamosComponent},
     {path:'ingresar',component:IniciarSesionComponent},
 
     {path:'app/admin',component:AdminHomeComponent},
     {path:'app/mozo',component:MozoHomeComponent},
     {path:'app/cajero',component:CajeroHomeComponent},
+    
+    {path:'comer/altamesa/:id/:name',component:AltaMesaComponent},
+
 
     {path:'**',component:HomeComponent}
 ];

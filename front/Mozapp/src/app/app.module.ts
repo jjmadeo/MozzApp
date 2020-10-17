@@ -19,6 +19,9 @@ import { InfoFooterComponent } from './moz/complementos/info-footer/info-footer.
 import { AdminHomeComponent } from './moz/aplicacion/admin-home/admin-home.component';
 import { MozoHomeComponent } from './moz/aplicacion/mozo-home/mozo-home.component';
 import { CajeroHomeComponent } from './moz/aplicacion/cajero-home/cajero-home.component';
+import { MesaComponent } from './moz/aplicacion/mesa/mesa/mesa.component';
+import { AltaMesaComponent } from './moz/aplicacion/mesa/alta-mesa/alta-mesa.component';
+import { ComamosComponent } from './moz/comamos/comamos.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,10 @@ import { CajeroHomeComponent } from './moz/aplicacion/cajero-home/cajero-home.co
     AdminHomeComponent,
     MozoHomeComponent,
     CajeroHomeComponent,
+    MesaComponent,
+    AltaMesaComponent,
+    ComamosComponent,
+    
     
   ],
   imports: [
