@@ -24,6 +24,8 @@ import { AltaMesaComponent } from './moz/aplicacion/mesa/alta-mesa/alta-mesa.com
 import { ComamosComponent } from './moz/comamos/comamos.component';
 import { AdmAuditoriaComponent } from './moz/aplicacion/adm-auditoria/adm-auditoria.component';
 import { AdmPersonasComponent } from './moz/aplicacion/adm-personas/adm-personas.component';
+import { MozoPedidosComponent } from './moz/aplicacion/mozo-pedidos/mozo-pedidos.component';
+import { MozoNuevoPedidoComponent } from './moz/aplicacion/mozo-nuevo-pedido/mozo-nuevo-pedido.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import { AdmPersonasComponent } from './moz/aplicacion/adm-personas/adm-personas
     ComamosComponent,
     AdmAuditoriaComponent,
     AdmPersonasComponent,
+    MozoPedidosComponent,
+    MozoNuevoPedidoComponent,
     
     
   ],

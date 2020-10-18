@@ -11,6 +11,8 @@ import { ComamosComponent } from './moz/comamos/comamos.component';
 import { AltaMesaComponent } from './moz/aplicacion/mesa/alta-mesa/alta-mesa.component';
 import { AdmPersonasComponent } from './moz/aplicacion/adm-personas/adm-personas.component';
 import { AdmAuditoriaComponent } from './moz/aplicacion/adm-auditoria/adm-auditoria.component';
+import { MozoPedidosComponent } from './moz/aplicacion/mozo-pedidos/mozo-pedidos.component';
+import { MozoNuevoPedidoComponent } from './moz/aplicacion/mozo-nuevo-pedido/mozo-nuevo-pedido.component';
 
 
 const routes: Routes = [
@@ -25,6 +27,9 @@ const routes: Routes = [
     {path:'app/cajero',component:CajeroHomeComponent},
     {path:'app/adm/personas',component:AdmPersonasComponent},
     {path:'app/adm/auditoria',component:AdmAuditoriaComponent},
+
+    {path:'app/mozo/pedidos',component:MozoPedidosComponent},
+    {path:'app/mozo/pedido',component:MozoNuevoPedidoComponent},
     
     {path:'comer/altamesa/:id/:name',component:AltaMesaComponent},
 

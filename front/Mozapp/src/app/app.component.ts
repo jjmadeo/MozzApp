@@ -26,8 +26,11 @@ export class AppComponent implements DoCheck {
       {name: 'inicio', path: '/app/adm', role:'ADM'},
       {name: 'Auditoria', path: '/app/adm/auditoria', role:'ADM'},
       {name: 'Personas', path: '/app/adm/personas', role:'ADM'},
-      {name: 'MenuAPPa', path: '/app/c', role:'MOZO'},
-      {name: 'MenuAPPa', path: '/app/d', role:'MOZO'},
+      {name: 'Inicio', path: '/app/mozo/', role:'MOZO'},
+      {name: 'Solicitudes', path: '/app/mozo/pedidos', role:'MOZO'},
+      {name: 'Nuevo pedido', path: '/app/mozo/pedido', role:'MOZO'},
+      
+
       {name: 'MenuAPPa', path: '/app/e', role:'CAJERO'}
 
     ];
