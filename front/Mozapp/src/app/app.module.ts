@@ -26,6 +26,7 @@ import { AdmAuditoriaComponent } from './moz/aplicacion/adm-auditoria/adm-audito
 import { AdmPersonasComponent } from './moz/aplicacion/adm-personas/adm-personas.component';
 import { MozoPedidosComponent } from './moz/aplicacion/mozo-pedidos/mozo-pedidos.component';
 import { MozoNuevoPedidoComponent } from './moz/aplicacion/mozo-nuevo-pedido/mozo-nuevo-pedido.component';
+import { CartaComponent } from './moz/aplicacion/carta/carta.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { MozoNuevoPedidoComponent } from './moz/aplicacion/mozo-nuevo-pedido/moz
     AdmPersonasComponent,
     MozoPedidosComponent,
     MozoNuevoPedidoComponent,
+    CartaComponent,
     
     
   ],
