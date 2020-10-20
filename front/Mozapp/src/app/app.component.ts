@@ -39,9 +39,7 @@ export class AppComponent implements DoCheck {
 
   ngDoCheck(){
     this.userLogued = this._AuthService.userIsLogued();
-    console.log(this.userLogued);     
-
-  }
+    }
 
 
 }

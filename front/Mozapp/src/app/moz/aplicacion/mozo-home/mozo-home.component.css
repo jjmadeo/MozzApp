@@ -1,0 +1,42 @@
+@media (min-width: 200px) 
+{
+    .mesa{
+        width: 30px;
+        height: 30px;
+    }
+    .alerta{
+        width: 10px;
+        height: 10px;
+    }
+}
+    
+@media (min-width: 768px) {
+    .mesa{
+        width: 40px;
+        height: 40px;
+    }
+    .alerta{
+        width: 10px;
+        height: 10px;
+    }
+}
+@media (min-width: 992px) { 
+    .mesa{
+        width: 50px;
+        height: 50px;
+    }
+    .alerta{
+        width: 10px;
+        height: 10px;
+    }
+}
+@media (min-width: 1200px) {
+    .mesa{
+        width: 60px;
+        height: 60px;
+    }
+    .alerta{
+        width: 30px;
+        height: 30px;
+    }
+}
