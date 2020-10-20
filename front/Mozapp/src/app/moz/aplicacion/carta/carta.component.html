@@ -1,0 +1,22 @@
+<table id="menu" class="table table-sm table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Accion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of carta">
+        <th scope="row">{{item.id}}</th>
+        <td>{{item.nombre}}</td>
+        <td>${{item.precio}}</td>
+        <td>
+            <button  class="btn badge badge-success mr-1" (click)="emitirAdd(item)">+</button>                                 
+            <button  class=" btn badge badge-danger ml-1" (click)="emitirDelete(item)">-</button> 
+        </td>                           
+      </tr>
+     
+    </tbody>
+  </table>
