@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PersonaService } from "../../servicios/persona.service";
 
 @Component({
   selector: 'app-adm-auditoria',
@@ -6,10 +7,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./adm-auditoria.component.css']
 })
 export class AdmAuditoriaComponent implements OnInit {
+  //creo una lista de array de auditoria
+  listaAuditoria:any[];
 
-  constructor() { }
+  constructor(
+    private _personaServices:PersonaService
+  ) { }
 
   ngOnInit(): void {
-  }
 
-}
+    this.listaAuditoria= [
+      {usuario:"pDRoloco",log:"ingreso a sistema el dia 17/10/20 11:00 am"},
+      {usuario:"JuanLo",log:"realizo compra el dia 17/10/20  01:00 pm"},
+      {usuario:"Joselo",log:"solicito mesa el dia 18/10/20 4:00 pm"}
+
+    ]
+    
+    this._personaServices.getEMPL().subscribe(res=>{
+      console.log(res)
+    
+    },err=>{
+      console.log(err)
+    }
+  )}}
