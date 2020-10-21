@@ -1,8 +1,46 @@
-<h1>ESTE ES EL HOME DEL ADM, y aca se debe mostrar Lista de usaurios</h1>
+<!-- muestro la lista de usuarios/nombre   -->
+<!-- <div class="container">
+    <div class="row">
+          <br> <br>
+          <h1>Lista de Usuarios</h1>  
+    </div>
+  </div>
 
-<ul>
-    <li *ngFor="let item of listaUser">
-        Usaurio: {{item.usuario}} <br>
-        nombre: {{item.nombre}}
-    </li>
-</ul>
+
+<div class="container">
+    <div class="row">
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let item of listaUser">
+                Usuario: {{item.usuario}} <br>
+                nombre: {{item.nombre}}
+            </li>
+        </ul>
+    </div>
+  </div>
+
+
+   -->
+
+<br> <br>
+  <div class="container">
+    <div class="row justify-content-md-center">
+            <div class="card text-center">
+                <div class="card-header">
+                    Lista de Usuarios
+                    </div>
+                        <div class="card-body">
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let item of listaUser">
+                                    Usuario: {{item.usuario}} <br>
+                                    nombre: {{item.nombre}}
+                                </li>
+                            </ul>
+                        </div>
+                    <div class="card-footer text-muted">
+                </div>
+            </div>  
+    </div>
+  </div>
+
+
+ 
