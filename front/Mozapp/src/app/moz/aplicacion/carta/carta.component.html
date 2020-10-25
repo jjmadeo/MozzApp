@@ -1,22 +1,80 @@
-<table id="menu" class="table table-sm table-hover">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Precio</th>
-        <th scope="col">Accion</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of carta">
-        <th scope="row">{{item.id}}</th>
-        <td>{{item.nombre}}</td>
-        <td>${{item.precio}}</td>
-        <td>
-            <button  class="btn badge badge-success mr-1" (click)="emitirAdd(item)">+</button>                                 
-            <button  class=" btn badge badge-danger ml-1" (click)="emitirDelete(item)">-</button> 
-        </td>                           
-      </tr>
+
+<div class="container-fluid"  *ngIf="vista==='TABLE'">
+  <div class="row ">
+    <div class="col">
+      <input type="text" class="form-control" placeholder="Buscar: Ej. papas" [(ngModel)]="inputBuscar" (ngModelChange)='buscarArray()' >
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col menu"></div>
+
+      <table id="menu"  class="table table-sm table-hover">
+  
+        <thead>          
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Accion</th>
+          </tr>
+        </thead>
+        <tbody class="menu" >
+          <tr *ngFor="let item of cartaFiller">
+            <th scope="row">{{item.id}}</th>
+            <td>{{item.nombre}}</td>
+            <td>${{item.precio}}</td>
+            <td>
+                <button  class="btn badge badge-success mr-1" (click)="emitirAdd(item)">+</button>                                 
+                <button  class=" btn badge badge-danger ml-1" (click)="emitirDelete(item)">-</button> 
+            </td>                           
+          </tr>
+         
+        </tbody>
+      </table>
      
-    </tbody>
-  </table>
+  </div>  
+</div>
+
+
+
+
+
+  <div class="container-fluid"  *ngIf="vista==='CARD'">
+    <div class="row ">
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Buscar: Ej. papas" [(ngModel)]="inputBuscar" (ngModelChange)='buscarArray()' >
+      </div>
+    </div>
+    <div class="row">
+      <div class="col menu">
+        <div class="item m-3 shadow-lg p-3 mb-5 bg-white rounded"  *ngFor="let item of cartaFiller" >
+          <div class="card" style="max-width: 15rem;">
+            <img src="https://cocina-casera.com/wp-content/uploads/2016/11/hamburguesa-queso-receta.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{item.id}} - {{item.nombre}}</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+             
+             <div class="row">
+               <div class="col-1 ">
+                <button  class="btn  btn-success " (click)="emitirAdd(item)">+</button>                                 
+               </div>
+               <div class="col-1  ml-2">
+                <button  class=" btn  btn-danger  " (click)="emitirDelete(item)">-</button> 
+               </div>
+               <div class="col  ml-1">
+                <button  class=" btn  btn-warning  " disabled>${{item.precio}}</button> 
+
+               </div>
+             </div>
+             
+    
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div> 
+
+
+  

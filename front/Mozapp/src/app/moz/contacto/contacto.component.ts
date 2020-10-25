@@ -18,6 +18,7 @@ export class ContactoComponent implements OnInit {
    emailData:String;
    telefonoData:string;
    mensajeData:String;
+   calificacionNumerica:number
 
   constructor() { }
 

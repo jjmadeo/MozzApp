@@ -17,7 +17,7 @@ import { MozoNuevoPedidoComponent } from './moz/aplicacion/mozo-nuevo-pedido/moz
 
 const routes: Routes = [
     {path:'',component:HomeComponent},
-    {path:'contacto',component:ContactoComponent},
+    {path:'califica',component:ContactoComponent},
     {path:'nosotros',component:NosotrosComponent},
     {path:'comer',component:ComamosComponent},
     {path:'ingresar',component:IniciarSesionComponent},
@@ -31,7 +31,7 @@ const routes: Routes = [
     {path:'app/mozo/pedidos',component:MozoPedidosComponent},
     {path:'app/mozo/pedido',component:MozoNuevoPedidoComponent},
     
-    {path:'comer/altamesa/:id/:name',component:AltaMesaComponent},
+    {path:'comer/altamesa/:id',component:AltaMesaComponent},
 
 
     {path:'**',component:HomeComponent}

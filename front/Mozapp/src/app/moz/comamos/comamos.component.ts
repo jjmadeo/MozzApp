@@ -21,7 +21,8 @@ export class ComamosComponent implements OnInit {
 
 validarMesa(){
   //validar mesa disponible
-  this._route.navigate([`comer/altamesa/${this.nmesaData}/${this.nombreData}`]);
+  // this._route.navigate([`comer/altamesa/${this.nmesaData}/${this.nombreData}`]);
+  this._route.navigate([`comer/altamesa/${this.nmesaData}`]);
 
 
 }

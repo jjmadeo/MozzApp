@@ -20,7 +20,7 @@ export class AppComponent implements DoCheck {
     this.elements = [
       {name: 'Home', path: '/home', role:''},
       {name: 'Nosotros', path: '/nosotros', role:''},
-      {name: 'Contacto', path: '/contacto', role:''},
+      // {name: 'Contacto', path: '/contacto', role:''},
       {name: 'Coma Aqui!', path: '/comer', role:''},
       {name: 'Trabajo Aqui!', path: '/ingresar', role:''},
       {name: 'inicio', path: '/app/adm', role:'ADM'},

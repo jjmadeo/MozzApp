@@ -1,4 +1,8 @@
 .menu{
-    max-height:350px;
+    max-height:420px;
     overflow-y: auto;
+}
+
+.cartaBTN{
+    font-size: 200% !important;
 }
