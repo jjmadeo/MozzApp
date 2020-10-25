@@ -27,6 +27,9 @@ import { AdmPersonasComponent } from './moz/aplicacion/adm-personas/adm-personas
 import { MozoPedidosComponent } from './moz/aplicacion/mozo-pedidos/mozo-pedidos.component';
 import { MozoNuevoPedidoComponent } from './moz/aplicacion/mozo-nuevo-pedido/mozo-nuevo-pedido.component';
 import { CartaComponent } from './moz/aplicacion/carta/carta.component';
+import { AbmCartaComponent } from './moz/aplicacion/carta/abm-carta/abm-carta.component';
+import { CajeroCartaComponent } from './moz/aplicacion/cajero-carta/cajero-carta.component';
+import { CajeroPedidosComponent } from './moz/aplicacion/cajero-pedidos/cajero-pedidos.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +55,9 @@ import { CartaComponent } from './moz/aplicacion/carta/carta.component';
     MozoPedidosComponent,
     MozoNuevoPedidoComponent,
     CartaComponent,
+    AbmCartaComponent,
+    CajeroCartaComponent,
+    CajeroPedidosComponent,
     
     
   ],

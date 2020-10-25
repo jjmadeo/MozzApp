@@ -1,0 +1,123 @@
+<div class="container">
+    <div class="row mt-3">
+        <div class="col">
+            <h3>Administracion de la carta</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button type="button" class="btn btn-success m-1 " (click)="vistaCarta()">Añadir Carta</button>
+            <button type="button" class="btn btn-success m-1" (click)="vistaBanner()" >Añadir banner principal</button>
+
+        </div>
+
+    </div>
+
+    <div class="row mt-3">
+        <div class="col">
+
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col">
+
+            <div class="card bg-light shadow-lg  bg-white rounded" *ngIf="viewCarta || viewBanner" >
+                <div class="card-header" >Añadidir - Modificar</div>
+
+                <div class="card-body">
+                 <form  #carta="ngForm"   *ngIf="viewCarta" >
+                    <div class="row">
+                          <div class="col">
+                            <label for="validationServerUsername">Nombre</label>                           
+                                <input type="text" class="form-control" name="nombre" #nombre="ngModel" [ngClass]="{'is-valid': nombre.valid && nombre.touched,'is-invalid': !nombre.valid && nombre.touched }"  [(ngModel)]="nombreData"   required>
+                          </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="validationServerUsername">Descripccion </label>
+                                <input type="text" class="form-control " [ngClass]="{'is-valid': descripccion.valid && descripccion.touched,'is-invalid': !descripccion.valid && descripccion.touched }"  name="descripccion" #descripccion="ngModel"  [(ngModel)]="descripccionData" required>
+                             
+                          </div>  
+                    </div>
+
+                    <div class="row">
+                        <div class="col-3">
+
+                            <label for="validationServerUsername">Precio </label>
+                            <input type="number" class="form-control " [ngClass]="{'is-valid': precio.valid && precio.touched,'is-invalid': !precio.valid && precio.touched }"  name="precio" #precio="ngModel"  [(ngModel)]="precioData" required>
+                         
+                        </div>
+                        <div class="col-3">
+                            <div class="custom-control custom-switch mt-5">
+                                <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                                <label class="custom-control-label" for="customSwitch1">Disponible</label>
+                              </div>                         
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="row">
+                        <div class="col text-left">
+                            <button class="btn btn-success m-2"  [disabled]="!carta.valid" >Guardar cambios</button>
+                            <button class="btn btn-info m-2"  [disabled]="!carta.valid" >Descartar cambios</button>
+
+                        </div>
+                    </div>
+
+                    
+                 </form>
+
+                 <div class="row" *ngIf="viewBanner  && viewCarta ">
+                     <div class="col">
+                         <hr>
+                     </div>
+                 </div>
+
+                 <form  #carta="ngForm"  *ngIf="viewBanner"  >
+                    <div class="row">
+                          <div class="col">
+                            <label for="validationServerUsername">Nombre</label>                           
+                                <input type="text" class="form-control" name="nombre" #nombre="ngModel" [ngClass]="{'is-valid': nombre.valid && nombre.touched,'is-invalid': !nombre.valid && nombre.touched }"  [(ngModel)]="nombreData"   required>
+                          </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="validationServerUsername">Descripccion </label>
+                                <input type="text" class="form-control " [ngClass]="{'is-valid': descripccion.valid && descripccion.touched,'is-invalid': !descripccion.valid && descripccion.touched }"  name="descripccion" #descripccion="ngModel"  [(ngModel)]="descripccionData" required>
+                             
+                          </div>  
+                    </div>
+
+                    <div class="row">
+                        <div class="col-3">
+
+                            <label for="validationServerUsername">URL </label>
+                            <input type="text" class="form-control " [ngClass]="{'is-valid': precio.valid && precio.touched,'is-invalid': !precio.valid && precio.touched }"  name="precio" #precio="ngModel"  [(ngModel)]="precioData" required>
+                         
+                        </div>
+                        
+                    </div>
+
+                    
+
+                    <div class="row">
+                        <div class="col text-left">
+                            <button class="btn btn-success m-2"  [disabled]="!carta.valid" >Guardar cambios</button>
+                            <button class="btn btn-info m-2"  [disabled]="!carta.valid" >Descartar cambios</button>
+
+                        </div>
+                    </div>
+
+                    
+                 </form>
+
+
+
+                </div>
+              </div>
+
+
+        </div>
+    </div>
+</div>

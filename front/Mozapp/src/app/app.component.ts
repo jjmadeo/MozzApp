@@ -24,14 +24,20 @@ export class AppComponent implements DoCheck {
       {name: 'Coma Aqui!', path: '/comer', role:''},
       {name: 'Trabajo Aqui!', path: '/ingresar', role:''},
       {name: 'inicio', path: '/app/adm', role:'ADM'},
+     
       {name: 'Auditoria', path: '/app/adm/auditoria', role:'ADM'},
       {name: 'Personas', path: '/app/adm/personas', role:'ADM'},
+      
       {name: 'Inicio', path: '/app/mozo/', role:'MOZO'},
       {name: 'Solicitudes', path: '/app/mozo/pedidos', role:'MOZO'},
       {name: 'Nuevo pedido', path: '/app/mozo/pedido', role:'MOZO'},
       
 
-      {name: 'MenuAPPa', path: '/app/e', role:'CAJERO'}
+      {name: 'Inicio', path: '/app/cajero', role:'CAJERO'},
+      {name: 'Carta', path: '/app/cajero/carta', role:'CAJERO'},
+      {name: 'Pedidos', path: '/app/cajero/pedidos', role:'CAJERO'}
+
+
 
     ];
     
