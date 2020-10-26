@@ -15,17 +15,17 @@ export class MozoHomeComponent implements OnInit {
   ngOnInit(): void {
     this.mesas = [
       {numero:1,estado:1,mozo:"Salvador", alerta:{tipo:1,cantidad:2}},
-      {numero:2,estado:0,mozo:"Salvador", alerta:{tipo:0,cantidad:1}},
+      {numero:2,estado:0,mozo:"Salvador", alerta:{tipo:0,cantidad:0}},
       {numero:3,estado:1,mozo:"Salvador", alerta:{tipo:0,cantidad:1}},
       {numero:4,estado:2,mozo:"Salvador", alerta:{tipo:2,cantidad:3}},
       {numero:5,estado:2,mozo:"Salvador", alerta:{tipo:1,cantidad:1}},
       {numero:6,estado:1,mozo:"Salvador", alerta:{tipo:1,cantidad:2}},
-      {numero:7,estado:0,mozo:"Salvador", alerta:{tipo:0,cantidad:1}},
+      {numero:7,estado:0,mozo:"Salvador", alerta:{tipo:0,cantidad:0}},
       {numero:8,estado:1,mozo:"Salvador", alerta:{tipo:0,cantidad:1}},
       {numero:9,estado:2,mozo:"Salvador", alerta:{tipo:2,cantidad:3}},
-      {numero:10,estado:2,mozo:"Salvador", alerta:{tipo:1,cantidad:1}},
+      {numero:10,estado:2,mozo:"Salvador", alerta:{tipo:1,cantidad:0}},
       {numero:11,estado:1,mozo:"Salvador", alerta:{tipo:1,cantidad:2}},
-      {numero:12,estado:0,mozo:"Salvador", alerta:{tipo:0,cantidad:1}},
+      {numero:12,estado:0,mozo:"Salvador", alerta:{tipo:0,cantidad:0}},
       {numero:13,estado:1,mozo:"Salvador", alerta:{tipo:0,cantidad:1}},
       {numero:14,estado:2,mozo:"Salvador", alerta:{tipo:2,cantidad:3}},
       {numero:15,estado:2,mozo:"Salvador", alerta:{tipo:1,cantidad:1}}
