@@ -4,7 +4,7 @@ require_once('./db.php');
 
 function obtenerTablPrueba(){
    
-  return  Leer("select *  from testtable");
+  return  Leer("SELECT * FROM mozapp.relarolpermiso");
 
 }
 
