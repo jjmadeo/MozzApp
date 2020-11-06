@@ -13,11 +13,11 @@
                         <div id="carouselExampleCaptions" class="carousel slide shadow-lg p-3 mb-5 mt-2 bg-white rounded caruselCustomize" data-ride="carousel">
                             
                             <div class="carousel-inner">
-                                <div class="carousel-item " [ngClass]="{'active': item.active}" *ngFor="let item of elementsCarruselle" >
-                                    <img src="{{item.url}}" class="d-block w-100" alt="...">
+                                <div class="carousel-item " [ngClass]="{'active': item.IMGPRINCIPAL == 1}" *ngFor="let item of elementsCarruselle" >
+                                    <img src="{{item.URL}}" class="d-block w-100" alt="...">
                                     <div class="carousel-caption d-none d-md-block">
-                                      <h5>{{item.titulo}}</h5>
-                                      <p>{{item.descripccion}}</p>
+                                      <h5>{{item.TITULO}}</h5>
+                                      <p>{{item.DESCRIPCCION}}</p>
                                     </div>
                                   </div>
                             </div>

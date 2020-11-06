@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -6,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(  private _http:HttpClient    ) { }
 
   userIsLogued(){
 
@@ -21,9 +22,12 @@ export class AuthService {
   }
 
 
-  // login():Observable<any>{
+  login(body):Observable<any>{
+     let headers = new HttpHeaders().set('Content-Type','application/json');
+      return this._http.post("http://localhost:81/TPLab/api/login",body,{headers: headers})
+    
 
-  // }
+  }
 
   logOut(){
 

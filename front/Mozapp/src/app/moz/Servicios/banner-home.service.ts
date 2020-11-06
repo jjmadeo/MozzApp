@@ -12,13 +12,16 @@ export class BannerHomeService {
     
   ){ }
     
-
+  // getCarrusel():Observable<any>{
+  //   let headers = new HttpHeaders().set('Content-Type','application/json');
+  //   return this._http.get("http://localhost:81/TPLab/api/carrusel",{headers: headers})
+  // }
 
 
     getCarrusel():Observable<any>{
       let headers = new HttpHeaders().set('Content-Type','application/json');
 
-      return this._http.get("../../../assets/mock/getCarrusel.json/",{headers: headers})
+      return this._http.get("http://localhost:81/TPLab/api/carrusel",{headers: headers})
     }
 
 

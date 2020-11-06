@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { loaderSet } from '../complementos/loadModify';
 import { BannerHomeService } from "../servicios/banner-home.service";
 @Component({
   selector: 'app-home',
@@ -14,15 +15,21 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
        
+      loaderSet(true)
       this._getCarruserlService.getCarrusel().subscribe(res=>{
       
-        this.elementsCarruselle= res.carrusel
+        this.elementsCarruselle= res
+        loaderSet(false)
 
       },err=>{
         console.log(err)
+        loaderSet(false)
+
 
       }
     )
+     
+      
 
 
   }

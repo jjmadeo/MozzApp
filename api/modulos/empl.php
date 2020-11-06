@@ -17,6 +17,13 @@ function ObtenerEmpleados(){
 function crearempleado($body){
     $result= json_decode($body);
 
+    $usuarioBBDD = Leer("SELECT EMPLUSUA as usuario  FROM mozapp.empleado e  where   EMPLUSUA ='$result->usuario'");
+
+
+    if(isset($usuarioBBDD[0]['usuario'])){
+      return "Usuario existente";
+    }
+
     $result->clave = password_hash($result->clave,PASSWORD_DEFAULT);
     return Escribir(" INSERT INTO `empleado` (`EMPLNOMB`,`EMPLAPLL`,`EMPLTURN`,`EMPLUSUA`,`EMPLCLAV`,`ROLEID`)VALUES('$result->nombre','$result->apellido','$result->turno','$result->usuario','$result->clave',$result->rol)");
    //return Escribir(" INSERT INTO empleado ('EMPLNOMB','EMPLAPLL','EMPLTURN','EMPLUSUA','EMPLCLAV','ROLEID') VALUES('$result=>nombre','$result=>apellido','$result=>turno','$result=>usuario','$result=>clave',$result=>rol)");

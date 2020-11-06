@@ -38,7 +38,8 @@ export class MenuResponsiveComponent implements OnInit , OnChanges {
 }
 
 recargarMenu(array,user){
- return  array.filter(item=>item.role.toUpperCase() === (user?.role.toUpperCase() === null || user?.role.toUpperCase() === undefined?"":user?.role.toUpperCase() ) ||  item.role.toUpperCase() ==='*' )
+ return  array.filter(item=>item.role.toUpperCase() === (user?.rol.toUpperCase() === null || user?.rol.toUpperCase() === undefined?"":user?.rol.toUpperCase() ) ||  item.role.toUpperCase() ==='*' )
+ return  array.filter(item=>item.role.toUpperCase() === (user?.rol.toUpperCase() === null || user?.rol.toUpperCase() === undefined?"":user?.rol.toUpperCase() ) ||  item.role.toUpperCase() ==='*' )
 
 
 }
