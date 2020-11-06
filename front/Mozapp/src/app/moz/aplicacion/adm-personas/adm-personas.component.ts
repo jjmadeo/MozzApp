@@ -16,6 +16,26 @@ export class AdmPersonasComponent implements OnInit {
     private _personaServices:PersonaService
   ) { }
 
+
+    abrirNuevo(){
+      
+      alert("abrir Nuevo ");
+      
+     
+    }
+
+    abrirEditar(){
+      
+      alert("abrir Editar ");
+     
+    }
+
+    abrirEliminar(){
+      
+      alert("abrir Eliminar ");
+     
+    }
+
   ngOnInit(): void {
 
     // this.listaUsercombo= [
@@ -25,6 +45,7 @@ export class AdmPersonasComponent implements OnInit {
 
     // ]
 
+    
 
 
 this._personaServices.getEMPL().subscribe(res=>{
@@ -34,4 +55,5 @@ this._personaServices.getEMPL().subscribe(res=>{
   console.log(err)
 }
 )
-  }}
+}}
+

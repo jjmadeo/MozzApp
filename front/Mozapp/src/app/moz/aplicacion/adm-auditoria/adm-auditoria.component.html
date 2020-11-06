@@ -28,38 +28,37 @@
 <br> <br>
  <div class="container">
     <div class="row justify-content-md-center">
-        <div class='panel-body'>
-            <div class='table-responsive table-bordered'>
-
-                <div class="card">
-                    <div class="card-header">Logs del Sistema</div>
-                 
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Usuarios</th>
-                                <th>Logs</th>
-                            </tr>
-                        </thead>
-                 
-                        <tbody>
-                            <tr *ngFor="let item of listaAuditoria;">
-                                <td>{{item.usuario}}</td>
-                                <td>{{item.log}}</td>
-                            </tr>
-                 
-                
-                        </tbody>
-                    </table>
-                 
-                    <div class="card-footer">
+        <div class="col-md-12">
+                <div class='panel-body'>
+                    <div class='table-responsive table-bordered'>
+                        <div class="card">
+                            <div class="card-header">Logs del Sistema</div>
                         
-                    </div>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Usuarios</th>
+                                            <th>Logs</th>
+                                        </tr>
+                                    </thead>
+                            
+                                    <tbody>
+                                        <tr *ngFor="let item of listaAuditoria;">
+                                            <td>{{item.usuario}}</td>
+                                            <td>{{item.log}}</td>
+                                        </tr>
+                            
+                            
+                                    </tbody>
+                                </table>
+                        
+                            <div class="card-footer">
+                                
+                            </div>
+                        </div>
+                    </div>    
                 </div>
-
-
-            </div>    
-        </div>
+        </div>        
     </div>
 </div>        
 

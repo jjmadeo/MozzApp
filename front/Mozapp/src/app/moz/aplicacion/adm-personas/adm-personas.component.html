@@ -54,9 +54,9 @@ muestro todos los usuarios con un combo select -->
 
                                 <div class="row m-3">
                                     <div class="col">
-                                        <button class="btn btn-success" [disabled]='!abmpersona.form.valid'  >Nuevo</button>
-                                        <button class="btn btn-success" [disabled]='!abmpersona.form.valid'  >Editar</button>
-                                        <button class="btn btn-success" [disabled]='!abmpersona.form.valid'  >Eliminar</button>
+                                        <button class="btn btn-success m-1" [disabled]='!abmpersona.form.valid' (click)="abrirNuevo()" >Nuevo</button>
+                                        <button class="btn btn-success m-1" [disabled]='!abmpersona.form.valid' (click)="abrirEditar()" >Editar</button>
+                                        <button class="btn btn-success m-1" [disabled]='!abmpersona.form.valid' (click)="abrirEliminar()" >Eliminar</button>
                                     </div>
                                 </div>
                             </div> 
