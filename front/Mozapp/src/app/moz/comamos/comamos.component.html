@@ -18,6 +18,11 @@
                                 <h3>Ingresa el codigo de tu mesa</h3>
                                 <form #altaMesa="ngForm">
                                 <div class="container">
+
+                                    <div class="alert alert-danger alert-dismissible fade show" *ngIf="logginError" role="alert">
+                                        {{logginErrorText}}
+                                          
+                                        </div>
                                     
                                     <div class="row m-3">
                                         <div class="col">

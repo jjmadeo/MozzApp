@@ -1,5 +1,7 @@
 import { Component, DoCheck, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
+import { loaderSet } from 'src/app/moz/complementos/loadModify';
+import { MesaService } from "../../../servicios/mesa.service";
 
 
 @Component({
@@ -18,7 +20,16 @@ export class AltaMesaComponent implements OnInit,DoCheck {
   validarLista:boolean;
   msjPedidoBTN:string;
   total:number=0;
+
+  mesaRequestJSON:any ={
+    mesaID:null,
+    pedido:{
+        pedidoTotal:null,
+        pedidoList:[]
+    }
+  }
   constructor(
+    private _mesaService:MesaService,
     private _route:ActivatedRoute
   ) { }
 
@@ -110,6 +121,37 @@ export class AltaMesaComponent implements OnInit,DoCheck {
   }
 
   enviarPedido(){
+    console.log(this.pedidoList)
+    this.mesaRequestJSON.mesaID = this.nmesa;
+    this.mesaRequestJSON.pedido.pedidoTotal = this.total;
+    let arrAux=[];
+    
+
+    this.pedidoList.forEach(element => {
+
+
+      arrAux.push({id:element.elemento.id,cantidad:element.cantidad,observacion:''})
+    });
+
+    this.mesaRequestJSON.pedido.pedidoList =arrAux;
+
+    console.log(this.mesaRequestJSON);
+
+    loaderSet(true);
+    this._mesaService.postAltaPedidoMesa(this.mesaRequestJSON).subscribe(res=>{
+      // this.pedidoEnviado =  true;
+      console.log(res);
+
+
+
+      loaderSet(false)
+    },e=>{
+      console.log(e);
+
+      loaderSet(false)
+    })
+
+
 
     // si el pedido fue enviado y la peticion  http vulve ok   seteamos en true
 

@@ -75,6 +75,12 @@ return $results;
 
 }
 
+function getConnection()
+{
+    global $conn;
+    return $conn;
+}
+
 
 
 ?>

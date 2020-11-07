@@ -26,6 +26,8 @@ require_once('./modulos/empl.php');
 require_once('./modulos/auth.php');
 require_once('./modulos/mesa.php');
 require_once('./modulos/carrusel.php');
+require_once('./modulos/pedido.php');
+
 
 
 
@@ -133,6 +135,24 @@ if($_SERVER['REQUEST_METHOD']=='GET'){ // consultar datos del servidor
           
             json_encode(http_response_code(404));
             }
+
+
+        break;
+        case "AltaPedidoMesa":
+
+            try {
+
+                print_r(json_encode(altaMesaPedido($BodyRequest)));
+                // print_r($BodyRequest);
+
+          
+                json_encode(http_response_code(200));    
+            } catch (Exception $th) {
+                
+                print_r(json_encode($th->getMessage()));
+            
+                json_encode(http_response_code(404));
+                }
 
 
         break;

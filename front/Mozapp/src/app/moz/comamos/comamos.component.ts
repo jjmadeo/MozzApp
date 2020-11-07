@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { loaderSet } from '../complementos/loadModify';
+import {MesaService} from '../servicios/mesa.service';
 
 
 @Component({
@@ -11,18 +13,50 @@ export class ComamosComponent implements OnInit {
   nmesaData:number;
   nombreData:String
 
+  logginError:boolean = false;
+  logginErrorText:String;
+
   constructor(
-    private _route:Router
+    private _route:Router,
+    private _mesaService:MesaService
+
   ) { }
 
   ngOnInit(): void {
+    if(localStorage.getItem("mesa") !== null){
+      this._route.navigate([`comer/altamesa/${localStorage.getItem("mesa")}`]);
+
+    }
   }
 
 
 validarMesa(){
-  //validar mesa disponible
-  // this._route.navigate([`comer/altamesa/${this.nmesaData}/${this.nombreData}`]);
-  this._route.navigate([`comer/altamesa/${this.nmesaData}`]);
+
+  loaderSet(true);
+  this._mesaService.getMesaID(this.nmesaData).subscribe(res=>{
+    res = JSON.stringify(res[0]).toLowerCase()
+    res  = JSON.parse(res);
+
+    console.log(res);
+    if(res.habilitada === "1" && res.ocupada === "0"){
+      this._route.navigate([`comer/altamesa/${this.nmesaData}`]);
+      localStorage.setItem("mesa",`${this.nmesaData}`);
+    }else{
+      this.logginError = true;
+      this.logginErrorText="Mesa Ocupada o inhabilitada"
+    }
+
+
+    loaderSet(false);
+
+
+  },e=>{
+    loaderSet(false);
+
+
+  })
+
+
 
 
 }
