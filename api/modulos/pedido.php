@@ -20,7 +20,9 @@ function altaMesaPedido($obj){
       foreach ( $listaPedido as $item ){
             $conn->exec("INSERT INTO `mozapp`.`relacartapedido` (`PEDIDOID`,`PRODID`,`CANTIDAD`,`OBSERVACION`) VALUES($id_Pedido,$item->id,$item->cantidad,'$item->observacion');");
       }
-        
+      //envio notificacion al realizar alta de pedido .
+      $conn->exec("INSERT INTO `mozapp`.`notificacion`(`PEDIDOID`,`ESTADOID`,`TIPO_NOTI_ID`)VALUES($id_Pedido,1,3);");
+
         $conn->commit();
         $resultQuery = array("msj"=>"Transaccion finalizada con exito.");
       } catch(PDOException $e) {

@@ -27,6 +27,8 @@ require_once('./modulos/auth.php');
 require_once('./modulos/mesa.php');
 require_once('./modulos/carrusel.php');
 require_once('./modulos/pedido.php');
+require_once('./modulos/carta.php');
+
 
 
 
@@ -60,6 +62,10 @@ if($_SERVER['REQUEST_METHOD']=='GET'){ // consultar datos del servidor
 
         break;
         case "carta":
+
+            print_r(json_encode(ObtenerCarta()));
+            //print_r(json_encode(ObtenerCarta()));
+
 
         break;
         case "carrusel":
@@ -189,7 +195,7 @@ if($_SERVER['REQUEST_METHOD']=='GET'){ // consultar datos del servidor
 
     switch ($url) {
         case "test/".$parametroGET:
-            print_r(json_encode(obtenerTablPrueba()));
+
         break;
         
         case "test":

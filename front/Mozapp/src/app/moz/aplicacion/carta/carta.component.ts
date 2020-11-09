@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { CartaService } from "../../servicios/carta.service";
 
 @Component({
   selector: 'app-carta',
@@ -6,7 +7,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
   styleUrls: ['./carta.component.css']
 })
 export class CartaComponent implements OnInit {
-  carta:any[]
+  carta:any
   cartaFiller:any[]
 
   @Output() itemCartaAdd:any = new EventEmitter ();
@@ -17,29 +18,19 @@ export class CartaComponent implements OnInit {
 
   inputBuscar:String;
 
-  constructor() { }
+  constructor(private _cartaService:CartaService) { }
 
   ngOnInit(): void {
-    this.carta =[
-      {id:1,nombre:"milanesas",precio:356.99},
-      {id:2,nombre:"papas fritas",precio:356.99},
-      {id:3,nombre:"huvos",precio:356.99},
-      {id:4,nombre:"caldo",precio:356.99},
-      {id:5,nombre:"arrozz",precio:356.99},
-      {id:6,nombre:"hamburguesa",precio:356.99},
-      {id:7,nombre:"pato",precio:356.99},
-      {id:8,nombre:"cone",precio:356.99},
-      {id:9,nombre:"milanga",precio:356.99},
-      {id:10,nombre:"puchero",precio:356.99},
-      {id:11,nombre:"hamburguesa",precio:356.99},
-      {id:12,nombre:"pato",precio:356.99},
-      {id:13,nombre:"cone",precio:356.99},
-      {id:14,nombre:"milanga",precio:356.99},
-      {id:15,nombre:"puchero",precio:356.99}
 
-    ]
+    this._cartaService.getCarta().subscribe(res=>{
+       this.carta= JSON.parse(JSON.stringify(res).toLowerCase())
+       this.cartaFiller = this.carta
+    },e=>{
+      console.log(e);
+    })
 
-    this.cartaFiller = this.carta;
+
+   
   }
 
   emitirAdd(item){
@@ -53,8 +44,6 @@ export class CartaComponent implements OnInit {
   }
 
   buscarArray(){
-    console.log("ejecute Change Buscar Array")
-
     this.cartaFiller  =  this.carta.filter(item=>{
       return item.nombre.toLowerCase().includes(this.inputBuscar.toLowerCase()) || item.id ==this.inputBuscar.toLowerCase();
   })

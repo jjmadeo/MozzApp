@@ -1,7 +1,8 @@
 import { Component, DoCheck, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute ,Router } from "@angular/router";
 import { loaderSet } from 'src/app/moz/complementos/loadModify';
 import { MesaService } from "../../../servicios/mesa.service";
+
 
 
 @Component({
@@ -30,17 +31,19 @@ export class AltaMesaComponent implements OnInit,DoCheck {
   }
   constructor(
     private _mesaService:MesaService,
-    private _route:ActivatedRoute
+    private _route:ActivatedRoute,
+    private _routeNavigate:Router,
+
   ) { }
 
-  ngDoCheck(): void {    
+  ngDoCheck(): void {  
+    this.pedidoEnviado = localStorage.getItem("pedidoEnviado") !=null &&  localStorage.getItem("pedidoEnviado") === 'true'? true:false
     this.msjPedidoBTN = this.pedidoEnviado?"Pedido Enviado":"Enviar pedido";
     this.validarLista = (this.pedidoList.length > 0)
     this.cantidadPedidosList=0
     this.total = 0;
     
 
-    console.log("cambio!!! =>",this.total)
 
     this.pedidoList.forEach(element => {
       
@@ -57,6 +60,27 @@ export class AltaMesaComponent implements OnInit,DoCheck {
     this.nmesa = this._route.snapshot.paramMap.get('id');
     // this.nombre = this._route.snapshot.paramMap.get('name');
 
+    
+    if((localStorage.getItem("mesa") !== null )){
+      this._routeNavigate.navigate(["comer/altamesa/"+localStorage.getItem("mesa")]);      
+
+    }else{
+
+        loaderSet(true);
+        this._mesaService.getMesaID(this.nmesa).subscribe(res=>{
+        res = JSON.stringify(res[0]).toLowerCase()
+        res  = JSON.parse(res);
+        if(res.habilitada === "1" && res.ocupada === "0"){      
+          localStorage.setItem("mesa",`${this.nmesa}`);
+        }else{
+          this._routeNavigate.navigate(["/"]);
+        }
+            loaderSet(false);
+      },e=>{
+        loaderSet(false);
+        })
+    }
+  
     console.log(this._route.snapshot.paramMap.get('id')+"-"+this._route.snapshot.paramMap.get('name'))
 
     
@@ -135,13 +159,11 @@ export class AltaMesaComponent implements OnInit,DoCheck {
 
     this.mesaRequestJSON.pedido.pedidoList =arrAux;
 
-    console.log(this.mesaRequestJSON);
 
     loaderSet(true);
     this._mesaService.postAltaPedidoMesa(this.mesaRequestJSON).subscribe(res=>{
-      // this.pedidoEnviado =  true;
-      console.log(res);
-
+      //this.pedidoEnviado =  true;
+      localStorage.setItem("pedidoEnviado",'true');
 
 
       loaderSet(false)
@@ -153,12 +175,12 @@ export class AltaMesaComponent implements OnInit,DoCheck {
 
 
 
-    // si el pedido fue enviado y la peticion  http vulve ok   seteamos en true
 
-    this.pedidoEnviado =  true;
 
 
   }
+
+
   solicitaCierre(){
     //Solicitar Cierre de cuenta.
     

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CartaService} from '../../Servicios/carta.service';
+import {CartaService} from '../../servicios/carta.service';
 
 @Component({
   selector: 'app-mozo-nuevo-pedido',
@@ -11,12 +11,12 @@ export class MozoNuevoPedidoComponent implements OnInit {
   constructor(private _cartaService:CartaService) { }
   carta: any[];
   ngOnInit(): void {
-      this._cartaService.getCARTA().subscribe(resp=>{
-      this.carta= resp.carta;
-      console.log(resp);
-    },
-    error=>{
-      console.log("Error: "+error);
-    })
+    //   this._cartaService.getCARTA().subscribe(resp=>{
+    //   this.carta= resp.carta;
+    //   console.log(resp);
+    // },
+    // error=>{
+    //   console.log("Error: "+error);
+    // })
   }
 }
