@@ -1,7 +1,7 @@
 export  var config = 
 {
     "host":"http://localhost",
-    "port":80,
-    "path":"/MozzApp/api/"
+    "port":81,
+    "path":"/TPLab/api/"
 }
 export var url = config.host+":"+config.port+config.path;

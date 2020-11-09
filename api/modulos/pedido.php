@@ -24,7 +24,7 @@ function altaMesaPedido($obj){
       $conn->exec("INSERT INTO `mozapp`.`notificacion`(`PEDIDOID`,`ESTADOID`,`TIPO_NOTI_ID`)VALUES($id_Pedido,1,3);");
 
         $conn->commit();
-        $resultQuery = array("msj"=>"Transaccion finalizada con exito.");
+        $resultQuery = array("msj"=>"Transaccion finalizada con exito.","nPedido"=>$id_Pedido);
       } catch(PDOException $e) {
         // roll back the transaction if something failed
         $conn->rollback();

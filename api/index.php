@@ -28,6 +28,8 @@ require_once('./modulos/mesa.php');
 require_once('./modulos/carrusel.php');
 require_once('./modulos/pedido.php');
 require_once('./modulos/notificacion.php');
+require_once('./modulos/carta.php');
+
 
 
 //fin imports
@@ -165,6 +167,19 @@ if($_SERVER['REQUEST_METHOD']=='GET'){ // consultar datos del servidor
             
                 json_encode(http_response_code(404));
                 }
+
+
+        break;
+        case "altaNotificacion":
+
+            try {
+
+                print_r(json_encode(crearNotificacion($BodyRequest)));          
+                json_encode(http_response_code(200));    
+            } catch (Exception $th) {                
+                print_r(json_encode($th->getMessage()));
+                json_encode(http_response_code(404));
+            }
 
 
         break;

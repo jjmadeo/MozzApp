@@ -15,7 +15,7 @@
              <span class="sr-only">unread messages</span>
            </button>
            
-           <button class="btn btn-danger  ml-3" (click)="solicitaCierre()" [disabled]='!pedidoEnviado' *ngIf="invocado === 'ROUTER'"  data-toggle="modal" data-target="#confirmPedidoCuenta" >La cuenta</button>
+           <button class="btn btn-danger  ml-3"  [disabled]='!pedidoEnviado' *ngIf="invocado === 'ROUTER'"  data-toggle="modal" data-target="#confirmPedidoCuenta" [disabled]="!cuentaDelayButtom"  >La cuenta</button>
 
         </div>
        
@@ -107,7 +107,7 @@
           <p>¿Vas solicitar la cuenta?</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="enviarPedido()">Si, Dale!</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="solicitaCierre()">Si, Dale!</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">No, Para!</button>
         </div>
       </div>

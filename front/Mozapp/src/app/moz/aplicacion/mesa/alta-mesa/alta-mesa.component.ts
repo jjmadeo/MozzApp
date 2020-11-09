@@ -2,6 +2,8 @@ import { Component, DoCheck, Input, OnInit } from '@angular/core';
 import { ActivatedRoute ,Router } from "@angular/router";
 import { loaderSet } from 'src/app/moz/complementos/loadModify';
 import { MesaService } from "../../../servicios/mesa.service";
+import { NotificacionService } from "../../../servicios/notificacion.service";
+
 
 
 
@@ -14,13 +16,16 @@ export class AltaMesaComponent implements OnInit,DoCheck {
   @Input('invocado') invocado:string ='ROUTER';
   nmesa:string;
   nombre:String;
-  mozoDelayButtom:boolean = true;
+  mozoDelayButtom:boolean;
   pedidoList:any[];
   cantidadPedidosList:number =0;
   pedidoEnviado:boolean =false;
   validarLista:boolean;
   msjPedidoBTN:string;
   total:number=0;
+  nPedido:number;
+  cuentaDelayButtom:boolean;
+
 
   mesaRequestJSON:any ={
     mesaID:null,
@@ -31,6 +36,7 @@ export class AltaMesaComponent implements OnInit,DoCheck {
   }
   constructor(
     private _mesaService:MesaService,
+    private _notificacionService:NotificacionService,
     private _route:ActivatedRoute,
     private _routeNavigate:Router,
 
@@ -88,14 +94,23 @@ export class AltaMesaComponent implements OnInit,DoCheck {
 
   }
   pedirAsistencia(){
-    console.log("estoy llamando al mozo.")
-    this.mozoDelayButtom = false;
+    loaderSet(true);
+    this._notificacionService.altaNotificacion({idPedido:this.nPedido,tipo:1}).subscribe(res=>{
+        console.log(res)
 
 
+      loaderSet(false);
+      setTimeout(()=>{
+        this.mozoDelayButtom=true;
+      },600000)
+    },e=>{
 
-    setTimeout(()=>{
-      this.mozoDelayButtom=true;
-    },30000)
+      loaderSet(false);
+    })
+    
+
+
+    
 
   }
 
@@ -163,6 +178,10 @@ export class AltaMesaComponent implements OnInit,DoCheck {
     loaderSet(true);
     this._mesaService.postAltaPedidoMesa(this.mesaRequestJSON).subscribe(res=>{
       //this.pedidoEnviado =  true;
+      this.mozoDelayButtom=true;
+      this.cuentaDelayButtom = true
+      console.log(res)
+      this.nPedido = res.nPedido
       localStorage.setItem("pedidoEnviado",'true');
 
 
@@ -182,8 +201,20 @@ export class AltaMesaComponent implements OnInit,DoCheck {
 
 
   solicitaCierre(){
-    //Solicitar Cierre de cuenta.
-    
+    loaderSet(true);
+    this._notificacionService.altaNotificacion({idPedido:this.nPedido,tipo:2}).subscribe(res=>{
+        console.log(res)
+      loaderSet(false);
+      setTimeout(()=>{
+        this.mozoDelayButtom=true;
+        this.cuentaDelayButtom=true;
+
+      },600000)
+    },e=>{
+
+      loaderSet(false);
+    })
+        
   }
 
 }
