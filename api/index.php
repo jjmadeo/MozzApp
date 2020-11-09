@@ -27,15 +27,7 @@ require_once('./modulos/auth.php');
 require_once('./modulos/mesa.php');
 require_once('./modulos/carrusel.php');
 require_once('./modulos/pedido.php');
-require_once('./modulos/carta.php');
-
-
-
-
-
-
-
-
+require_once('./modulos/notificacion.php');
 
 
 //fin imports
@@ -72,18 +64,32 @@ if($_SERVER['REQUEST_METHOD']=='GET'){ // consultar datos del servidor
             print_r(json_encode(obtenerCarrusel()));
 
         break;        
-        case "mesas":
-            
+        case "mesas":            
             print_r(json_encode(ObtenerMesas()));
-
-
         break;
-        case "mesa/".$parametroGET:
-            
+        case "mesa/".$parametroGET:            
             print_r(json_encode(ObtenerMesa($parametroGET)));
 
         break;
-        case "notificaciones":
+        case "notificaciones/".$parametroGET:
+            try {
+                print_r(json_encode(ObtenerNotificacionesMozo($parametroGET)));
+                http_response_code(200);
+            } catch (\Throwable $th) {
+                print_r(json_encode($th->getMessage()));          
+                json_encode(http_response_code(404));
+            }
+
+        break;
+
+        case "mesasempleado/".$parametroGET:
+            try {
+                print_r(json_encode(ObtenerMesasEmpleado($parametroGET)));
+                http_response_code(200);
+            } catch (\Throwable $th) {
+                print_r(json_encode($th->getMessage()));          
+                json_encode(http_response_code(404));
+            }
 
         break;
         case "pedidos":

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MesaService } from "../../servicios/mesa.service";
 
 @Component({
   selector: 'app-mozo-home',
@@ -10,7 +11,9 @@ export class MozoHomeComponent implements OnInit {
   mozo: any=JSON.parse(localStorage.getItem("sesion")).nombre//localStorage())
   fecha: Date = new Date();
   
-  constructor(){ }
+  constructor(
+    private _mesaService: MesaService
+  ){ }
 
   ngOnInit(): void {
     this.mesas = [
@@ -31,5 +34,10 @@ export class MozoHomeComponent implements OnInit {
       {numero:15,estado:2,mozo:"Salvador", alerta:{tipo:1,cantidad:1}}
     ];
 
+    this._mesaService.getmesasEmpleado(9).subscribe(res=>{
+      console.log(res);
+    },e=>{
+      console.log(e);
+    })
   }
 }

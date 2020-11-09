@@ -15,6 +15,11 @@ function ObtenerMesas(){
   
   }
 
+  function ObtenerMesasEmpleado($id){   
+    return  Leer(" select M.* from mesa M inner join relamesaemplpedido REP on m.MESAID=REP.MESAID where REP.EMPLID= $id");
+  }
+
+
 
   
 
