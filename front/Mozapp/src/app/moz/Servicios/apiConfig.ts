@@ -2,6 +2,11 @@ export  var config =
 {
     "host":"http://localhost",
     "port":81,
-    "path":"/TPLab/api/"
+    "pathJuan":"/TPLab/api/",
+    "pathSalva":"/TPLab/api/",
+    "pathJose":"/TPLab/api/"
+
 }
-export var url = config.host+":"+config.port+config.path;
+export var url = config.host+":"+config.port+config.pathJuan;
+// export var url = config.host+":"+config.port+config.pathJose;
+// export var url = config.host+":"+config.port+config.pathSalva;
