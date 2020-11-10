@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row mt-3">
         <div class="col">
-            <h3>Administracion de la carta</h3>
+            <h3>Administracion de la carta Y Banner</h3>
         </div>
     </div>
     <div class="row">
@@ -22,7 +22,26 @@
         <div class="col">
 
             <div class="card bg-light shadow-lg  bg-white rounded" *ngIf="viewCarta || viewBanner" >
-                <div class="card-header" >Añadidir - Modificar</div>
+                <div class="card-header" > 
+                    <div class="row">
+                        <div class="col">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" [(ngModel)]="swichCarta" id="customSwitch1">
+                                <label class="custom-control-label" for="customSwitch1">Añadir o Actualizar.</label>
+                              </div>
+                            
+                              
+                            </div>
+                            <div class="col">
+                                <select class="form-control" (change)="rellenarFormUpdate($event.target.value)" *ngIf="swichCarta" [(ngModel)] ="categoriaData" >
+                                <option *ngFor="let item of carta" [value]="item.id">{{item.NOMBRE}}-{{item.PRECIO}}</option>
+                                        
+                            </select></div>
+                            
+                        </div>
+
+                    </div>
+                    
 
                 <div class="card-body">
                  <form  #carta="ngForm"   *ngIf="viewCarta" >
@@ -31,11 +50,11 @@
                             <label for="validationServerUsername">Nombre</label>                           
                                 <input type="text" class="form-control" name="nombre" #nombre="ngModel" [ngClass]="{'is-valid': nombre.valid && nombre.touched,'is-invalid': !nombre.valid && nombre.touched }"  [(ngModel)]="nombreData"   required>
                           </div>
-                    </div>
-                    <div class="row">
+                    </div>                    
+                   <div class="row">
                         <div class="col">
-                            <label for="validationServerUsername">Descripccion </label>
-                                <input type="text" class="form-control " [ngClass]="{'is-valid': descripccion.valid && descripccion.touched,'is-invalid': !descripccion.valid && descripccion.touched }"  name="descripccion" #descripccion="ngModel"  [(ngModel)]="descripccionData" required>
+                            <label for="validationServerUsername">url </label>
+                                <input type="text" class="form-control " [ngClass]="{'is-valid': url.valid && url.touched,'is-invalid': !url.valid && url.touched }"  name="url" #url="ngModel"  [(ngModel)]="urlData" required>
                              
                           </div>  
                     </div>
@@ -48,19 +67,27 @@
                          
                         </div>
                         <div class="col-3">
-                            <div class="custom-control custom-switch mt-5">
-                                <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                                <label class="custom-control-label" for="customSwitch1">Disponible</label>
-                              </div>                         
+                                
+                              <label for="validationServerUsername">Categoria </label>
+                                <select class="form-control" [ngClass]="{'is-valid': categoria.valid && categoria.touched,'is-invalid': !categoria.valid && categoria.touched }" id="categoria" name="categoria " #categoria="ngModel" [(ngModel)] ="categoriaData" required>
+                                  <option *ngFor="let item of categorias" [value]="item.ID">{{item.NOMBRE}}</option>
+                                
+                                </select>
+
+
+
                         </div>
+                        
                     </div>
+                        
+                        
 
                     
 
                     <div class="row">
                         <div class="col text-left">
-                            <button class="btn btn-success m-2"  [disabled]="!carta.valid" >Guardar cambios</button>
-                            <button class="btn btn-info m-2"  [disabled]="!carta.valid" >Descartar cambios</button>
+                            <button class="btn btn-success m-2" (click)="grabarItemCarta(carta)"  [disabled]="!carta.valid" >Guardar cambios</button>
+                            <button class="btn btn-info m-2" (click)="carta.resetForm()" [disabled]="!carta.valid" >Descartar cambios</button>
 
                         </div>
                     </div>
@@ -74,17 +101,17 @@
                      </div>
                  </div>
 
-                 <form  #carta="ngForm"  *ngIf="viewBanner"  >
+                 <form  #banner="ngForm"  *ngIf="viewBanner"  >
                     <div class="row">
                           <div class="col">
                             <label for="validationServerUsername">Nombre</label>                           
-                                <input type="text" class="form-control" name="nombre" #nombre="ngModel" [ngClass]="{'is-valid': nombre.valid && nombre.touched,'is-invalid': !nombre.valid && nombre.touched }"  [(ngModel)]="nombreData"   required>
+                                <input type="text" class="form-control" name="nombre" #nombre="ngModel" [ngClass]="{'is-valid': nombre.valid && nombre.touched,'is-invalid': !nombre.valid && nombre.touched }"  [(ngModel)]="nombreBannerData"   required>
                           </div>
                     </div>
                     <div class="row">
                         <div class="col">
                             <label for="validationServerUsername">Descripccion </label>
-                                <input type="text" class="form-control " [ngClass]="{'is-valid': descripccion.valid && descripccion.touched,'is-invalid': !descripccion.valid && descripccion.touched }"  name="descripccion" #descripccion="ngModel"  [(ngModel)]="descripccionData" required>
+                                <input type="text" class="form-control " [ngClass]="{'is-valid': descripccion.valid && descripccion.touched,'is-invalid': !descripccion.valid && descripccion.touched }"  name="descripccion" #descripccion="ngModel"  [(ngModel)]="descripccionBannerData" required>
                              
                           </div>  
                     </div>
@@ -93,7 +120,7 @@
                         <div class="col-3">
 
                             <label for="validationServerUsername">URL </label>
-                            <input type="text" class="form-control " [ngClass]="{'is-valid': precio.valid && precio.touched,'is-invalid': !precio.valid && precio.touched }"  name="precio" #precio="ngModel"  [(ngModel)]="precioData" required>
+                            <input type="text" class="form-control " [ngClass]="{'is-valid': precio.valid && precio.touched,'is-invalid': !precio.valid && precio.touched }"  name="precio" #precio="ngModel"  [(ngModel)]="urlBannerData" required>
                          
                         </div>
                         
@@ -103,8 +130,8 @@
 
                     <div class="row">
                         <div class="col text-left">
-                            <button class="btn btn-success m-2"  [disabled]="!carta.valid" >Guardar cambios</button>
-                            <button class="btn btn-info m-2"  [disabled]="!carta.valid" >Descartar cambios</button>
+                            <button class="btn btn-success m-2" (click)="grabarCarrusel(banner)"  [disabled]="!banner.valid" >Guardar cambios</button>
+                            <button class="btn btn-info m-2" (click)="banner.resetForm()"  [disabled]="!banner.valid" >Descartar cambios</button>
 
                         </div>
                     </div>

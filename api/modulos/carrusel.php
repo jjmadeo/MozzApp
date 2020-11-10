@@ -12,7 +12,7 @@ function crearCarrusel($body){
 
     $result= json_decode($body);
     
-    return Escribir("INSERT INTO  carrusel (`URL`,`TITULO`,`DESCRIPCCION`,`IMGPRINCIPAL`)VALUES('$result->url','$result->titulo','$result->descripcion',$result->active)");
+    return Escribir("INSERT INTO  carrusel (`URL`,`TITULO`,`DESCRIPCCION`)VALUES('$result->url','$result->titulo','$result->descripcion')");
 
 }
 

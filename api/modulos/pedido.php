@@ -39,5 +39,17 @@ function altaMesaPedido($obj){
 
 
 
+function obtenerPedidoMesa($mesa){
+  $pedido =Leer("SELECT p.PEDIDOID id_pedido ,  p.TOTAL total FROM mozapp.mesa m inner join relamesaemplpedido rel on m.MESAID = rel.MESAID inner join pedido p  on rel.RELAID = p.RELAID where p.PEDIDO_COBRADO = 0  and m.MESAID = $mesa ");
+
+  $id_pedidoA = $pedido[0]['id_pedido'];
+  $total= $pedido[0]['total'];
+
+return array("pedido"=>Leer("SELECT c.NOMBRE,c.URLIMG,c.PRECIO,rela.CANTIDAD, rela.OBSERVACION FROM mozapp.relacartapedido rela  inner join carta c on c.PRODID = rela.PRODID where  rela.PEDIDOID = $id_pedidoA "),"total"=>$total,"pedidoID"=>$id_pedidoA);
+
+
+}
+
+
 
 ?>

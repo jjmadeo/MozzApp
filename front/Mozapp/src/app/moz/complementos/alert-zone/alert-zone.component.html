@@ -1,0 +1,7 @@
+<div class="alert  alert-dismissible fade show" *ngFor="let item of notificaciones"  [ngClass]="{'alert-success': item.tipo === 'OK', 'alert-danger': item.tipo == 'ERROR' }"   role="alert">
+    {{item.msj}}
+    <button type="button" class="close" (click)="eliminarAlerta(item)" >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  

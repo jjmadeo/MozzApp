@@ -11,7 +11,7 @@ if (isset($_SERVER['HTTP_ORIGIN'])) {
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
     if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");         
+        header("Access-Control-Allow-Methods: GET, POST, PUT, OPTIONS");         
 
     if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
         header("Access-Control-Allow-Headers:        {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
@@ -62,6 +62,13 @@ if($_SERVER['REQUEST_METHOD']=='GET'){ // consultar datos del servidor
 
 
         break;
+        case "cartacategorias":
+
+            print_r(json_encode(cartaCategorias()));
+            //print_r(json_encode(ObtenerCarta()));
+
+
+        break;
         case "carrusel":
             print_r(json_encode(obtenerCarrusel()));
 
@@ -83,10 +90,30 @@ if($_SERVER['REQUEST_METHOD']=='GET'){ // consultar datos del servidor
             }
 
         break;
+        case "notificacionMesa/".$parametroGET:
+            try {
+                print_r(json_encode(ObtenerNotificacionesMesa($parametroGET)));
+                http_response_code(200);
+            } catch (\Throwable $th) {
+                print_r(json_encode($th->getMessage()));          
+                json_encode(http_response_code(404));
+            }
+
+        break;
 
         case "mesasempleado/".$parametroGET:
             try {
                 print_r(json_encode(ObtenerMesasEmpleado($parametroGET)));
+                http_response_code(200);
+            } catch (\Throwable $th) {
+                print_r(json_encode($th->getMessage()));          
+                json_encode(http_response_code(404));
+            }
+
+        break;
+        case "pedidomesa/".$parametroGET:
+            try {
+                print_r(json_encode(obtenerPedidoMesa($parametroGET)));
                 http_response_code(200);
             } catch (\Throwable $th) {
                 print_r(json_encode($th->getMessage()));          
@@ -183,6 +210,19 @@ if($_SERVER['REQUEST_METHOD']=='GET'){ // consultar datos del servidor
 
 
         break;
+        case "altacarta":
+
+            try {
+
+                print_r(json_encode(altaCarta($BodyRequest)));          
+                json_encode(http_response_code(200));    
+            } catch (Exception $th) {                
+                print_r(json_encode($th->getMessage()));
+                json_encode(http_response_code(404));
+            }
+
+
+        break;
         default:
         print_r(json_encode(array("MSJ"=>"Error, el metodo POST no existe.")));
         http_response_code(404);    
@@ -201,8 +241,17 @@ if($_SERVER['REQUEST_METHOD']=='GET'){ // consultar datos del servidor
             print_r(json_encode(actualizarEmpleado($BodyRequest,$parametroGET)));
         break;
         
-        case "test":
-            print_r(json_encode("Test sin parametro"));
+        case "carta/".$parametroGET:
+
+            try {
+
+                print_r(json_encode(actualizarItemCarta($parametroGET,$BodyRequest)));          
+                json_encode(http_response_code(200));    
+            } catch (Exception $th) {                
+                print_r(json_encode($th->getMessage()));
+                json_encode(http_response_code(404));
+            }
+
         break;
         default:
             print_r(json_encode(array("MSJ"=>"Error, el metodo Put no existe.")));

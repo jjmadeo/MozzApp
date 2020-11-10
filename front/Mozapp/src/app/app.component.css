@@ -22,3 +22,16 @@ app-loader{
     }
 
   }
+
+  .alertZone{
+    max-width: 20rem;
+    max-height: 30rem;
+    margin: 20px;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+  }

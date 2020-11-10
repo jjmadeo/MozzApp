@@ -4,9 +4,46 @@ require_once('./db.php');
 
 function ObtenerCarta(){
    
-    return  Leer("SELECT B.PRODID as id , B.NOMBRE , B.URLIMG, B.PRECIO, A.nombre CATEGORIA FROM mozapp.carta  B inner join categoria A ON A.CATEGORIAID = B.CATEGORIAID;");
+    return  Leer("SELECT B.PRODID as id , B.NOMBRE , B.URLIMG, B.PRECIO, A.nombre CATEGORIA, A.CATEGORIAID id_categoria  FROM mozapp.carta  B inner join categoria A ON A.CATEGORIAID = B.CATEGORIAID;");
   
   }
+
+  function cartaCategorias()
+  {
+    
+    return Leer("SELECT CATEGORIAID ID, NOMBRE FROM mozapp.categoria;");
+  }
+
+  function altaCarta($body){
+        $result= json_decode($body);  
+        $resultQuery = Escribir("INSERT INTO `mozapp`.`carta` (`NOMBRE`,`URLIMG`,`CATEGORIAID`,`PRECIO`)VALUES('$result->nombre','$result->url',$result->categoria,$result->precio)");
+
+        if($resultQuery >0){
+          return "nuevo item de carta ingresado.";
+          
+        }
+        
+         throw new Exception("Error al insertar la carta");
+        
+
+    }
+
+  function actualizarItemCarta($id,$body)   
+  {
+    $result= json_decode($body);  
+
+    $resultQuery =  Escribir("UPDATE `mozapp`.`carta`SET `NOMBRE` = '$result->nombre',`URLIMG` = '$result->url',`CATEGORIAID` =$result->categoria ,`PRECIO` = $result->precio  WHERE `PRODID` = $id;");
+    if($resultQuery >0){
+      return "Se ah actualizado el Registro de la carta";
+      
+    }else{
+      throw new Exception("Error al actualizar la carta");
+
+    }
+    
+
+  }
+  
 
 // function crearempleado($body){
 //     $result= json_decode($body);

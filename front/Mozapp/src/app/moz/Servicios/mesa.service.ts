@@ -18,6 +18,12 @@ export class MesaService {
 
     return this._http.get(url+"/mesa/"+id,{headers: headers})
   }
+  getMesas():Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+
+    return this._http.get(url+"/mesas",{headers: headers})
+  }
+
 
   postAltaPedidoMesa(obj):Observable<any>{
     let headers = new HttpHeaders().set('Content-Type','application/json');
@@ -28,6 +34,11 @@ export class MesaService {
   getmesasEmpleado(id):Observable<any>{
     let headers = new HttpHeaders().set('Content-Type','application/json');
     return this._http.get(`${url}/mesasempleado/${id}`,{headers: headers})
+  }
+
+  getPedidoMesa(id):Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    return this._http.get(`${url}/pedidomesa/${id}`,{headers: headers})
   }
 
 }

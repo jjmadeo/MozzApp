@@ -1,1 +1,71 @@
-<p>cajero-home works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h3>Mesas</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card text-center">
+                <div class="card-header">
+                </div>
+                <div class="card-body">
+                    <div class="continer">
+                        <div class="row">
+                            <div class="col"  *ngFor="let item of mesas" >
+                                <app-mesa class="btn" (click)="VerPedido(item)" [mesaObj]='item' data-toggle="modal" data-target="#verPedido" ></app-mesa>
+                            </div> 
+                                                       
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal" id="verPedido" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmacion</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Comentarios</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of pedido">
+                    <td>{{item.nombre}}</td>
+                    <td>{{item.cantidad}}</td>
+                    <td>{{item.observacion}}</td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+
+
+        </div>
+        <div class="modal-footer">
+            <p class="text-left font-weight-bold   rounded " >Total: ${{total}}</p>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+          <button type="button" class="btn btn-success" [disabled]='!ocupada' (click)="cerrarMesa(idPedido)">Cerrar Mesa</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+

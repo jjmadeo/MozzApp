@@ -25,6 +25,11 @@ export class BannerHomeService {
       return this._http.get(url+"/carrusel",{headers: headers})
     }
 
+    añadirCarrusel(obj):Observable<any>{
+      let headers = new HttpHeaders().set('Content-Type','application/json');
+      return this._http.post(url+"/carrusel",obj,{headers: headers})
+    }
+
 
 }
 

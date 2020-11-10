@@ -17,8 +17,9 @@ export class HomeComponent implements OnInit {
        
       loaderSet(true)
       this._getCarruserlService.getCarrusel().subscribe(res=>{
-      
+       
         this.elementsCarruselle= res
+        console.log(this.elementsCarruselle)
         loaderSet(false)
 
       },err=>{

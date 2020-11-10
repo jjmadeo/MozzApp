@@ -7,6 +7,10 @@ function ObtenerNotificacionesMozo($id){
   return  Leer("SELECT  N.*,A.MESAID FROM relamesaemplpedido A  INNER JOIN   pedido P ON A.RELAID = P.RELAID  INNER JOIN notificacion N ON N.PEDIDOID = P.PEDIDOID WHERE A.EMPLID = $id");
 }
 
+function ObtenerNotificacionesMesa($mesa){
+   return Leer("SELECT n.PEDIDOID pedido,tnoti.NOMBRE tipo, esta.NOMBRE estado FROM notificacion n inner join pedido p on n.PEDIDOID = p.PEDIDOID inner join relamesaemplpedido rel on  rel.RELAID = p.RELAID inner join tipo_notificacion tnoti on tnoti.TIPO_NOTI_ID = n.TIPO_NOTI_ID inner join estado esta on esta.ESTADOID= n.ESTADOID where  rel.MESAID = $mesa and p.PEDIDO_COBRADO = 0 ");
+}
+
 
 function crearNotificacion($body){
   $result= json_decode($body);

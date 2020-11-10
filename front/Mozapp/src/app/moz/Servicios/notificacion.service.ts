@@ -17,4 +17,9 @@ export class NotificacionService {
 
     return this._http.post(url+"altaNotificacion",obj,{headers: headers})
   }
+  getNotiMesa(idMesa):Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+
+    return this._http.get(url+"notificacionMesa/"+idMesa,{headers: headers})
+  }
 }

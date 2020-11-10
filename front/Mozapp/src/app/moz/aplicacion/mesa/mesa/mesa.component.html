@@ -1,1 +1,9 @@
-<p>mesa works!</p>
+<div class="card text-white bg-primary mb-3"  [ngClass]="{'bg-secondary': mesaObj.habilitada == 0, 'bg-success': mesaObj.habilitada == 1 && mesaObj.ocupada != 1 , 'bg-danger': mesaObj.habilitada == 1 && mesaObj.ocupada == 1 }"  style="max-width: 10rem; max-height: 10rem;">
+    <div class="card-header">         
+        Notifications <span class="badge badge-light">{{notificaciones.length}}</span>
+      </div>
+    <div class="card-body">
+        MESA:{{mesaObj.id_mesa}}
+      <p class="card-text">Mozo:<br> {{mesaObj.nombre}} {{mesaObj.apellido}} </p>
+    </div>
+  </div>

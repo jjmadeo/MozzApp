@@ -14,6 +14,18 @@ export class CartaService {
     let headers = new HttpHeaders().set('Content-Type','application/json');
     return this._http.get(url+"/carta",{headers: headers})
   }
+  addCarta(obj):Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    return this._http.post(url+"/altacarta",obj,{headers: headers})
+  }
+  getCategorias():Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    return this._http.get(url+"/cartacategorias",{headers: headers})
+  }
+  actualizarItemCarta(id,obj):Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    return this._http.put(url+"/carta/"+id,obj,{headers: headers})
 
 }
 
+}

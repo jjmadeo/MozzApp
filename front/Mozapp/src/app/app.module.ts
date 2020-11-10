@@ -30,6 +30,8 @@ import { CartaComponent } from './moz/aplicacion/carta/carta.component';
 import { AbmCartaComponent } from './moz/aplicacion/carta/abm-carta/abm-carta.component';
 import { CajeroCartaComponent } from './moz/aplicacion/cajero-carta/cajero-carta.component';
 import { CajeroPedidosComponent } from './moz/aplicacion/cajero-pedidos/cajero-pedidos.component';
+import { AlertZoneComponent } from './moz/complementos/alert-zone/alert-zone.component';
+import { ShareService } from './moz/complementos/shereservice/share.service';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,7 @@ import { CajeroPedidosComponent } from './moz/aplicacion/cajero-pedidos/cajero-p
     AbmCartaComponent,
     CajeroCartaComponent,
     CajeroPedidosComponent,
+    AlertZoneComponent,
     
     
   ],
@@ -67,7 +70,7 @@ import { CajeroPedidosComponent } from './moz/aplicacion/cajero-pedidos/cajero-p
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [ShareService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

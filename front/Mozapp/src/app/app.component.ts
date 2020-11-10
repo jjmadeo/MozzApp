@@ -1,6 +1,7 @@
 import { importExpr } from '@angular/compiler/src/output/output_ast';
 import { Component, DoCheck } from '@angular/core';
 import { AuthService } from "./moz/servicios/auth.service";
+import { ShareService } from "./moz/complementos/shereservice/share.service";
 
 @Component({
   selector: 'app-root',
@@ -12,8 +13,13 @@ export class AppComponent implements DoCheck {
   title:String = 'Mozapp';
   userLogued:any;
   elements: any[];
+  alertas: any[];
+
+
   constructor(
-    private _AuthService:AuthService
+    private _AuthService:AuthService,
+    private _shereService:ShareService
+
   ){}
 
   ngOnInit(): void {
@@ -45,7 +51,13 @@ export class AppComponent implements DoCheck {
 
   ngDoCheck(){
     this.userLogued = this._AuthService.userIsLogued();
+    
+    this.alertas =  JSON.parse(localStorage.getItem('notificaciones'))
+
+
     }
+
+    
 
 
 }
