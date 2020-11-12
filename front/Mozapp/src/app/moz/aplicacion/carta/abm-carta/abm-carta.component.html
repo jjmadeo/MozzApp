@@ -6,8 +6,8 @@
     </div>
     <div class="row">
         <div class="col">
-            <button type="button" class="btn btn-success m-1 " (click)="vistaCarta()">Añadir Carta</button>
-            <button type="button" class="btn btn-success m-1" (click)="vistaBanner()" >Añadir banner principal</button>
+            <button type="button" class="btn btn-success m-1" [ngClass]="{'btn-success': !viewCarta, 'btn-secondary': viewCarta}"  (click)="vistaCarta()">Añadir Carta</button>
+            <button type="button" class="btn btn-success m-1" [ngClass]="{'btn-success': !viewBanner, 'btn-secondary': viewBanner}" (click)="vistaBanner()" >Añadir banner principal</button>
 
         </div>
 
@@ -21,19 +21,25 @@
     <div class="row mt-3">
         <div class="col">
 
-            <div class="card bg-light shadow-lg  bg-white rounded" *ngIf="viewCarta || viewBanner" >
+            <div class="card bg-light shadow-lg  bg-white rounded" *ngIf="viewCarta" >
                 <div class="card-header" > 
                     <div class="row">
                         <div class="col">
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" class="custom-control-input" [(ngModel)]="swichCarta" id="customSwitch1">
-                                <label class="custom-control-label" for="customSwitch1">Añadir o Actualizar.</label>
+                                <label class="custom-control-label" for="customSwitch1">Añadir o Actualizar Carta.</label>
                               </div>
                             
                               
+                            </div> 
+                            <div class="col" *ngIf="swichCarta">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input"   [(ngModel)]="swichDeleteCarta" id="swichEliminarCarta">
+                                <label class="custom-control-label" for="swichEliminarCarta">¿Eliminar?</label>
                             </div>
+                        </div>
                             <div class="col">
-                                <select class="form-control" (change)="rellenarFormUpdate($event.target.value)" *ngIf="swichCarta" [(ngModel)] ="categoriaData" >
+                                <select class="form-control" (change)="rellenarFormUpdateCarta($event.target.value)" *ngIf="swichCarta" >
                                 <option *ngFor="let item of carta" [value]="item.id">{{item.NOMBRE}}-{{item.PRECIO}}</option>
                                         
                             </select></div>
@@ -86,8 +92,9 @@
 
                     <div class="row">
                         <div class="col text-left">
-                            <button class="btn btn-success m-2" (click)="grabarItemCarta(carta)"  [disabled]="!carta.valid" >Guardar cambios</button>
-                            <button class="btn btn-info m-2" (click)="carta.resetForm()" [disabled]="!carta.valid" >Descartar cambios</button>
+                            <button class="btn btn-success m-2" (click)="grabarItemCarta(carta)"  [disabled]="!carta.valid || swichDeleteCarta" >Guardar cambios</button>
+                            <button class="btn btn-info m-2" (click)="carta.resetForm()" [disabled]="!carta.valid || swichDeleteCarta" >Descartar cambios</button>
+                            <button class="btn btn-danger m-2" (click)="carta.resetForm()"  [disabled]="!swichDeleteCarta" data-toggle="modal" data-target="#confirmEliminarItemCarta" >Eliminar</button>
 
                         </div>
                     </div>
@@ -95,52 +102,83 @@
                     
                  </form>
 
-                 <div class="row" *ngIf="viewBanner  && viewCarta ">
-                     <div class="col">
-                         <hr>
-                     </div>
-                 </div>
+                 
 
-                 <form  #banner="ngForm"  *ngIf="viewBanner"  >
-                    <div class="row">
-                          <div class="col">
-                            <label for="validationServerUsername">Nombre</label>                           
-                                <input type="text" class="form-control" name="nombre" #nombre="ngModel" [ngClass]="{'is-valid': nombre.valid && nombre.touched,'is-invalid': !nombre.valid && nombre.touched }"  [(ngModel)]="nombreBannerData"   required>
-                          </div>
-                    </div>
+                 
+
+
+
+                </div>
+              </div>
+
+              <div class="card bg-light shadow-lg  bg-white rounded" *ngIf="viewBanner" >
+                <div class="card-header" > 
                     <div class="row">
                         <div class="col">
-                            <label for="validationServerUsername">Descripccion </label>
-                                <input type="text" class="form-control " [ngClass]="{'is-valid': descripccion.valid && descripccion.touched,'is-invalid': !descripccion.valid && descripccion.touched }"  name="descripccion" #descripccion="ngModel"  [(ngModel)]="descripccionBannerData" required>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input"  [(ngModel)]="swichBanner" id="swichupdate">
+                                <label class="custom-control-label" for="swichupdate">Eliminar.</label>
+                            </div>
+                        </div>
+                        <!-- <div class="col" *ngIf="swichBanner">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input"   [(ngModel)]="swichDeleteBanner" id="swichEliminarBnner">
+                                <label class="custom-control-label" for="swichEliminarBnner">¿Eliminar?</label>
+                            </div>
+                        </div> -->
+                        <div class="col">
+                                <select class="form-control" (change)="rellenarFormUpdateBanner($event.target.value)" *ngIf="swichBanner"  >
+                                <option *ngFor="let item of carrusel" [value]="item.id">{{item.titulo}}-{{item.descripccion}}</option>
+                                        
+                            </select>
+                        </div>
+                            
+                        </div>
+
+                    </div>
+                    
+
+                <div class="card-body" >
+                    <form  #banner="ngForm">
+                        <div class="row" >
+                              <div class="col">
+                                <label for="validationServerUsername">Nombre</label>                           
+                                    <input type="text" class="form-control" [disabled]='swichBanner'  name="nombre" #nombre="ngModel" [ngClass]="{'is-valid': nombre.valid && nombre.touched,'is-invalid': !nombre.valid && nombre.touched }"  [(ngModel)]="nombreBannerData"   required>
+                              </div>
+                        </div>
+                        <div class="row" >
+                            <div class="col">
+                                <label for="validationServerUsername">Descripccion </label>
+                                    <input type="text" class="form-control " [disabled]='swichBanner'  [ngClass]="{'is-valid': descripccion.valid && descripccion.touched,'is-invalid': !descripccion.valid && descripccion.touched }"  name="descripccion" #descripccion="ngModel"  [(ngModel)]="descripccionBannerData" required>
+                                 
+                              </div>  
+                        </div>
+    
+                        <div class="row" > 
+                            <div class="col">
+    
+                                <label for="validationServerUsername">URL </label>
+                                <input type="text" class="form-control " [disabled]='swichBanner'   [ngClass]="{'is-valid': precio.valid && precio.touched,'is-invalid': !precio.valid && precio.touched }"  name="precio" #precio="ngModel"  [(ngModel)]="urlBannerData" required>
                              
-                          </div>  
-                    </div>
-
-                    <div class="row">
-                        <div class="col-3">
-
-                            <label for="validationServerUsername">URL </label>
-                            <input type="text" class="form-control " [ngClass]="{'is-valid': precio.valid && precio.touched,'is-invalid': !precio.valid && precio.touched }"  name="precio" #precio="ngModel"  [(ngModel)]="urlBannerData" required>
-                         
+                            </div>
+                            
                         </div>
+    
                         
-                    </div>
+    
+                        <div class="row">
+                            <div class="col text-left">
+                                <button class="btn btn-success m-2" *ngIf="!swichBanner" (click)="grabarCarrusel(banner)"  [disabled]="!banner.valid || swichBanner" >Guardar cambios</button>
+                                <button class="btn btn-info m-2" *ngIf="!swichBanner" (click)="banner.resetForm()"  [disabled]="!banner.valid || swichBanner" >Descartar cambios</button>
+                                <button class="btn btn-danger m-2" (click)="banner.resetForm()"  [disabled]="!swichBanner "  data-toggle="modal" data-target="#confirmEliminarItemBanner" >Eliminar</button>
 
-                    
-
-                    <div class="row">
-                        <div class="col text-left">
-                            <button class="btn btn-success m-2" (click)="grabarCarrusel(banner)"  [disabled]="!banner.valid" >Guardar cambios</button>
-                            <button class="btn btn-info m-2" (click)="banner.resetForm()"  [disabled]="!banner.valid" >Descartar cambios</button>
-
+    
+                            </div>
                         </div>
-                    </div>
-
+    
+                        
+                     </form>
                     
-                 </form>
-
-
-
                 </div>
               </div>
 
@@ -148,3 +186,46 @@
         </div>
     </div>
 </div>
+
+
+
+<div class="modal" id="confirmEliminarItemBanner" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmacion</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>¿Eliminamos el banner?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="eliminarItemBanner()">Si, Dale!</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No, Para!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal" id="confirmEliminarItemCarta" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmacion</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>¿Eliminamos el item de la carta seleccionado.?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="eliminarItemCarta()">Si, Dale!</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No, Para!</button>
+        </div>
+      </div>
+    </div>
+  </div>

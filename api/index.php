@@ -11,7 +11,7 @@ if (isset($_SERVER['HTTP_ORIGIN'])) {
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
     if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
-        header("Access-Control-Allow-Methods: GET, POST, PUT, OPTIONS");         
+        header("Access-Control-Allow-Methods: GET, POST, PUT, OPTIONS, DELETE");         
 
     if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
         header("Access-Control-Allow-Headers:        {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
@@ -197,6 +197,24 @@ if($_SERVER['REQUEST_METHOD']=='GET'){ // consultar datos del servidor
 
 
         break;
+        case "cerrarMesa":
+
+            try {
+
+                print_r(json_encode(CerrarMesa($BodyRequest)));
+                // print_r($BodyRequest);
+
+          
+                json_encode(http_response_code(200));    
+            } catch (Exception $th) {
+                
+                print_r(json_encode($th->getMessage()));
+            
+                json_encode(http_response_code(404));
+                }
+
+
+        break;
         case "altaNotificacion":
 
             try {
@@ -264,8 +282,25 @@ if($_SERVER['REQUEST_METHOD']=='GET'){ // consultar datos del servidor
 }elseif ($_SERVER['REQUEST_METHOD']=='DELETE') { //eliminar datos existentes en el servidor
 
     switch ($url) {
-        case "test/".$parametroGET:
+        case "carta/".$parametroGET:
+            try {
 
+                print_r(json_encode(eliminarItemCarta($parametroGET)));          
+                json_encode(http_response_code(200));    
+            } catch (Exception $th) {                
+                print_r(json_encode($th->getMessage()));
+                json_encode(http_response_code(404));
+            }
+        break;
+        case "carrusel/".$parametroGET:
+            try {
+
+                print_r(json_encode(eliminarItemBnner($parametroGET)));          
+                json_encode(http_response_code(200));    
+            } catch (Exception $th) {                
+                print_r(json_encode($th->getMessage()));
+                json_encode(http_response_code(404));
+            }
         break;
         
         case "test":

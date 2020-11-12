@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { alerta, loaderSet } from 'src/app/moz/complementos/loadModify';
 import { BannerHomeService } from "../../../servicios/banner-home.service";
 import { CartaService } from "../../../servicios/carta.service";
@@ -11,12 +11,13 @@ import { NgForm } from '@angular/forms';
   templateUrl: './abm-carta.component.html',
   styleUrls: ['./abm-carta.component.css']
 })
-export class AbmCartaComponent implements OnInit {
+export class AbmCartaComponent implements OnInit,DoCheck {
 
   viewCarta:boolean =false;
   viewBanner:boolean =false;
 
    carta:any[];
+   carrusel:any[];
 
   nombreData:string;
   descripccionData:string;
@@ -30,9 +31,12 @@ export class AbmCartaComponent implements OnInit {
   descripccionBannerData:string;
   urlBannerData:string;
   swichCarta:boolean
+  swichBanner:boolean
 
 
   categorias:any[];
+
+  idDelete:number;
 
 
   constructor(private _banner:BannerHomeService,
@@ -40,6 +44,11 @@ export class AbmCartaComponent implements OnInit {
     private _cartaService:CartaService
     ) { }
 
+
+    ngDoCheck():void {
+
+      console.log("Cambie !!!")
+    }
   ngOnInit(): void {
        
     
@@ -53,42 +62,24 @@ export class AbmCartaComponent implements OnInit {
       loaderSet(false)
 
     })
-
-    this._cartaService.getCarta().subscribe(res=>{
-      loaderSet(false)
-
-      this.carta = res;
-      console.log(this.carta)
-
-    },e=>{
-      loaderSet(false)
-
-    })
-
+    
+    this.renderBannerCarta();
 
 
 
   }
+  
 
   vistaCarta(){
 
-    if(this.viewCarta){
-      this.viewCarta=false
-    }
-    else{
+    
       this.viewCarta=true
-
-    }
+      this.viewBanner=false
 
   }
   vistaBanner(){
-    if(this.viewBanner){
-      this.viewBanner=false
-    }
-    else{
+    this.viewCarta=false
       this.viewBanner=true
-
-    }
   }
 
   grabarItemCarta(f:NgForm){
@@ -148,20 +139,91 @@ export class AbmCartaComponent implements OnInit {
 
   }
 
-  rellenarFormUpdate(item){
-    let arrAux 
-
-      arrAux= this.carta.find(i=> item === i.id)
-
-
-    this.nombreData =arrAux.NOMBRE;
-    this.precioData=arrAux.PRECIO;
-    this.urlData=arrAux.URLIMG;
-    this.categoriaData=arrAux.id_categoria;
-    this.idCarta=arrAux.id;
+  rellenarFormUpdateBanner(item){
+    let arrAux
+      arrAux= this.carrusel.find(i=> item === i.id)
+      this.urlBannerData =arrAux.url;
+      this.nombreBannerData=arrAux.titulo;
+      this.descripccionBannerData=arrAux.descripccion;
+      this.idDelete = arrAux.id  
 
   }
 
+  rellenarFormUpdateCarta(item){
+    let arrAux
+    
+      arrAux= this.carta.find(i=> item === i.id)
+      this.nombreData =arrAux.NOMBRE;
+      this.precioData=arrAux.PRECIO;
+      this.urlData=arrAux.URLIMG;
+      this.categoriaData=arrAux.id_categoria;
+      this.idCarta=arrAux.id;
+    
+    
+
+  }
+
+  eliminarItemCarta(){
+    loaderSet(true)
+
+    this._cartaService.eliminarItemCarta(this.idCarta).subscribe(res =>{
+      console.log(res)
+      alerta('OK',res)
+      loaderSet(false)
+      this.renderBannerCarta();
+    },e=>{
+      loaderSet(false)
+      console.log(e)
+      alerta('OK',e.error.text)
+    })
+  
+
+
+  }
+
+  eliminarItemBanner(){
+    loaderSet(true)
+
+    this._banner.eliminarItemCarrusel(this.idDelete).subscribe(res =>{
+      console.log(res)
+      alerta('OK',res)
+      loaderSet(false)
+      this.renderBannerCarta();
+    },e=>{
+      loaderSet(false)
+      console.log(e)
+      alerta('OK',e.error.text)
+    })
+  
+
+  }
+
+  renderBannerCarta(){
+    loaderSet(true)
+
+    this._cartaService.getCarta().subscribe(res=>{
+      loaderSet(false)
+
+      this.carta = res;
+      console.log(this.carta)
+
+    },e=>{
+      loaderSet(false)
+
+    })
+    loaderSet(true)
+
+    this._banner.getCarrusel().subscribe(res=>{
+      loaderSet(false)
+
+      this.carrusel = JSON.parse(JSON.stringify(res).toLowerCase())
+      console.log(this.carrusel)
+
+    },e=>{
+      loaderSet(false)
+
+    })
+  }
   
 
 

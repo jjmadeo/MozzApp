@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MesaService } from "../../servicios/mesa.service";
-import { loaderSet } from "../../complementos/loadModify";
+import { alerta, loaderSet } from "../../complementos/loadModify";
 @Component({
   selector: 'app-cajero-home',
   templateUrl: './cajero-home.component.html',
@@ -12,6 +12,9 @@ export class CajeroHomeComponent implements OnInit {
     total:number;
     idPedido:number;
     ocupada: number;
+    idMesa:number;
+
+    renderingMesas:boolean= false
 
   constructor(
     private _mesaService:MesaService
@@ -19,16 +22,23 @@ export class CajeroHomeComponent implements OnInit {
 
   
   ngOnInit(): void {
-      loaderSet(true);
+    this.renderMesas()
+    
+    setInterval(()=>{
+
+      this.renderingMesas=true
       this._mesaService.getMesas().subscribe(res=>{
         this.mesas = JSON.parse(JSON.stringify(res).toLowerCase());
         console.log(this.mesas);
-        loaderSet(false);
 
       },e=>{
-        loaderSet(false);
 
       })
+
+      this.renderingMesas=false
+
+    },600000)
+
   }
 
   VerPedido(mesa){
@@ -40,8 +50,10 @@ export class CajeroHomeComponent implements OnInit {
       this.total = res.total;
       this.idPedido = res.pedidoID
       this.ocupada = mesa.ocupada
+      this.idMesa = mesa.id_mesa
       
-      console.log(this.pedido)
+      
+      console.log(this.idPedido)
       loaderSet(false);
 
     },e=>{
@@ -62,7 +74,35 @@ export class CajeroHomeComponent implements OnInit {
   }
 
   cerrarMesa(ID){
-    console.log("voy a cerrar el pedido =>",ID)
-  }
+    loaderSet(true)
+    this._mesaService.cerrarMesa({idmesa:ID}).subscribe(res=>{
+      loaderSet(false)
+      alerta('OK',res.msj)
+      console.log(res)
+      this.renderMesas()
+
+    },e=>{
+      loaderSet(false)
+      console.log(e)
+      alerta('ERROR',e)
+    })
+}
+
+
+renderMesas(){
+  loaderSet(true);
+      this._mesaService.getMesas().subscribe(res=>{
+        this.mesas = JSON.parse(JSON.stringify(res).toLowerCase());
+        console.log(this.mesas);
+        loaderSet(false);
+
+      },e=>{
+        loaderSet(false);
+
+      })
+      loaderSet(false);
+
+}
+
 
 }

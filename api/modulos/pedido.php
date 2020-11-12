@@ -51,5 +51,34 @@ return array("pedido"=>Leer("SELECT c.NOMBRE,c.URLIMG,c.PRECIO,rela.CANTIDAD, re
 }
 
 
+function CerrarMesa($idmesa){
+  $jsonBody= json_decode($idmesa);
+  $conn = getConnection();
+  $resultQuery = null;
+  try {
+      // set the PDO error mode to exception
+      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);      
+      $conn->beginTransaction();
+      
+      //print_r($jsonBody->idmesa);
+      $conn->exec("UPDATE `mozapp`.`mesa` SET `OCUPADA` = 0 WHERE `MESAID` = $jsonBody->idmesa;");        
+      $pedido = Leer("SELECT p.PEDIDOID pedido FROM mozapp.relamesaemplpedido rela inner join pedido p on rela.RELAID = p.RELAID where p.PEDIDO_COBRADO = 0 and rela.MESAID = $jsonBody->idmesa ;")[0]['pedido'];
+      $conn->exec("UPDATE `mozapp`.`pedido` SET `PEDIDO_COBRADO` =1  WHERE `PEDIDOID` =$pedido");
+           
+      $conn->commit();
+      $resultQuery = array("msj"=>"Transaccion finalizada con exito.");
+    } catch(PDOException $e) {
+      // roll back the transaction if something failed
+      $conn->rollback();
+      $resultQuery = "Error: " . $e->getMessage();
+    }
+    finally{
+       return $resultQuery;
+    }
+    
+
+}
+
+
 
 ?>

@@ -7,7 +7,11 @@
     <div class="row">
         <div class="col">
             <div class="card text-center">
-                <div class="card-header">
+                <div class="card-header text-left">
+                  <button class="btn btn-primary" (click)="renderMesas()" type="button" >
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Recargar!
+                  </button>
                 </div>
                 <div class="card-body">
                     <div class="continer">
@@ -61,7 +65,7 @@
         <div class="modal-footer">
             <p class="text-left font-weight-bold   rounded " >Total: ${{total}}</p>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
-          <button type="button" class="btn btn-success" [disabled]='!ocupada' (click)="cerrarMesa(idPedido)">Cerrar Mesa</button>
+          <button type="button" class="btn btn-success" [disabled]='!ocupada' (click)="cerrarMesa(idMesa)">Cerrar Mesa</button>
         </div>
       </div>
     </div>

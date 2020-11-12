@@ -28,4 +28,11 @@ export class CartaService {
 
 }
 
+eliminarItemCarta(id):Observable<any>{
+  let headers = new HttpHeaders().set('Content-Type','application/json');
+  return this._http.delete(url+"/carta/"+id,{headers: headers})
+
+}
+
+
 }

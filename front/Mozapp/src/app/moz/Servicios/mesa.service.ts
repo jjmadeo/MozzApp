@@ -31,6 +31,12 @@ export class MesaService {
     return this._http.post(url+"AltaPedidoMesa",obj,{headers: headers})
   }
 
+  cerrarMesa(obj):Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+
+    return this._http.post(url+"cerrarMesa",obj,{headers: headers})
+  }
+
   getmesasEmpleado(id):Observable<any>{
     let headers = new HttpHeaders().set('Content-Type','application/json');
     return this._http.get(`${url}/mesasempleado/${id}`,{headers: headers})
