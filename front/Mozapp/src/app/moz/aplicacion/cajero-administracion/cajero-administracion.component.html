@@ -1,0 +1,62 @@
+<div class="container">
+    <div class="row mt-4">
+        <div class="col">
+            <h3>Administracion</h3>
+
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            <div class="card text-center   shadow-lg  rounded">
+                <div class="card-header">
+                  <div class="row">
+                      <div class="col-3">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input"  [(ngModel)]="estadoMesa"  id="checkReasign">
+                            <label class="custom-control-label" for="checkReasign">Reasignar/Estado Mesa</label>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                <div class="card-body">
+
+
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Mesa</th>
+                            <th *ngIf="!estadoMesa"scope="col">Reasignar</th>
+                            <th *ngIf="estadoMesa" scope="col">Estado</th>
+                            <th scope="col">Guardar</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr [disabled]='true'  *ngFor="let item of mesas">
+                            <th scope="row">{{item.id_mesa}}</th>
+                            <td *ngIf="!estadoMesa">
+                                <select class="custom-select" id="inputGroupSelect01">
+                                    <option selected>Seleccione</option>
+                                    <option *ngFor="let item2 of personas" [selected]='item.id_empl == item2.id ' [value]="item2.id">{{item2.nombre}} {{item2.apellido}}</option>
+                                </select>
+                            </td>
+                            <td *ngIf="estadoMesa">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" [disabled]='item.ocupada == 1'  [checked]="item.habilitada == 1"  id="checkEstado{{item.id_mesa}}">
+                                    <label class="custom-control-label" for="checkEstado{{item.id_mesa}}">Habilitada</label>
+                                </div>
+                            </td>
+                            <td>
+                                <button type="button" (click)="actualizarRelaMesas(item2)" class="btn btn-success btn-sm">Ok</button>
+                            </td>
+                          </tr>                          
+                        </tbody>
+                      </table>
+                  
+                </div>
+                <div class="card-footer text-muted">
+                  
+                </div>
+              </div>
+        </div>
+    </div>
+</div>

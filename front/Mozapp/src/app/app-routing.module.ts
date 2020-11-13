@@ -14,7 +14,7 @@ import { AdmAuditoriaComponent } from './moz/aplicacion/adm-auditoria/adm-audito
 import { MozoPedidosComponent } from './moz/aplicacion/mozo-pedidos/mozo-pedidos.component';
 import { MozoNuevoPedidoComponent } from './moz/aplicacion/mozo-nuevo-pedido/mozo-nuevo-pedido.component';
 import { CajeroCartaComponent } from './moz/aplicacion/cajero-carta/cajero-carta.component';
-import { CajeroPedidosComponent } from './moz/aplicacion/cajero-pedidos/cajero-pedidos.component';
+import { CajeroAdministracionComponent } from './moz/aplicacion/cajero-administracion/cajero-administracion.component';
 
 
 const routes: Routes = [
@@ -28,7 +28,7 @@ const routes: Routes = [
     {path:'app/mozo',component:MozoHomeComponent},
     {path:'app/cajero',component:CajeroHomeComponent},
     {path:'app/cajero/carta',component:CajeroCartaComponent},
-    {path:'app/cajero/pedidos',component:CajeroPedidosComponent},
+    {path:'app/cajero/administracion',component:CajeroAdministracionComponent},
 
 
 

@@ -41,7 +41,7 @@ export class AppComponent implements DoCheck {
 
       {name: 'Inicio', path: '/app/cajero', role:'CAJERO'},
       {name: 'Carta', path: '/app/cajero/carta', role:'CAJERO'},
-      {name: 'Pedidos', path: '/app/cajero/pedidos', role:'CAJERO'}
+      {name: 'Administracion', path: '/app/cajero/administracion', role:'CAJERO'}
 
 
 
