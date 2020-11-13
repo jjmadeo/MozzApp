@@ -47,4 +47,10 @@ export class MesaService {
     return this._http.get(`${url}/pedidomesa/${id}`,{headers: headers})
   }
 
+
+  habilitarMesa(idMesa,estadoMesa):Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    return this._http.put(url+"/habilitarMesa/"+idMesa,{estado:estadoMesa},{headers: headers})
+  }
+
 }

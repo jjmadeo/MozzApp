@@ -39,6 +39,20 @@ function actualizarEmpleado($body,$id){
 
 }
 
+function actualizarMesaEmpleado($urlid,$body){
+  $result= json_decode($body);
+
+   $resultQuery = Escribir("update mozapp.relamesaemplpedido set EMPLID = $result->id_empl  where MESAID =$urlid");
+
+   if($resultQuery >0){
+    return "Se ah actualizado el Registro de la relacion";
+    
+  }else{
+    throw new Exception("Error al actualizar el Registro de la relacion");
+
+  }
+}
+
 
 
 

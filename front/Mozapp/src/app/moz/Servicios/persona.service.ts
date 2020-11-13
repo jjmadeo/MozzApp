@@ -19,6 +19,11 @@ export class PersonaService {
       return this._http.get(url+"/empleados",{headers: headers})
     }
 
+    asignarMesa(idMesa,idEmpleado):Observable<any>{
+      let headers = new HttpHeaders().set('Content-Type','application/json');
+      return this._http.put(url+"/asignarMesaEmpleado/"+idMesa,{id_empl:idEmpleado},{headers: headers})
+    }
+
 
 
 

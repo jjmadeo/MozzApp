@@ -14,6 +14,7 @@ export class CajeroAdministracionComponent implements OnInit {
   personas:any[];
   estadoMesa:boolean
 
+
   constructor(
     private _mesaService:MesaService,
     private _personaService:PersonaService
@@ -54,7 +55,24 @@ cargarPersonas(){
 
     })
   }
-  actualizarRelaMesas(item,e){
-    console.log(item+""+e )
+  actualizarRelaMesas(idEMPL,MESAID){
+    this._personaService.asignarMesa(MESAID,idEMPL).subscribe(res=>{
+      console.log(res);
+      this.cargarMesas()
+      this.cargarPersonas()
+    })
+  }
+  actualizarMesaEstado(item){
+    loaderSet(true)
+    let estado = item.habilitada ==1 ? 0:1;
+
+    this._mesaService.habilitarMesa(item.id_mesa,estado).subscribe(res=>{
+      console.log(res);
+      this.cargarMesas()
+      this.cargarPersonas()
+      loaderSet(false)
+
+    })
+
   }
 }
