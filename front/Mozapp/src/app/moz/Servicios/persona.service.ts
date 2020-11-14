@@ -24,7 +24,19 @@ export class PersonaService {
       return this._http.put(url+"/asignarMesaEmpleado/"+idMesa,{id_empl:idEmpleado},{headers: headers})
     }
 
+    altaEmpleado(empleado):Observable<any>{
+      let headers = new HttpHeaders().set('Content-Type','application/json');
+      return this._http.post(url+"/empleado",empleado,{headers: headers})
+    }
 
+    actualizarEmpleado(id,obj):Observable<any>{
+      let headers = new HttpHeaders().set('Content-Type','application/json');
+      return this._http.put(url+"/empleado/"+id,obj,{headers: headers})
+    }
+    bajaEmpleado(id):Observable<any>{
+      let headers = new HttpHeaders().set('Content-Type','application/json');
+      return this._http.delete(url+"/empleado/"+id,{headers: headers})
+    }
 
 
 }

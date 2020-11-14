@@ -316,6 +316,16 @@ if($_SERVER['REQUEST_METHOD']=='GET'){ // consultar datos del servidor
                 json_encode(http_response_code(404));
             }
         break;
+        case "empleado/".$parametroGET:
+            try {
+
+                print_r(json_encode(bajaLogicaEmpleado($parametroGET)));          
+                json_encode(http_response_code(200));    
+            } catch (Exception $th) {                
+                print_r(json_encode($th->getMessage()));
+                json_encode(http_response_code(404));
+            }
+        break;
         case "carrusel/".$parametroGET:
             try {
 

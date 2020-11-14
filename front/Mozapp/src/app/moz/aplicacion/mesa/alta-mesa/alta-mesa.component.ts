@@ -25,6 +25,7 @@ export class AltaMesaComponent implements OnInit,DoCheck {
   nPedido:number;
   cuentaDelayButtom:boolean;
   mozoDelayButtom:boolean;
+  observacionPedido:String;
 
 
 
