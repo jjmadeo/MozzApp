@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PersonaService } from "../../servicios/persona.service";
-
+import { loaderSet } from "../../complementos/loadModify";
 
 @Component({
   selector: 'app-adm-personas',
@@ -11,6 +11,7 @@ export class AdmPersonasComponent implements OnInit {
   listaUsercombo:any[];
   usuarioData:string;
   nombreData:string;
+  passwordData:string;
   
   constructor(
     private _personaServices:PersonaService
@@ -19,20 +20,22 @@ export class AdmPersonasComponent implements OnInit {
 
     abrirNuevo(){
       
-      alert("abrir Nuevo ");
+     
       
+      
+       alert("abrir Nuevo "+this.nombreData);
      
     }
 
     abrirEditar(){
       
-      alert("abrir Editar ");
+      alert("abrir Editar "+this.nombreData);
      
     }
 
     abrirEliminar(){
       
-      alert("abrir Eliminar ");
+      alert("abrir Eliminar "+this.nombreData);
      
     }
 
@@ -46,13 +49,17 @@ export class AdmPersonasComponent implements OnInit {
     // ]
 
     
-
+    loaderSet(true);
 
 this._personaServices.getEMPL().subscribe(res=>{
+  
+  console.log(res.empleados.usuario);
   this.listaUsercombo=res.empleados;
+  loaderSet(false);
 
 },err=>{
   console.log(err)
+  loaderSet(false);
 }
 )
 }}
