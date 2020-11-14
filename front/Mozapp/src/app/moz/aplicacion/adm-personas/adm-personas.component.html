@@ -40,13 +40,19 @@ muestro todos los usuarios con un combo select -->
 
                                 <div class="row m-3">
                                     <div class="col">
+                                        <label for="">Password:</label>
+                                            <input #password="ngModel" type="password" [(ngModel)]="passwordData" name="password"  placeholder=' Ej:password "Pedro78"' class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div class="row m-3">
+                                    <div class="col">
                                         <div class="form-group col-md-4">
                                             <label for="inputState">Roles</label>
                                             <select id="inputState" class="form-control">
                                                 <option>ADM</option>
-                                                <option>CAJ</option>
-                                                <option>MOZ</option>
-                                                <option>USU</option>
+                                                <option>CAJERO</option>
+                                                <option>MOZO</option>
                                             </select>
                                             </div>    
                                     </div>
@@ -71,4 +77,5 @@ muestro todos los usuarios con un combo select -->
         </div>
     </div>
 </div>
+
 
