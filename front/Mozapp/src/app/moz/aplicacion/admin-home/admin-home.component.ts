@@ -19,14 +19,9 @@ export class AdminHomeComponent implements OnInit {
     loaderSet(true);
 
 this._personaServices.getEMPL().subscribe(res=>{
-  //console.log(res)
-  this.listaUser= [
-    {usuario: res.empleados[0].usuario},
-    {usuario: res.empleados[1].usuario},
-    {usuario: res.empleados[2].usuario}
-
-    ]
-
+  
+  this.listaUser=res;
+  console.log(this.listaUser)
     loaderSet(false);
 
 },err=>{

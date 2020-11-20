@@ -39,4 +39,9 @@ export class PersonaService {
     }
 
 
+    getROLES():Observable<any>{
+      let headers = new HttpHeaders().set('Content-Type','application/json');
+      return this._http.get(url+"/roles",{headers: headers})
+    }
+
 }

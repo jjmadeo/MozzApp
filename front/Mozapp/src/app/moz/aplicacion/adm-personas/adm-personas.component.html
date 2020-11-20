@@ -17,8 +17,8 @@ muestro todos los usuarios con un combo select -->
                 <div class="card-header">
                     <label for=""> Elija Usuario </label>
                     
-                    <select class="mdb-select md-form" name="miselect" [(ngModel)]="listaUsercombo">
-                    <option [value]="item" *ngFor="let item of listaUsercombo">{{item.usuario}}</option>
+                    <select class="mdb-select md-form form-control" name="miselect">
+                    <option [value]="item.ID" *ngFor="let item of listaUsercombo">{{item.USUARIO}}-{{item.NOMBRE}} {{item.APELLIDO}} </option>
                     </select>
                 </div>
                 <div class="card-body">
@@ -31,6 +31,14 @@ muestro todos los usuarios con un combo select -->
                                         <input  #nombre="ngModel" placeholder=' Ej:Nombre "Pedro"'   [(ngModel)]="nombreData"  name="nombre"   type="text" class="form-control" required>
                                     </div>
                                 </div>
+
+                                <div class="row m-3">
+                                    <div class="col">
+                                        <label for="">Apellido:</label>
+                                        <input type="text" class="form-control" placeholder=' Ej:Apellido "gomez"'   name="apellido" [ngClass]="{'is-valid': apellido.valid && apellido.touched,'is-invalid': !apellido.valid && apellido.touched }"  #apellido="ngModel"  [(ngModel)]="apellidoData"   required>
+                                    </div>
+                                </div>
+
                                 <div class="row m-3">
                                     <div class="col">
                                         <label for="">Usuario:</label>
@@ -47,12 +55,21 @@ muestro todos los usuarios con un combo select -->
 
                                 <div class="row m-3">
                                     <div class="col">
+                                        <label for="inputState">Turno:</label>
+                                        <select id="inputState" class="form-control" name="turno" #turno="ngModel"  [(ngModel)]="turnoData" required>
+                                            <option value="TT">Turno Tarde</option> 
+                                            <option value="TM">Turno Mañana</option> 
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class="row m-3">
+                                    <div class="col">
                                         <div class="form-group col-md-4">
-                                            <label for="inputState">Roles</label>
-                                            <select id="inputState" class="form-control">
-                                                <option>ADM</option>
-                                                <option>CAJERO</option>
-                                                <option>MOZO</option>
+                                            <label for="rolinput">Roles</label>
+                                            <select id="rolinput" class="form-control" name="rol" #rol="ngModel"  [(ngModel)]="rolData" required>
+                                                <option [value]="item1.ID" *ngFor="let item1 of listaRolescombo">{{item1.NOMBRE}} </option>
                                             </select>
                                             </div>    
                                     </div>
@@ -60,9 +77,10 @@ muestro todos los usuarios con un combo select -->
 
                                 <div class="row m-3">
                                     <div class="col">
-                                        <button class="btn btn-success m-1" [disabled]='!abmpersona.form.valid' (click)="abrirNuevo()" >Nuevo</button>
+                                        <button class="btn btn-success m-1" [disabled]='!abmpersona.form.valid' (click)="CrearEmpleado()" >Nuevo</button>
                                         <button class="btn btn-success m-1" [disabled]='!abmpersona.form.valid' (click)="abrirEditar()" >Editar</button>
                                         <button class="btn btn-success m-1" [disabled]='!abmpersona.form.valid' (click)="abrirEliminar()" >Eliminar</button>
+
                                     </div>
                                 </div>
                             </div> 

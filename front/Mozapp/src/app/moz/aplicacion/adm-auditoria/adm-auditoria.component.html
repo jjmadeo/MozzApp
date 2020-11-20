@@ -25,7 +25,7 @@
     </div>
 </div>
  -->
-<br> <br>
+<!-- <br> <br>
  <div class="container">
     <div class="row justify-content-md-center">
         <div class="col-md-12">
@@ -60,6 +60,50 @@
                 </div>
         </div>        
     </div>
-</div>        
+</div>         -->
 
 
+<div class="container">
+    <div class="row mt-4">
+        <div class="col">
+            <h3>Logs del Sistema</h3>
+
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            <div class="card text-center   shadow-lg  rounded">
+                <div class="card-header">
+                  
+                </div>
+                <div class="card-body">
+
+
+                    <table class="table">
+                       
+                        <thead>
+                            <tr>
+                                <th>Usuarios</th>
+                                <th>Logs</th>
+                            </tr>
+                        </thead>
+                
+                        <tbody>
+                            <tr *ngFor="let item of listaAuditoria;">
+                                <td >{{item.usuario}}</td>
+                                <td>{{item.log}}</td>
+                            </tr>
+                
+                
+                        </tbody>
+
+                    </table>
+                  
+                </div>
+                <div class="card-footer text-muted">
+                  
+                </div>
+              </div>
+        </div>
+    </div>
+</div>

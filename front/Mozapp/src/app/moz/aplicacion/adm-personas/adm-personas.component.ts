@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PersonaService } from "../../servicios/persona.service";
-import { loaderSet } from "../../complementos/loadModify";
+import { alerta, loaderSet } from "../../complementos/loadModify";
 
 @Component({
   selector: 'app-adm-personas',
@@ -9,9 +9,14 @@ import { loaderSet } from "../../complementos/loadModify";
 })
 export class AdmPersonasComponent implements OnInit {
   listaUsercombo:any[];
+  listaRolescombo:any[];
   usuarioData:string;
+  apellidoData:string;
   nombreData:string;
   passwordData:string;
+  turnoData:string;
+  rolData:number;
+  idUsuario:number;
   
   constructor(
     private _personaServices:PersonaService
@@ -41,26 +46,63 @@ export class AdmPersonasComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.listaUsercombo= [
-    //   {nombre:"Pedro", usuario:"ppedro",role:"ADM"},
-    //   {nombre:"Juan", usuario:"jjuan",role:"MOZ"},
-    //   {nombre:"Jose", usuario:"jjose",role:"USU"}
-
-    // ]
-
+    loaderSet(true);
+    this._personaServices.getROLES().subscribe(res=>{
+      
+      this.listaRolescombo=res;
+      console.log(this.listaRolescombo)
+        loaderSet(false);
+    
+    },err=>{
+      console.log(err)
+      loaderSet(false);
+    }
+    )
     
     loaderSet(true);
 
-this._personaServices.getEMPL().subscribe(res=>{
-  
-  console.log(res.empleados.usuario);
-  this.listaUsercombo=res.empleados;
-  loaderSet(false);
+    this._personaServices.getEMPL().subscribe(res=>{
+      
+      this.listaUsercombo=res;
+      console.log(this.listaUsercombo)
+        loaderSet(false);
+    
+    },err=>{
+      console.log(err)
+      loaderSet(false);
+    }
+    )
+}
+
+CrearEmpleado(){
+  loaderSet(true);
+  let empleado={
+    nombre:this.nombreData,
+    apellido:this.apellidoData,
+    turno:this.turnoData,
+    usuario:this.usuarioData,
+    clave: this.passwordData,
+    rol:this.rolData
+}
+  console.log(empleado);
+
+ this._personaServices.altaEmpleado(empleado).subscribe(res=>{
+      
+  alerta("OK","usuario grabado correctamente");
+  console.log(res)
+    loaderSet(false);
 
 },err=>{
+  alerta("ERROR","error al crear empleado");
   console.log(err)
   loaderSet(false);
 }
 )
-}}
 
+
+}
+
+
+
+
+}
