@@ -125,6 +125,14 @@ if($_SERVER['REQUEST_METHOD']=='GET'){ // consultar datos del servidor
 
         break;
 
+        case "roles":
+
+            print_r(json_encode(ObtenerRoles()));
+            //print_r(json_encode(ObtenerCarta()));
+
+
+        break;
+
         default:
                 http_response_code(405);
 
