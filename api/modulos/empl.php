@@ -80,4 +80,11 @@ function bajaLogicaEmpleado($id){
 
 
 
+function ObtenerRoles(){
+   
+  return  Leer("SELECT ROLEID ID, NOMBRE FROM mozapp.rol;");
+
+}
+
+
 ?>

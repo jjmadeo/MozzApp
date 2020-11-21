@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PersonaService } from "../../servicios/persona.service";
-
+import { loaderSet } from "../../complementos/loadModify";
 
 @Component({
   selector: 'app-admin-home',
@@ -16,18 +16,17 @@ export class AdminHomeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.listaUser= [
-      {nombre:"Pedro", usuario:"pDRoloco"},
-      {nombre:"Juan", usuario:"JuanLo"},
-      {nombre:"Jose", usuario:"Joselo"}
-
-    ]
+    loaderSet(true);
 
 this._personaServices.getEMPL().subscribe(res=>{
-  console.log(res)
+  
+  this.listaUser=res;
+  console.log(this.listaUser)
+    loaderSet(false);
 
 },err=>{
   console.log(err)
+  loaderSet(false);
 }
 )
 
