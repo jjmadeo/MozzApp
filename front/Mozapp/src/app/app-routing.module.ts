@@ -15,6 +15,7 @@ import { MozoPedidosComponent } from './moz/aplicacion/mozo-pedidos/mozo-pedidos
 import { MozoNuevoPedidoComponent } from './moz/aplicacion/mozo-nuevo-pedido/mozo-nuevo-pedido.component';
 import { CajeroCartaComponent } from './moz/aplicacion/cajero-carta/cajero-carta.component';
 import { CajeroAdministracionComponent } from './moz/aplicacion/cajero-administracion/cajero-administracion.component';
+import { AuthAdminGuard } from './moz/complementos/guards/auth-admin.guard';
 
 
 const routes: Routes = [
@@ -24,22 +25,22 @@ const routes: Routes = [
     {path:'comer',component:ComamosComponent},
     {path:'ingresar',component:IniciarSesionComponent},
 
-    {path:'app/adm',component:AdminHomeComponent},
-    {path:'app/mozo',component:MozoHomeComponent},
-    {path:'app/cajero',component:CajeroHomeComponent},
-    {path:'app/cajero/carta',component:CajeroCartaComponent},
-    {path:'app/cajero/administracion',component:CajeroAdministracionComponent},
+    {path:'app/adm',component:AdminHomeComponent,canActivate:[AuthAdminGuard]},
+    {path:'app/mozo',component:MozoHomeComponent,canActivate:[AuthAdminGuard]},
+    {path:'app/cajero',component:CajeroHomeComponent,canActivate:[AuthAdminGuard]},
+    {path:'app/cajero/carta',component:CajeroCartaComponent,canActivate:[AuthAdminGuard]},
+    {path:'app/cajero/administracion',component:CajeroAdministracionComponent,canActivate:[AuthAdminGuard]},
 
 
 
     
-    {path:'app/adm/personas',component:AdmPersonasComponent},
-    {path:'app/adm/auditoria',component:AdmAuditoriaComponent},
+    {path:'app/adm/personas',component:AdmPersonasComponent,canActivate:[AuthAdminGuard]},
+    {path:'app/adm/auditoria',component:AdmAuditoriaComponent,canActivate:[AuthAdminGuard]},
 
-    {path:'app/mozo/pedidos',component:MozoPedidosComponent},
-    {path:'app/mozo/pedido',component:MozoNuevoPedidoComponent},
+    {path:'app/mozo/pedidos',component:MozoPedidosComponent,canActivate:[AuthAdminGuard]},
+    {path:'app/mozo/pedido',component:MozoNuevoPedidoComponent,canActivate:[AuthAdminGuard]},
     
-    {path:'comer/altamesa/:id',component:AltaMesaComponent},
+    {path:'comer/altamesa/:id',component:AltaMesaComponent,canActivate:[AuthAdminGuard]},
 
 
     {path:'**',component:HomeComponent}
