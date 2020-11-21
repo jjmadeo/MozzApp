@@ -16,7 +16,6 @@ export class AltaMesaComponent implements OnInit,DoCheck {
   @Input('invocado') invocado:string ='ROUTER';
   nmesa:string;
   nombre:String;
-  mozoDelayButtom:boolean;
   pedidoList:any[];
   cantidadPedidosList:number =0;
   pedidoEnviado:boolean =false;
@@ -25,6 +24,9 @@ export class AltaMesaComponent implements OnInit,DoCheck {
   total:number=0;
   nPedido:number;
   cuentaDelayButtom:boolean;
+  mozoDelayButtom:boolean;
+  observacionPedido:String;
+
 
 
   mesaRequestJSON:any ={
@@ -94,6 +96,9 @@ export class AltaMesaComponent implements OnInit,DoCheck {
 
   }
   pedirAsistencia(){
+
+    this.mozoDelayButtom=false;
+
     loaderSet(true);
     this._notificacionService.altaNotificacion({idPedido:this.nPedido,tipo:1}).subscribe(res=>{
         console.log(res)
@@ -102,7 +107,7 @@ export class AltaMesaComponent implements OnInit,DoCheck {
       loaderSet(false);
       setTimeout(()=>{
         this.mozoDelayButtom=true;
-      },600000)
+      },6000)
     },e=>{
 
       loaderSet(false);
@@ -202,19 +207,30 @@ export class AltaMesaComponent implements OnInit,DoCheck {
 
   solicitaCierre(){
     loaderSet(true);
+    this.cuentaDelayButtom=false;
+    this.mozoDelayButtom=false;
     this._notificacionService.altaNotificacion({idPedido:this.nPedido,tipo:2}).subscribe(res=>{
         console.log(res)
       loaderSet(false);
+      localStorage.removeItem('mesa');
+      localStorage.removeItem('pedidoEnviado');
+      
+     
+        
       setTimeout(()=>{
         this.mozoDelayButtom=true;
         this.cuentaDelayButtom=true;
 
-      },600000)
+      },6000)
     },e=>{
 
       loaderSet(false);
     })
         
+  }
+
+  realizarEncuesta(){
+    this._routeNavigate.navigate(["/califica"]); 
   }
 
 }

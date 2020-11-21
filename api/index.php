@@ -11,7 +11,7 @@ if (isset($_SERVER['HTTP_ORIGIN'])) {
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
     if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
-        header("Access-Control-Allow-Methods: GET, POST, PUT, OPTIONS");         
+        header("Access-Control-Allow-Methods: GET, POST, PUT, OPTIONS, DELETE");         
 
     if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
         header("Access-Control-Allow-Headers:        {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
@@ -197,6 +197,24 @@ if($_SERVER['REQUEST_METHOD']=='GET'){ // consultar datos del servidor
 
 
         break;
+        case "cerrarMesa":
+
+            try {
+
+                print_r(json_encode(CerrarMesa($BodyRequest)));
+                // print_r($BodyRequest);
+
+          
+                json_encode(http_response_code(200));    
+            } catch (Exception $th) {
+                
+                print_r(json_encode($th->getMessage()));
+            
+                json_encode(http_response_code(404));
+                }
+
+
+        break;
         case "altaNotificacion":
 
             try {
@@ -253,6 +271,30 @@ if($_SERVER['REQUEST_METHOD']=='GET'){ // consultar datos del servidor
             }
 
         break;
+        case "asignarMesaEmpleado/".$parametroGET:
+
+            try {
+
+                print_r(json_encode(actualizarMesaEmpleado($parametroGET,$BodyRequest)));          
+                json_encode(http_response_code(200));    
+            } catch (Exception $th) {                
+                print_r(json_encode($th->getMessage()));
+                json_encode(http_response_code(404));
+            }
+
+        break;
+        case "habilitarMesa/".$parametroGET:
+
+            try {
+
+                print_r(json_encode(habilitarMesa($parametroGET,$BodyRequest)));          
+                json_encode(http_response_code(200));    
+            } catch (Exception $th) {                
+                print_r(json_encode($th->getMessage()));
+                json_encode(http_response_code(404));
+            }
+
+        break;
         default:
             print_r(json_encode(array("MSJ"=>"Error, el metodo Put no existe.")));
             http_response_code(404);    
@@ -264,8 +306,35 @@ if($_SERVER['REQUEST_METHOD']=='GET'){ // consultar datos del servidor
 }elseif ($_SERVER['REQUEST_METHOD']=='DELETE') { //eliminar datos existentes en el servidor
 
     switch ($url) {
-        case "test/".$parametroGET:
+        case "carta/".$parametroGET:
+            try {
 
+                print_r(json_encode(eliminarItemCarta($parametroGET)));          
+                json_encode(http_response_code(200));    
+            } catch (Exception $th) {                
+                print_r(json_encode($th->getMessage()));
+                json_encode(http_response_code(404));
+            }
+        break;
+        case "empleado/".$parametroGET:
+            try {
+
+                print_r(json_encode(bajaLogicaEmpleado($parametroGET)));          
+                json_encode(http_response_code(200));    
+            } catch (Exception $th) {                
+                print_r(json_encode($th->getMessage()));
+                json_encode(http_response_code(404));
+            }
+        break;
+        case "carrusel/".$parametroGET:
+            try {
+
+                print_r(json_encode(eliminarItemBnner($parametroGET)));          
+                json_encode(http_response_code(200));    
+            } catch (Exception $th) {                
+                print_r(json_encode($th->getMessage()));
+                json_encode(http_response_code(404));
+            }
         break;
         
         case "test":

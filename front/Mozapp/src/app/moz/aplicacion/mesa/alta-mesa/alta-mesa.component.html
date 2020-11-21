@@ -21,7 +21,7 @@
        
     </div>
     <div class="row mt-3">
-        <div class="col-4">            
+        <div class="col">            
                 <div class="menu shadow-lg p-3 mb-5 bg-white rounded">
                     
                   <app-carta (itemCartaAdd)="addList($event)" *ngIf=" invocado === 'ROUTER'" vista='CARD' (itemCartaRem)="remList($event)" ></app-carta>
@@ -107,7 +107,7 @@
           <p>¿Vas solicitar la cuenta?</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="solicitaCierre()">Si, Dale!</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal"  data-toggle="modal" data-target="#realizarEncuesta" (click)="solicitaCierre()">Si, Dale!</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">No, Para!</button>
         </div>
       </div>
@@ -133,3 +133,26 @@
       </div>
     </div>
   </div>
+
+
+  <div class="modal" id="realizarEncuesta" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmacion</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>¿Queres contarnos como te atendimos?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="realizarEncuesta()">Si, Dale!</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No, Para!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

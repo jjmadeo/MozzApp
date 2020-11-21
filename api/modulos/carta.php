@@ -4,7 +4,7 @@ require_once('./db.php');
 
 function ObtenerCarta(){
    
-    return  Leer("SELECT B.PRODID as id , B.NOMBRE , B.URLIMG, B.PRECIO, A.nombre CATEGORIA, A.CATEGORIAID id_categoria  FROM mozapp.carta  B inner join categoria A ON A.CATEGORIAID = B.CATEGORIAID;");
+    return  Leer("SELECT B.PRODID as id , B.NOMBRE , B.URLIMG, B.PRECIO, A.nombre CATEGORIA, A.CATEGORIAID id_categoria  FROM mozapp.carta  B inner join categoria A ON A.CATEGORIAID = B.CATEGORIAID where b.eliminado = 0;");
   
   }
 
@@ -38,6 +38,21 @@ function ObtenerCarta(){
       
     }else{
       throw new Exception("Error al actualizar la carta");
+
+    }
+    
+
+  }
+
+  function eliminarItemCarta($id)   
+  {
+    
+    $resultQuery =  Escribir("update mozapp.carta set eliminado = 1 where  prodid =$id;");
+    if($resultQuery >0){
+      return "Se ah Eliminado el Registro de la carta";
+      
+    }else{
+      throw new Exception("Error al Eliminar el Registro de la carta");
 
     }
     

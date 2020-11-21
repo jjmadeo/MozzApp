@@ -16,5 +16,20 @@ function crearCarrusel($body){
 
 }
 
+function eliminarItemBnner($id)   
+  {
+    
+    $resultQuery =  Escribir("DELETE FROM `mozapp`.`carrusel` WHERE ID = $id;");
+    if($resultQuery >0){
+      return "Se ah Eliminado el item del banner";
+      
+    }else{
+      throw new Exception("Error al Eliminar el Registro del banner");
+
+    }
+    
+
+  }
+
 
 ?>

@@ -13,12 +13,6 @@ export class BannerHomeService {
     
   ){ }
     
-  // getCarrusel():Observable<any>{
-  //   let headers = new HttpHeaders().set('Content-Type','application/json');
-  //   return this._http.get("http://localhost:81/TPLab/api/carrusel",{headers: headers})
-  // }
-
-
     getCarrusel():Observable<any>{
       let headers = new HttpHeaders().set('Content-Type','application/json');
 
@@ -28,6 +22,11 @@ export class BannerHomeService {
     añadirCarrusel(obj):Observable<any>{
       let headers = new HttpHeaders().set('Content-Type','application/json');
       return this._http.post(url+"/carrusel",obj,{headers: headers})
+    }
+
+    eliminarItemCarrusel(id):Observable<any>{
+      let headers = new HttpHeaders().set('Content-Type','application/json');
+      return this._http.delete(url+"/carrusel/"+id,{headers: headers})
     }
 
 

@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="row mt-4">
+        <div class="col">
+            <h3>Administracion</h3>
+
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            <div class="card text-center   shadow-lg  rounded">
+                <div class="card-header">
+                  
+                </div>
+                <div class="card-body">
+
+
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Mesa</th>
+                            <th scope="col">Reasignar</th>
+                            <th  scope="col">Estado</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr [disabled]='true'  *ngFor="let item of mesas">
+                            <th scope="row">{{item.id_mesa}}</th>
+                            <td >
+                                <select class="custom-select" id="inputGroupSelect01"  (change)="actualizarRelaMesas($event.target.value,item.id_mesa)">
+                                    <option selected>Seleccione</option>
+                                    <option *ngFor="let item2 of personas" [selected]='item.id_empl == item2.id ' [value]="item2.id">{{item2.nombre}} {{item2.apellido}}</option>
+                                </select>
+                            </td>
+                            <td >
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input"  [disabled]='item.ocupada == 1'  (change)="actualizarMesaEstado(item)"  [checked]="item.habilitada == 1"  id="checkEstado{{item.id_mesa}}">
+                                    <label class="custom-control-label" for="checkEstado{{item.id_mesa}}">Habilitada</label>
+                                </div>
+                            </td>
+                            
+                          </tr>                          
+                        </tbody>
+                      </table>
+                  
+                </div>
+                <div class="card-footer text-muted">
+                  
+                </div>
+              </div>
+        </div>
+    </div>
+</div>

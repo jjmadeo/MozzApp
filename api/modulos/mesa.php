@@ -20,7 +20,20 @@ function ObtenerMesas(){
   }
 
 
-
+  function habilitarMesa($urlid,$body){
+    $result= json_decode($body);
+  
+     $resultQuery = Escribir("update  mozapp.mesa set habilitada = $result->estado where MESAID=$urlid");
+  
+     if($resultQuery >0){
+      return "Se ah actualizado el estado  de la Mesa";
+      
+    }else{
+      throw new Exception("Error al actualizar el estado de la mesa");
+  
+    }
+  }
+  
   
 
 
