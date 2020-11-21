@@ -9,6 +9,8 @@ import { NotificacionService } from "../../../servicios/notificacion.service";
 })
 export class MesaComponent implements OnInit, DoCheck {
 
+@Input('tipoMesa') tipoMesa:boolean;
+
   @Input()
   mesaObj:any;
   notificaciones:any=[]

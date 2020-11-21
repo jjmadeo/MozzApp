@@ -10,6 +10,7 @@ export class MozoHomeComponent implements OnInit {
   mesas: any[];
   mozo: any=JSON.parse(localStorage.getItem("sesion")).nombre//localStorage())
   fecha: Date = new Date();
+  idMozo:number =JSON.parse(localStorage.getItem("sesion")).id
   
   constructor(
     private _mesaService: MesaService
@@ -17,8 +18,9 @@ export class MozoHomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.mesas = [];
+    
 
-    this._mesaService.getmesasEmpleado(9).subscribe(res=>{      
+    this._mesaService.getmesasEmpleado(this.idMozo).subscribe(res=>{      
       this.mesas=JSON.parse(JSON.stringify(res).toLowerCase());
       console.log(this.mesas);
     },e=>{

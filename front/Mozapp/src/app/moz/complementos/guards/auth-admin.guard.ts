@@ -37,7 +37,7 @@ export class AuthAdminGuard implements CanActivate {
 
         break;
         case 'adm':
-          if(rol !== null && rol === 'cajero' && state.url.includes('cajero') ){
+          if(rol !== null && rol === 'adm' && state.url.includes('adm') ){
             return true;
           }else{
             this._router.navigate(["/home"]);

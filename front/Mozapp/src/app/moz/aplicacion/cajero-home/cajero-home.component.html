@@ -16,7 +16,7 @@
                     <div class="continer">
                         <div class="row">
                             <div class="col"  *ngFor="let item of mesas" >
-                                <app-mesa class="btn" (click)="VerPedido(item)" [mesaObj]='item' data-toggle="modal" data-target="#verPedido" ></app-mesa>
+                                <app-mesa class="btn" (click)="VerPedido(item)" [mesaObj]='item' [tipoMesa]='true' data-toggle="modal" data-target="#verPedido" ></app-mesa>
                             </div> 
                                                        
                         </div>
