@@ -23,15 +23,8 @@
                 <div class="card-body">
                     <div class="continer">
                         <div class="row">
-                            <div class="col" *ngFor="let mesa of mesas">
-                                <div class="card m-2 mesa btn" data-toggle="modal" data-target="#exampleModal" [ngClass]="{'bg-secondary': mesa.estado==0,'bg-success': mesa.estado==1,'bg-primary': mesa.estado==2}">
-                                    {{mesa.numero}}                                    
-                                    <div *ngIf="mesa.alerta.cantidad!=0">
-                                        <div class="card alerta" [ngClass]="{'bg-warning': mesa.alerta.tipo==0,'bg-danger':  mesa.alerta.tipo==1,'bg-info':  mesa.alerta.tipo==2}">
-                                            {{mesa.alerta.cantidad}}
-                                        </div>
-                                    </div>
-                                </div>                                                              
+                            <div class="col" *ngFor="let mesa of mesas">                                
+                                <app-mesa class="btn" [mesaObj]='mesa'></app-mesa>
                             </div>                            
                         </div>
                     </div>
