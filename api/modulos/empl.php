@@ -10,7 +10,7 @@ function ObtenerEmpleado($id){
 
 function ObtenerEmpleados(){
    
-    return  Leer("SELECT EMPLID as ID, EMPLNOMB as NOMBRE, EMPLAPLL as APELLIDO, EMPLTURN as TURNO, EMPLUSUA as USUARIO, r.NOMBRE as ROL  FROM mozapp.empleado e , mozapp.rol r where   e.BAJA = 0 and e.ROLEID =r.ROLEID");
+    return  Leer("SELECT EMPLID as ID, EMPLNOMB as NOMBRE, EMPLAPLL as APELLIDO, EMPLTURN as TURNO, EMPLUSUA as USUARIO, r.NOMBRE as ROL,r.ROLEID as rolID  FROM mozapp.empleado e , mozapp.rol r where   e.BAJA = 0 and e.ROLEID =r.ROLEID");
   
   }
 
@@ -33,8 +33,18 @@ function crearempleado($body){
 
 function actualizarEmpleado($body,$id){
     $result= json_decode($body);
-    $result->clave = password_hash($result->clave,PASSWORD_DEFAULT);
-    return Escribir(" update `empleado` set `EMPLNOMB`='$result->nombre',`EMPLAPLL`='$result->apellido',`EMPLTURN`='$result->turno',`EMPLUSUA`='$result->usuario',`EMPLCLAV`='$result->clave',`ROLEID`= '$result->rol' where emplid = $id");
+
+    if($result->clave !== null){
+      $result->clave = password_hash($result->clave,PASSWORD_DEFAULT);
+      return Escribir(" update `empleado` set `EMPLNOMB`='$result->nombre',`EMPLAPLL`='$result->apellido',`EMPLTURN`='$result->turno',`EMPLUSUA`='$result->usuario',`EMPLCLAV`='$result->clave',`ROLEID`= '$result->rol' where emplid = $id");
+    }else{
+      return Escribir(" update `empleado` set `EMPLNOMB`='$result->nombre',`EMPLAPLL`='$result->apellido',`EMPLTURN`='$result->turno',`EMPLUSUA`='$result->usuario',`ROLEID`= '$result->rol' where emplid = $id");
+
+    }
+
+    
+    // $result->clave = password_hash($result->clave,PASSWORD_DEFAULT);
+    // return Escribir(" update `empleado` set `EMPLNOMB`='$result->nombre',`EMPLAPLL`='$result->apellido',`EMPLTURN`='$result->turno',`EMPLUSUA`='$result->usuario',`EMPLCLAV`='$result->clave',`ROLEID`= '$result->rol' where emplid = $id");
    //return Escribir(" INSERT INTO empleado ('EMPLNOMB','EMPLAPLL','EMPLTURN','EMPLUSUA','EMPLCLAV','ROLEID') VALUES('$result=>nombre','$result=>apellido','$result=>turno','$result=>usuario','$result=>clave',$result=>rol)");
 
 }

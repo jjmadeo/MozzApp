@@ -13,7 +13,7 @@ muestro todos los usuarios con un combo select -->
 
     <div class="row">
         <div class="col">
-            <div class="card text-left">
+            <!-- <div class="card text-left">
                 <div class="card-header">
                     <label for=""> Elija Usuario </label>
                     
@@ -89,6 +89,127 @@ muestro todos los usuarios con un combo select -->
                 </div>
                 <div class="card-footer text-muted">
                   ABM de Usuarios
+                </div>
+              </div> -->
+
+
+              <div class="card bg-light shadow-lg  bg-white rounded" >
+                <div class="card-header" > 
+                    <div class="row">
+                        <div class="col">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" [(ngModel)]="swichModificarPersona"  id="customSwitch1">
+                                <label class="custom-control-label" for="customSwitch1">Añadir o Actualizar Persona.</label>
+                              </div>
+                            
+                              
+                            </div> 
+                            <div class="col" *ngIf="swichModificarPersona" >
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input"  [(ngModel)]="swichEliminarPersona"    id="swichEliminarCarta">
+                                <label class="custom-control-label" for="swichEliminarCarta">¿Eliminar?</label>
+                            </div>
+                        </div>
+                            <div class="col" *ngIf="swichModificarPersona">
+                                <select class="mdb-select md-form form-control" (change)="rellenarFormUpdatePersona($event.target.value)" name="miselect">
+                                    <option [value]="item.ID" *ngFor="let item of listaUsercombo">{{item.USUARIO}}-{{item.NOMBRE}} {{item.APELLIDO}} </option>
+                                </select>
+                        </div>
+                            
+                        </div>
+
+                    </div>
+                    
+
+                <div class="card-body">
+                    
+
+                    <form #abmpersona="ngForm" >
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="container" *ngIf="!swichEliminarPersona">
+                                        
+                                            <div class="row m-3">
+                                                <div class="col">
+                                                    <label for="">Nombre:</label>
+                                                    <input  #nombre="ngModel" placeholder=' Ej:Nombre "Pedro"'   [(ngModel)]="nombreData"  name="nombre"   type="text" class="form-control" [ngClass]="{'is-valid': nombre.valid && nombre.touched,'is-invalid': !nombre.valid && nombre.touched }" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="row m-3">
+                                                <div class="col">
+                                                    <label for="">Apellido:</label>
+                                                    <input type="text" class="form-control" placeholder=' Ej:Apellido "gomez"'   name="apellido" [ngClass]="{'is-valid': apellido.valid && apellido.touched,'is-invalid': !apellido.valid && apellido.touched }"  #apellido="ngModel"  [(ngModel)]="apellidoData"   required>
+                                                </div>
+                                            </div>
+
+                                            <div class="row m-3">
+                                                <div class="col">
+                                                    <label for="">Usuario:</label>
+                                                    <input type="text" class="form-control" placeholder=' Ej:Usuario "ppedro"'  [disabled]='swichModificarPersona'  name="usuario" [ngClass]="{'is-valid': usuario.valid && usuario.touched,'is-invalid': !usuario.valid && usuario.touched }"  #usuario="ngModel"  [(ngModel)]="usuarioData"   required>
+                                                </div>
+                                            </div>
+
+                                            <div class="row m-3">
+                                                <div class="col " *ngIf="swichModificarPersona">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input"  [(ngModel)]="swichCambiarPassword"  name="passwordswich"   id="swichPass">
+                                                        <label class="custom-control-label" for="swichPass">Cambiar Contraseña</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col" *ngIf="!swichModificarPersona">
+                                                    <label for="">Password:</label>
+                                                        <input #password="ngModel" type="text" [(ngModel)]="passwordData" name="password"   placeholder=' Ej:password "Pedro78"' class="form-control" required>
+                                                </div> 
+                                                <div class="col" *ngIf="swichModificarPersona">
+                                                    <label for="">Password:</label>
+                                                        <input #passwordChange="ngModel" type="text" [(ngModel)]="passwordDataChange" name="passwordChange"  [disabled]='!swichCambiarPassword'  placeholder=' Ej:password "cambiar"' class="form-control" required>
+                                                </div>                                
+                                            </div>
+
+                                            <div class="row m-3">
+                                                <div class="col">
+                                                    <label for="inputState">Turno:</label>
+                                                    <select id="inputState" class="form-control" name="turno" #turno="ngModel"  [ngClass]="{'is-valid': turno.valid && turno.touched,'is-invalid': !turno.valid && turno.touched }"  [(ngModel)]="turnoData" required>
+                                                        <option value="TT">Turno Tarde</option> 
+                                                        <option value="TM">Turno Mañana</option> 
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row m-3">
+                                                <div class="col">
+                                                        <label for="rolinput">Roles</label>
+                                                        <select id="rolinput" class="form-control" name="rol" #rol="ngModel"  [ngClass]="{'is-valid': rol.valid && rol.touched,'is-invalid': !rol.valid && rol.touched }"    [(ngModel)]="rolData" required>
+                                                            <option [value]="item1.ID" *ngFor="let item1 of listaRolescombo">{{item1.NOMBRE}} </option>
+                                                        </select>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row m-3">
+                                <div class="col">
+                                    <button class="btn btn-success m-1" [disabled]='!abmpersona.form.valid  ' (click)="crearEmpleado()" *ngIf="!swichModificarPersona" >Crear Nuevo</button>
+                                    <button class="btn btn-info  m-1" [disabled]='!abmpersona.form.valid ' (click)="editarEmpleado()" *ngIf="swichModificarPersona && !swichEliminarPersona "   >Modificar Empleado</button>
+                                    <button class="btn btn-danger m-1" [disabled]='!abmpersona.form.valid ' *ngIf="swichEliminarPersona"  (click)="eliminarEmpleado()" >Eliminar Empleado</button>
+
+                                </div>
+                            </div>
+                        </div> 
+                     </form>
+
+                 
+
+                 
+
+
+
                 </div>
               </div>
 
