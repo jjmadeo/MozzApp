@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MesaService } from "../../servicios/mesa.service";
 import { alerta, loaderSet } from "../../complementos/loadModify";
+import { AuditoriaService } from '../../servicios/auditoria.service';
 @Component({
   selector: 'app-cajero-home',
   templateUrl: './cajero-home.component.html',
@@ -17,7 +18,8 @@ export class CajeroHomeComponent implements OnInit {
     renderingMesas:boolean= false
 
   constructor(
-    private _mesaService:MesaService
+    private _mesaService:MesaService,
+    private _auditoria:AuditoriaService
   ) { }
 
   
@@ -52,6 +54,7 @@ export class CajeroHomeComponent implements OnInit {
       this.ocupada = mesa.ocupada
       this.idMesa = mesa.id_mesa
       
+      this._auditoria.auditoria('ObtenerPedidosMesa','Se solicitaron los pedidos de la mesa => '+mesa.id_mes).subscribe(res=>{});
       
       console.log(this.idPedido)
       loaderSet(false);
@@ -79,6 +82,8 @@ export class CajeroHomeComponent implements OnInit {
       loaderSet(false)
       alerta('OK',res.msj)
       console.log(res)
+      this._auditoria.auditoria('CerrarMesa','Se solicto el cierre de la mesa => '+ID).subscribe(res=>{});
+
       this.renderMesas()
 
     },e=>{
@@ -94,6 +99,8 @@ renderMesas(){
       this._mesaService.getMesas().subscribe(res=>{
         this.mesas = JSON.parse(JSON.stringify(res).toLowerCase());
         console.log(this.mesas);
+        this._auditoria.auditoria('ObtenerMesas','Se solicito la lista de mesas.').subscribe(res=>{});
+
         loaderSet(false);
 
       },e=>{

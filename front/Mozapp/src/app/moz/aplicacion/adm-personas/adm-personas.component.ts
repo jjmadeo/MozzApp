@@ -2,6 +2,7 @@ import { Component, OnInit, ɵConsole } from '@angular/core';
 import { PersonaService } from "../../servicios/persona.service";
 import { alerta, loaderSet } from "../../complementos/loadModify";
 import { ThrowStmt } from '@angular/compiler';
+import { AuditoriaService } from '../../servicios/auditoria.service';
 
 @Component({
   selector: 'app-adm-personas',
@@ -28,7 +29,8 @@ export class AdmPersonasComponent implements OnInit {
 
   
   constructor(
-    private _personaServices:PersonaService
+    private _personaServices:PersonaService,
+    private _auditoria:AuditoriaService
   ) { }
 
 
@@ -55,6 +57,8 @@ export class AdmPersonasComponent implements OnInit {
       this.listaUsercombo=res;
       console.log(this.listaUsercombo)
         loaderSet(false);
+
+        this._auditoria.auditoria('ObtenerEmpleados','Se solicitaron los empleados.').subscribe(res=>{});
     
     },err=>{
       console.log(err)
@@ -79,6 +83,8 @@ crearEmpleado(){
       
   alerta("OK","usuario grabado correctamente");
   console.log(res)
+  this._auditoria.auditoria('Alta Empleado','Se ah dado de alta al empleado.').subscribe(res=>{});
+
     loaderSet(false);
 
 },err=>{
@@ -91,6 +97,9 @@ crearEmpleado(){
 
 }
 rellenarFormUpdatePersona(item){
+
+  if(item.value=='NA') this.idUsuario=null;
+
   let arrAux
     arrAux= this.listaUsercombo.find(i=> item === i.ID)
     console.log(arrAux);
@@ -125,12 +134,13 @@ loaderSet(true);
 this._personaServices.actualizarEmpleado(this.idUsuario,empleadoUpdate).subscribe(res=>{
   
   alerta("OK","Usuario ha sido modificado");
-  console.log(res)
-    loaderSet(false);
+  this._auditoria.auditoria('EditarEmpleado','Se Edito el empleado'+this.idUsuario).subscribe(res=>{});
+  
+  loaderSet(false);
+
 
 },err=>{
   alerta("ERROR","error al modificar el usaurio.");
-  console.log(err)
   loaderSet(false);
 })
 
@@ -145,13 +155,12 @@ eliminarEmpleado(){
     this._personaServices.bajaEmpleado(this.idUsuario).subscribe(res=>{
     
       alerta("OK","Usuario ah sido dado de baja");
-      console.log(res)
+      this._auditoria.auditoria('BajaLogicaEmplado','Se ha dado de baja el empleado'+this.idUsuario).subscribe(res=>{});
         loaderSet(false);
         this.swichEliminarPersona=false;
     
     },err=>{
       alerta("ERROR","no se ah podido dar de baja el usario.");
-      console.log(err)
       loaderSet(false);
       this.swichEliminarPersona=false;
 
