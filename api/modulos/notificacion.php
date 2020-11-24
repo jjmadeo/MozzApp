@@ -8,7 +8,7 @@ function ObtenerNotificacionesMozo($id){
 }
 
 function ObtenerNotificacionesMesa($mesa){
-   return Leer("SELECT n.PEDIDOID pedido,tnoti.NOMBRE tipo, esta.NOMBRE estado , tnoti.TIPO_NOTI_ID id_tipo_noti, n.notificacionid id_noti FROM notificacion n inner join pedido p on n.PEDIDOID = p.PEDIDOID inner join relamesaemplpedido rel on rel.RELAID = p.RELAID inner join tipo_notificacion tnoti on tnoti.TIPO_NOTI_ID = n.TIPO_NOTI_ID inner join estado esta on esta.ESTADOID= n.ESTADOID where rel.MESAID = $mesa and p.PEDIDO_COBRADO = 0");
+   return Leer("SELECT n.PEDIDOID pedido,tnoti.NOMBRE tipo, esta.NOMBRE estado , tnoti.TIPO_NOTI_ID id_tipo_noti, n.notificacionid id_noti FROM notificacion n inner join pedido p on n.PEDIDOID = p.PEDIDOID inner join relamesaemplpedido rel on rel.RELAID = p.RELAID inner join tipo_notificacion tnoti on tnoti.TIPO_NOTI_ID = n.TIPO_NOTI_ID inner join estado esta on esta.ESTADOID= n.ESTADOID where rel.MESAID = $mesa and p.PEDIDO_COBRADO = 0 and esta.ESTADOID!=2");
 }
 
 function crearNotificacion($body){

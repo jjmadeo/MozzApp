@@ -72,9 +72,7 @@ export class MozoHomeComponent implements OnInit
       loaderSet(false);
     },e=>{
       loaderSet(false);
-    })
-    
-        
+    })        
   }
 
 }

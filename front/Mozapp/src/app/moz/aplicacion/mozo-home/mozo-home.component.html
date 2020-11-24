@@ -75,7 +75,7 @@
                               <tr *ngFor="let item of notificaciones">
                                 <td>
                                     
-                                    <div class="alert btn" (click)="visarNotificacion(item.id_noti)" [ngClass]="{'alert-primary': item.id_tipo_noti==1, 'alert-danger': item.id_tipo_noti==2, 'alert-success': item.id_tipo_noti==3}" role="alert">
+                                    <div class="alert btn" (click)="visarNotificacion(item.id_noti,mesa )" [ngClass]="{'alert-primary': item.id_tipo_noti==1, 'alert-danger': item.id_tipo_noti==2, 'alert-success': item.id_tipo_noti==3}" role="alert">
                                         {{item.tipo}}
                                   </div>
                                     </td>
