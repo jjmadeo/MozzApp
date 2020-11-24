@@ -4,6 +4,7 @@ import { BannerHomeService } from "../../../servicios/banner-home.service";
 import { CartaService } from "../../../servicios/carta.service";
 import { ShareService } from 'src/app/moz/complementos/shereservice/share.service';
 import { NgForm } from '@angular/forms';
+import { AuditoriaService } from 'src/app/moz/servicios/auditoria.service';
 
 
 @Component({
@@ -41,7 +42,8 @@ export class AbmCartaComponent implements OnInit,DoCheck {
 
   constructor(private _banner:BannerHomeService,
     private _shereService:ShareService,
-    private _cartaService:CartaService
+    private _cartaService:CartaService,
+    private _auditoria:AuditoriaService
     ) { }
 
 
@@ -90,8 +92,11 @@ export class AbmCartaComponent implements OnInit,DoCheck {
         console.log(res)
         alerta('OK',res)
         f.resetForm();
+        this._auditoria.auditoria('AltaItemCarta','Se ah agregado un registro en la carta.').subscribe(res=>{});
+
         loaderSet(false)
-  
+        this.renderBannerCarta()
+
       },e=>{
         alerta('ERROR',e.error.text)
         loaderSet(false)
@@ -105,7 +110,11 @@ export class AbmCartaComponent implements OnInit,DoCheck {
         console.log(res)
         alerta('OK',res)
         f.resetForm();
+        this._auditoria.auditoria('ActualizarItemCarta','Se ah actualizado un registro en la carta.').subscribe(res=>{});
+
         loaderSet(false)
+        this.renderBannerCarta()
+
   
       },e=>{
         console.log(e)
@@ -128,6 +137,8 @@ export class AbmCartaComponent implements OnInit,DoCheck {
       console.log(res)
       alerta('OK','Curresel grabado')
       f.resetForm();
+      this._auditoria.auditoria('AñadirItemCarrusellPrincipal','Se ah agregado un registro en El Carrusel').subscribe(res=>{});
+      this.renderBannerCarta()
       loaderSet(false)
 
     },e=>{
@@ -169,6 +180,7 @@ export class AbmCartaComponent implements OnInit,DoCheck {
     this._cartaService.eliminarItemCarta(this.idCarta).subscribe(res =>{
       console.log(res)
       alerta('OK',res)
+      this._auditoria.auditoria('EliminarItemCarta','Se ah Eliminado un registro de la carta.').subscribe(res=>{});
       loaderSet(false)
       this.renderBannerCarta();
     },e=>{
@@ -187,6 +199,8 @@ export class AbmCartaComponent implements OnInit,DoCheck {
     this._banner.eliminarItemCarrusel(this.idDelete).subscribe(res =>{
       console.log(res)
       alerta('OK',res)
+      this._auditoria.auditoria('EliminarItemCarrusel','Se ah Eliminado un registro del carrusel.').subscribe(res=>{});
+
       loaderSet(false)
       this.renderBannerCarta();
     },e=>{
@@ -203,6 +217,7 @@ export class AbmCartaComponent implements OnInit,DoCheck {
 
     this._cartaService.getCarta().subscribe(res=>{
       loaderSet(false)
+      this._auditoria.auditoria('ObtenerCarta','Se ah solicitado la carta.').subscribe(res=>{});
 
       this.carta = res;
       console.log(this.carta)
@@ -215,6 +230,7 @@ export class AbmCartaComponent implements OnInit,DoCheck {
 
     this._banner.getCarrusel().subscribe(res=>{
       loaderSet(false)
+      this._auditoria.auditoria('ObtenerCarrusell','Se ah solicitado la carrusell.').subscribe(res=>{});
 
       this.carrusel = JSON.parse(JSON.stringify(res).toLowerCase())
       console.log(this.carrusel)

@@ -1,5 +1,7 @@
 import { Component, Input, OnInit  } from '@angular/core';
 import { Router } from '@angular/router';
+import { alerta } from '../complementos/loadModify';
+import { AuthService } from "../servicios/auth.service";
 
 @Component({
   selector: 'app-menu-small',
@@ -13,7 +15,8 @@ export class MenuSmallComponent implements OnInit {
   elements:any[];
 
   constructor(
-    private router:Router
+    private router:Router,
+    private _auhtService:AuthService
   ) {
     
 
@@ -41,8 +44,15 @@ recargarMenu(array,user){
 }
 
 logout(){
-  localStorage.removeItem("sesion")
-  this.router.navigate(['/home']);
+  this._auhtService.logOut().subscribe(res =>{
+    localStorage.removeItem("sesion")
+    this.router.navigate(['/home']);
+  },e=>{
+    console.log(e);
+    alerta('ERROR','No se ah podido cerrar Sesion');
+  });
+  
+  
 }
 
   goTo(element) {

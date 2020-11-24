@@ -11,7 +11,7 @@ function ObtenerMesa($id){
 
 function ObtenerMesas(){
    
-    return  Leer("SELECT a.MESAID id_mesa, a.OCUPADA, a.HABILITADA, c.EMPLID id_empl,c.EMPLNOMB nombre, c.EMPLAPLL apellido, c.EMPLTURN TURNO  FROM mesa a inner join relamesaemplpedido b on a.MESAID = b.MESAID inner join empleado c on b.EMPLID = c.EMPLID ");
+    return  Leer("SELECT a.MESAID id_mesa, a.OCUPADA, a.HABILITADA, c.EMPLID id_empl,c.EMPLNOMB nombre, c.EMPLAPLL apellido, c.EMPLTURN TURNO  FROM mesa a inner join relamesaemplpedido b on a.MESAID = b.MESAID inner join empleado c on b.EMPLID = c.EMPLID order by a.MESAID asc ");
   
   }
 

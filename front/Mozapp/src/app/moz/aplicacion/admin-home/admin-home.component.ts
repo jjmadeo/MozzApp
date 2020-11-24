@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PersonaService } from "../../servicios/persona.service";
 import { loaderSet } from "../../complementos/loadModify";
+import { AuditoriaService } from '../../servicios/auditoria.service';
 
 @Component({
   selector: 'app-admin-home',
@@ -11,24 +12,27 @@ export class AdminHomeComponent implements OnInit {
   listaUser:any[];
 
   constructor(
-    private _personaServices:PersonaService
+    private _personaServices:PersonaService,
+    private _auditoria:AuditoriaService
+
   ) { }
 
   ngOnInit(): void {
 
     loaderSet(true);
 
-this._personaServices.getEMPL().subscribe(res=>{
-  
-  this.listaUser=res;
-  console.log(this.listaUser)
-    loaderSet(false);
+    this._personaServices.getEMPL().subscribe(res=>{
+      
+      this.listaUser=res;
 
-},err=>{
-  console.log(err)
-  loaderSet(false);
-}
-)
+      this._auditoria.auditoria('ObtenerEmpleados','Se ha solicitado la lista de empleados').subscribe(res=>{});
+
+        loaderSet(false);
+
+    },err=>{
+      console.log(err)
+      loaderSet(false);
+    })
 
     
 

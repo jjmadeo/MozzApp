@@ -1,6 +1,7 @@
+import { IfStmt } from '@angular/compiler';
 import { Component, DoCheck, Input, OnInit } from '@angular/core';
 import { ActivatedRoute ,Router } from "@angular/router";
-import { loaderSet } from 'src/app/moz/complementos/loadModify';
+import { alerta, loaderSet } from 'src/app/moz/complementos/loadModify';
 import { MesaService } from "../../../servicios/mesa.service";
 import { NotificacionService } from "../../../servicios/notificacion.service";
 
@@ -107,7 +108,7 @@ export class AltaMesaComponent implements OnInit,DoCheck {
       loaderSet(false);
       setTimeout(()=>{
         this.mozoDelayButtom=true;
-      },6000)
+      },60000)
     },e=>{
 
       loaderSet(false);
@@ -180,22 +181,51 @@ export class AltaMesaComponent implements OnInit,DoCheck {
     this.mesaRequestJSON.pedido.pedidoList =arrAux;
 
 
-    loaderSet(true);
-    this._mesaService.postAltaPedidoMesa(this.mesaRequestJSON).subscribe(res=>{
-      //this.pedidoEnviado =  true;
-      this.mozoDelayButtom=true;
-      this.cuentaDelayButtom = true
-      console.log(res)
-      this.nPedido = res.nPedido
-      localStorage.setItem("pedidoEnviado",'true');
+      this._mesaService.getMesaID(this.nmesa).subscribe(res=>{
+        debugger;
+
+        if(res[0].HABILITADA ==0 || res[0].OCUPADA==1){
+          alerta('ERROR','MESA OCUPADA / INHABILITADA');
+                
+        }else{
+          loaderSet(true);
+          this._mesaService.postAltaPedidoMesa(this.mesaRequestJSON).subscribe(res=>{
+            //this.pedidoEnviado =  true;
+            this.mozoDelayButtom=true;
+            this.cuentaDelayButtom = true
+            console.log(res)
+            this.nPedido = res.nPedido
 
 
-      loaderSet(false)
-    },e=>{
-      console.log(e);
+            if(this.invocado==='MOZOCOMPONENT'){
+              alerta('OK','Pedido Generado ');
 
-      loaderSet(false)
-    })
+            }else{
+              localStorage.setItem("pedidoEnviado",'true');
+
+            }
+      
+      
+            loaderSet(false)
+          },e=>{
+            console.log(e);
+                alerta('ERROR','No se puede generar el pedido');
+                
+
+            loaderSet(false)
+          })
+        }
+
+      },e=>{
+        console.log(e)
+        alerta('ERROR','Verifique numero de mesa');
+      })
+
+    
+
+
+
+    
 
 
 
@@ -221,7 +251,7 @@ export class AltaMesaComponent implements OnInit,DoCheck {
         this.mozoDelayButtom=true;
         this.cuentaDelayButtom=true;
 
-      },6000)
+      },60000)
     },e=>{
 
       loaderSet(false);

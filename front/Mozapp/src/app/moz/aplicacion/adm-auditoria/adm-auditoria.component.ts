@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PersonaService } from "../../servicios/persona.service";
 import { loaderSet } from "../../complementos/loadModify";
+import { AuditoriaService } from '../../servicios/auditoria.service';
 
 @Component({
   selector: 'app-adm-auditoria',
@@ -12,35 +13,25 @@ export class AdmAuditoriaComponent implements OnInit {
   listaAuditoria:any[];
 
   constructor(
-    private _personaServices:PersonaService
+    private _personaServices:PersonaService,
+    private _auditoria:AuditoriaService
   ) { }
 
   ngOnInit(): void {
+    loaderSet(true);
 
-    // this.listaAuditoria= [
-    //   {usuario:"pDRoloco",log:"ingreso a sistema el dia 17/10/20 11:00 am"},
-    //   {usuario:"JuanLo",log:"realizo compra el dia 17/10/20  01:00 pm"},
-    //   {usuario:"Joselo",log:"solicito mesa el dia 18/10/20 4:00 pm"}
+      this._auditoria.obtenerAuditoria().subscribe(res=>{
+        this.listaAuditoria = res
+        this._auditoria.auditoria('ObtenerAuditoria','Se ha solicitado la auditoria del sistema.').subscribe(res=>{});
 
-    // ]
-    
-    this._personaServices.getEMPL().subscribe(res=>{
-      loaderSet(true);
-      
-      var tam=res.empleados.length;
-       //console.log(tam);
-      
-    
+        loaderSet(false);
 
-      this.listaAuditoria=[
-        {usuario: res.empleados[0].usuario,log:res.empleados[0].role},
-        {usuario: res.empleados[1].usuario,log:res.empleados[1].role},
-        {usuario: res.empleados[2].usuario,log:res.empleados[2].role}
-      ]
-      loaderSet(false);
+      },e=>{
+        loaderSet(false);
+
+      });
+
+
     
-    },err=>{
-      console.log(err)
-      loaderSet(false);
-    }
-  )}}
+  }
+}

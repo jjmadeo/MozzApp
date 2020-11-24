@@ -121,7 +121,14 @@ if($_SERVER['REQUEST_METHOD']=='GET'){ // consultar datos del servidor
             }
 
         break;
-        case "pedidos":
+        case "auditoria":
+            try {
+                print_r(json_encode(obtenerAuditoria()));
+                http_response_code(200);
+            } catch (\Throwable $th) {
+                print_r(json_encode($th->getMessage()));          
+                json_encode(http_response_code(404));
+            }
 
         break;
 
@@ -171,11 +178,34 @@ if($_SERVER['REQUEST_METHOD']=='GET'){ // consultar datos del servidor
 
 
         break;
+        
+
+        case "cerrarSesion": 
+            print_r(json_encode(cerrarSesion()));
+
+
+        break;
         case "login":
 
             try {
 
                 print_r(json_encode(login($BodyRequest)));
+          
+                json_encode(http_response_code(200));    
+            } catch (Throwable $th) {
+                
+            print_r(json_encode($th->getMessage()));
+          
+            json_encode(http_response_code(404));
+            }
+
+
+        break;
+        case "auditoria":
+
+            try {
+
+                print_r(json_encode(escribirAuditoriaService($BodyRequest)));
           
                 json_encode(http_response_code(200));    
             } catch (Throwable $th) {

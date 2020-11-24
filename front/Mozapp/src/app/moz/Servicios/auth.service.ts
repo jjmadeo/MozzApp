@@ -32,8 +32,8 @@ export class AuthService {
   }
 
   logOut(){
-
-    localStorage.clear();
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    return this._http.post(url+"cerrarSesion",{headers: headers})
 
   }
 

@@ -83,14 +83,21 @@
                        
                         <thead>
                             <tr>
-                                <th>Usuarios</th>
-                                <th>Logs</th>
+                                <th>Usuario</th>
+                                <th>Rol</th>
+                                <th>Fecha</th>
+                                <th>Operacion</th>
+                                <th>Log</th>
+
                             </tr>
                         </thead>
                 
                         <tbody>
                             <tr *ngFor="let item of listaAuditoria;">
                                 <td >{{item.usuario}}</td>
+                                <td>{{item.rol}}</td>
+                                <td>{{item.fecha}}</td>
+                                <td>{{item.operacion}}</td>
                                 <td>{{item.log}}</td>
                             </tr>
                 

@@ -4,6 +4,7 @@ import { loaderSet } from '../complementos/loadModify';
 import { PersonaService } from "../servicios/persona.service";
 import { Router } from '@angular/router';
 import { AuthService } from "../servicios/auth.service";
+import { AuditoriaService } from '../servicios/auditoria.service';
 
 @Component({
   selector: 'app-iniciar-sesion',
@@ -18,7 +19,9 @@ export class IniciarSesionComponent implements OnInit {
   constructor(
     private _route:Router,
     private _personaService:PersonaService,
-    private _authService:AuthService
+    private _authService:AuthService,
+    private _auditoria:AuditoriaService
+
 
 
   ) { 
@@ -56,7 +59,11 @@ export class IniciarSesionComponent implements OnInit {
 
         localStorage.setItem("sesion",JSON.stringify(res[0]))
          this._route.navigate(['/app/'+res[0].rol.toLowerCase()]);
-        console.log(res[0])
+
+          this._auditoria.auditoria('Login','Inicio de sesion del usaurio.').subscribe(res=>{});
+         
+
+
       },e=>{
 
         this.logginError = true;
