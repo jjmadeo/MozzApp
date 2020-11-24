@@ -44,14 +44,10 @@ export class MozoHomeComponent implements OnInit
       this.total = res.total;
       this.idPedido = res.pedidoID
       this.ocupada = mesa.ocupada
-      this.idMesa = mesa.id_mesa  
-      
-      
+      this.idMesa = mesa.id_mesa
       this._notificacionService.getNotiMesa(mesa.id_mesa).subscribe(res=>{
-        this.notificaciones=JSON.parse(JSON.stringify(res));
-        
-        console.log(this.notificaciones)
-
+      this.notificaciones=JSON.parse(JSON.stringify(res));
+      //console.log(this.notificaciones);
       },e=>{
       })
       loaderSet(false);
@@ -66,10 +62,15 @@ export class MozoHomeComponent implements OnInit
     }
   }
 
-  visarNotificacion(id_noti)
+  visarNotificacion(id_noti,mesa)
   {
     this._notificacionService.actulizarNotificacion(id_noti).subscribe(res=>{
       loaderSet(false);
+      this._notificacionService.getNotiMesa(mesa.id_mesa).subscribe(res=>{
+        this.notificaciones=JSON.parse(JSON.stringify(res));
+        //console.log(this.notificaciones);
+        },e=>{
+        })
     },e=>{
       loaderSet(false);
     })        
