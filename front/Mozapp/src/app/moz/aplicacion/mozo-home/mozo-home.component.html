@@ -1,13 +1,3 @@
-<!-- <h1>Mesas del mozo</h1>
-<div class="container ">
-   <div class="row">
-      <div class="col card">
-          <ul>
-              <li class="card justify-content-center text-center bg-secondary m-2 mesa" *ngFor="let mesa of mesas">{{mesa.numero}}</li>
-          </ul>
-      </div> 
-   </div>
-</div> -->
 <div class="container">
     <div class="row">
         <div class="col">
@@ -24,7 +14,7 @@
                     <div class="continer">
                         <div class="row">
                             <div class="col" *ngFor="let mesa of mesas">                                
-                                <app-mesa class="btn" [mesaObj]='mesa' [tipoMesa]='false' ></app-mesa>
+                                <app-mesa class="btn" (click)="VerPedido(mesa)" [mesaObj]='mesa' [tipoMesa]='false' data-toggle="modal" data-target="#verPedido"></app-mesa>
                             </div>                            
                         </div>
                     </div>
@@ -37,7 +27,7 @@
     </div>
 </div>
 
-<div class="modal" id="exampleModal" tabindex="-1" role="dialog">
+<div class="modal" id="verPedido" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -47,15 +37,59 @@
           </button>
         </div>
         <div class="modal-body">
-          <ul>
-              <li>3. Milanesas</li>
-              <li>3. Papa Fritas</li>
-              <li>3. Gaseosas</li>
-          </ul>
+            <div class="container">
+                <div class="row">
+                    <div class="col" id="pedidoTabla">
+                        <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Cantidad</th>
+                                <!-- <th scope="col">Comentarios</th> -->
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let item of pedido">
+                                <td>{{item.nombre}}</td>
+                                <td>{{item.cantidad}}</td>
+                                <!-- <td>{{item.observacion}}</td> -->
+                              </tr>                  
+                            </tbody>
+                          </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <hr>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col" id="pedidoTabla">
+                        <table class="table">
+                            <thead>
+                              <tr>
+                                <th scope="col">Notificaciones</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let item of notificaciones">
+                                <td>
+                                    
+                                    <div class="alert btn" (click)="visarNotificacion(item.id_noti)" [ngClass]="{'alert-primary': item.id_tipo_noti==1, 'alert-danger': item.id_tipo_noti==2, 'alert-success': item.id_tipo_noti==3}" role="alert">
+                                        {{item.tipo}}
+                                  </div>
+                                    </td>
+                              </tr>                  
+                            </tbody>
+                          </table>
+                    </div>
+                </div>
+            </div>
+            
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
+            <p class="text-left font-weight-bold   rounded " >Total: ${{total}}</p>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
       </div>
     </div>
   </div>

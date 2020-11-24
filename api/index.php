@@ -279,6 +279,19 @@ if($_SERVER['REQUEST_METHOD']=='GET'){ // consultar datos del servidor
             }
 
         break;
+
+        case "notificacion/".$parametroGET:
+            try {
+
+                print_r(json_encode(ActulizarNotificacionEstado($parametroGET)));          
+                json_encode(http_response_code(200));    
+            } catch (Exception $th) {                
+                print_r(json_encode($th->getMessage()));
+                json_encode(http_response_code(404));
+            }
+
+        break;
+
         case "asignarMesaEmpleado/".$parametroGET:
 
             try {
