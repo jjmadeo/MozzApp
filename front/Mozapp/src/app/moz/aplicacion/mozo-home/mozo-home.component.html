@@ -6,9 +6,21 @@
     </div>
     <div class="row">
         <div class="col">
-            <div class="card text-center">
-                <div class="card-header">
-                    Mozo: {{mozo}}
+            <div class="card ">
+                <div class="card-header text-lef">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col">
+                         <button class="btn btn-primary" (click)="obtenerMesasEmpleado()" type="button" >
+                        Recargar!
+                      </button>
+                    </div>
+                    <div class="col">
+                      Mozo: {{mozo}}
+                    </div>
+                    </div>
+                  </div>
+                   
                 </div>
                 <div class="card-body">
                     <div class="continer">

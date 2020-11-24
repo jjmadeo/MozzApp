@@ -26,12 +26,22 @@ export class MozoHomeComponent implements OnInit
   ngOnInit(): void 
   {
     this.mesas = [];
-    this._mesaService.getmesasEmpleado(this.idMozo).subscribe(res=>{      
-      this.mesas=JSON.parse(JSON.stringify(res).toLowerCase());
-      console.log(this.mesas);
-    },e=>{
-      console.log(e);
-    })
+    this.obtenerMesasEmpleado();
+
+    setInterval(()=>{
+
+      this._mesaService.getmesasEmpleado(this.idMozo).subscribe(res=>{      
+        this.mesas=JSON.parse(JSON.stringify(res).toLowerCase());
+        console.log(this.mesas);
+      },e=>{
+        console.log(e);
+      })
+
+
+    },600000)
+
+
+
   }
 
   VerPedido(mesa)
@@ -66,14 +76,32 @@ export class MozoHomeComponent implements OnInit
   {
     this._notificacionService.actulizarNotificacion(id_noti).subscribe(res=>{
       loaderSet(false);
-      this._notificacionService.getNotiMesa(mesa.id_mesa).subscribe(res=>{
-        this.notificaciones=JSON.parse(JSON.stringify(res));
-        //console.log(this.notificaciones);
-        },e=>{
-        })
+      this.obtenerNotisMesa(this.idMesa);
+      this.obtenerMesasEmpleado();
     },e=>{
       loaderSet(false);
     })        
   }
+
+
+  obtenerNotisMesa(id){
+    this._notificacionService.getNotiMesa(id).subscribe(res=>{
+      this.notificaciones=JSON.parse(JSON.stringify(res));
+
+
+      //console.log(this.notificaciones);
+      },e=>{
+      })
+  }
+
+  obtenerMesasEmpleado(){
+    this._mesaService.getmesasEmpleado(this.idMozo).subscribe(res=>{      
+      this.mesas=JSON.parse(JSON.stringify(res).toLowerCase());
+      console.log(this.mesas);
+    },e=>{
+      console.log(e);
+    })
+  }
+
 
 }

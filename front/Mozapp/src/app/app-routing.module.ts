@@ -37,7 +37,6 @@ const routes: Routes = [
     {path:'app/adm/personas',component:AdmPersonasComponent,canActivate:[AuthAdminGuard]},
     {path:'app/adm/auditoria',component:AdmAuditoriaComponent,canActivate:[AuthAdminGuard]},
 
-    {path:'app/mozo/pedidos',component:MozoPedidosComponent,canActivate:[AuthAdminGuard]},
     {path:'app/mozo/pedido',component:MozoNuevoPedidoComponent,canActivate:[AuthAdminGuard]},
     
     {path:'comer/altamesa/:id',component:AltaMesaComponent,canActivate:[AuthAdminGuard]},
