@@ -8,9 +8,8 @@ function ObtenerNotificacionesMozo($id){
 }
 
 function ObtenerNotificacionesMesa($mesa){
-   return Leer("SELECT n.PEDIDOID pedido,tnoti.NOMBRE tipo, esta.NOMBRE estado FROM notificacion n inner join pedido p on n.PEDIDOID = p.PEDIDOID inner join relamesaemplpedido rel on  rel.RELAID = p.RELAID inner join tipo_notificacion tnoti on tnoti.TIPO_NOTI_ID = n.TIPO_NOTI_ID inner join estado esta on esta.ESTADOID= n.ESTADOID where  rel.MESAID = $mesa and p.PEDIDO_COBRADO = 0 ");
+   return Leer("SELECT n.PEDIDOID pedido,tnoti.NOMBRE tipo, esta.NOMBRE estado , tnoti.TIPO_NOTI_ID id_tipo_noti, n.notificacionid id_noti FROM notificacion n inner join pedido p on n.PEDIDOID = p.PEDIDOID inner join relamesaemplpedido rel on rel.RELAID = p.RELAID inner join tipo_notificacion tnoti on tnoti.TIPO_NOTI_ID = n.TIPO_NOTI_ID inner join estado esta on esta.ESTADOID= n.ESTADOID where rel.MESAID = $mesa and p.PEDIDO_COBRADO = 0");
 }
-
 
 function crearNotificacion($body){
   $result= json_decode($body);
@@ -23,11 +22,17 @@ function crearNotificacion($body){
     else{
       throw new Exception('Error');
     }
-
-
-
 }
 
+function ActulizarNotificacionEstado($id){
+  $resultQuery=Escribir("UPDATE notificacion set estadoid=2 where notificacionid=$id");
+  if($resultQuery>0){
+    return'Notificacion Actualizada';
+  }
+  else{
+    throw new Exception('Error');
+  }
+}
 
 
 ?>

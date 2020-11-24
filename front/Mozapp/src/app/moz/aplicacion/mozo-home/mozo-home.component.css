@@ -55,3 +55,8 @@
         font-size: 1.5rem;
     }
 }
+
+#pedidoTabla{
+    max-height: 210px;
+    overflow-y: auto;
+}

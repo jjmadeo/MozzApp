@@ -22,4 +22,11 @@ export class NotificacionService {
 
     return this._http.get(url+"notificacionMesa/"+idMesa,{headers: headers})
   }
+
+  actulizarNotificacion(id):Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+
+    return this._http.put(url+"notificacion/"+id,{headers: headers})
+  }
+
 }
