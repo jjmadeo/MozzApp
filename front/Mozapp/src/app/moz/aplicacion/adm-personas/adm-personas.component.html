@@ -114,9 +114,9 @@
 
                             <div class="row m-3">
                                 <div class="col">
-                                    <button class="btn btn-success m-1" [disabled]='!abmpersona.form.valid  ' (click)="crearEmpleado()" *ngIf="!swichModificarPersona" >Crear Nuevo</button>
-                                    <button class="btn btn-info  m-1" [disabled]='!abmpersona.form.valid ' (click)="editarEmpleado()" *ngIf="swichModificarPersona && !swichEliminarPersona "   >Modificar Empleado</button>
-                                    <button class="btn btn-danger m-1" [disabled]='!abmpersona.form.valid ' *ngIf="swichEliminarPersona"  (click)="eliminarEmpleado()" >Eliminar Empleado</button>
+                                    <button class="btn btn-success m-1" [disabled]='!abmpersona.form.valid  ' (click)="crearEmpleado();abmpersona.resetForm()" *ngIf="!swichModificarPersona" >Crear Nuevo</button>
+                                    <button class="btn btn-info  m-1" [disabled]='!abmpersona.form.valid  ' (click)="editarEmpleado();abmpersona.resetForm()" *ngIf="swichModificarPersona && !swichEliminarPersona "   >Modificar Empleado</button>
+                                    <button class="btn btn-danger m-1" [disabled]='!abmpersona.form.valid ' *ngIf="swichEliminarPersona"  (click)="eliminarEmpleado();abmpersona.resetForm()" >Eliminar Empleado</button>
 
                                 </div>
                             </div>

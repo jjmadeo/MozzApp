@@ -95,7 +95,8 @@ export class AbmCartaComponent implements OnInit,DoCheck {
         this._auditoria.auditoria('AltaItemCarta','Se ah agregado un registro en la carta.').subscribe(res=>{});
 
         loaderSet(false)
-  
+        this.renderBannerCarta()
+
       },e=>{
         alerta('ERROR',e.error.text)
         loaderSet(false)
@@ -112,6 +113,8 @@ export class AbmCartaComponent implements OnInit,DoCheck {
         this._auditoria.auditoria('ActualizarItemCarta','Se ah actualizado un registro en la carta.').subscribe(res=>{});
 
         loaderSet(false)
+        this.renderBannerCarta()
+
   
       },e=>{
         console.log(e)
@@ -135,7 +138,7 @@ export class AbmCartaComponent implements OnInit,DoCheck {
       alerta('OK','Curresel grabado')
       f.resetForm();
       this._auditoria.auditoria('AñadirItemCarrusellPrincipal','Se ah agregado un registro en El Carrusel').subscribe(res=>{});
-
+      this.renderBannerCarta()
       loaderSet(false)
 
     },e=>{

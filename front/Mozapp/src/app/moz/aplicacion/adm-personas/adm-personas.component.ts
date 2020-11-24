@@ -3,6 +3,8 @@ import { PersonaService } from "../../servicios/persona.service";
 import { alerta, loaderSet } from "../../complementos/loadModify";
 import { ThrowStmt } from '@angular/compiler';
 import { AuditoriaService } from '../../servicios/auditoria.service';
+import { NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-adm-personas',
@@ -50,21 +52,8 @@ export class AdmPersonasComponent implements OnInit {
     }
     )
     
-    loaderSet(true);
-
-    this._personaServices.getEMPL().subscribe(res=>{
-      
-      this.listaUsercombo=res;
-      console.log(this.listaUsercombo)
-        loaderSet(false);
-
-        this._auditoria.auditoria('ObtenerEmpleados','Se solicitaron los empleados.').subscribe(res=>{});
-    
-    },err=>{
-      console.log(err)
-      loaderSet(false);
-    }
-    )
+    this.personasCombo();
+ 
 }
 
 crearEmpleado(){
@@ -86,6 +75,8 @@ crearEmpleado(){
   this._auditoria.auditoria('Alta Empleado','Se ah dado de alta al empleado.').subscribe(res=>{});
 
     loaderSet(false);
+    this.personasCombo();
+
 
 },err=>{
   alerta("ERROR","error al crear empleado");
@@ -98,7 +89,8 @@ crearEmpleado(){
 }
 rellenarFormUpdatePersona(item){
 
-  if(item.value=='NA') this.idUsuario=null;
+  if(item.value=='NA') this.idUsuario=0;
+  console.log(this.idUsuario);
 
   let arrAux
     arrAux= this.listaUsercombo.find(i=> item === i.ID)
@@ -137,6 +129,8 @@ this._personaServices.actualizarEmpleado(this.idUsuario,empleadoUpdate).subscrib
   this._auditoria.auditoria('EditarEmpleado','Se Edito el empleado'+this.idUsuario).subscribe(res=>{});
   
   loaderSet(false);
+  this.personasCombo();
+
 
 
 },err=>{
@@ -158,6 +152,8 @@ eliminarEmpleado(){
       this._auditoria.auditoria('BajaLogicaEmplado','Se ha dado de baja el empleado'+this.idUsuario).subscribe(res=>{});
         loaderSet(false);
         this.swichEliminarPersona=false;
+        this.personasCombo();
+
     
     },err=>{
       alerta("ERROR","no se ah podido dar de baja el usario.");
@@ -167,6 +163,24 @@ eliminarEmpleado(){
     })
   }
   
+}
+
+personasCombo(){
+  loaderSet(true);
+
+  this._personaServices.getEMPL().subscribe(res=>{
+      
+    this.listaUsercombo=res;
+    console.log(this.listaUsercombo)
+      loaderSet(false);
+
+      this._auditoria.auditoria('ObtenerEmpleados','Se solicitaron los empleados.').subscribe(res=>{});
+  
+  },err=>{
+    console.log(err)
+    loaderSet(false);
+  }
+  )
 }
 
 
