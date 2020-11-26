@@ -11,7 +11,7 @@
                 <div class="card-header">
                   
                 </div>
-                <div class="card-body">
+                <div class="card-body table-responsive-sm">
 
 
                     <table class="table">
@@ -31,6 +31,14 @@
                                     <option *ngFor="let item2 of personas" [selected]='item.id_empl == item2.id ' [value]="item2.id">{{item2.nombre}} {{item2.apellido}}</option>
                                 </select>
                             </td>
+                            <td>
+
+                              <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-secondary " (click)="verQrMesa(item.id_mesa)"  data-toggle="modal" data-target="#verQr" >Ver QR</button>
+                                <button type="button" class="btn btn-secondary  " (click)="actualizarQr(item.id_mesa)"  >Actualizar QR</button>
+                                </div>
+                            
+                            </td>
                             <td >
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input"  [disabled]='item.ocupada == 1'  (change)="actualizarMesaEstado(item)"  [checked]="item.habilitada == 1"  id="checkEstado{{item.id_mesa}}">
@@ -49,4 +57,26 @@
               </div>
         </div>
     </div>
+</div>
+
+
+
+
+<div class="modal" id="verQr" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Qr</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">          
+        <img [src]="urlQr" >
+      </div>
+      <div class="modal-footer">        
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+      </div>
+    </div>
+  </div>
 </div>

@@ -8,8 +8,10 @@ front/Mozapp/out-tsc
 front/Mozapp/bazel-out
 
 # dependencies
+api/modulos/library/phpqrcode/cache/*
 front/Mozapp/node_modules
 front/Mozapp/src/app/moz/servicios/apiConfig.ts
+api/modulos/library/phpqrcode/cache/*
 
 # profiling files
 chrome-profiler-events*.json

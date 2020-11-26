@@ -53,4 +53,9 @@ export class MesaService {
     return this._http.put(url+"/habilitarMesa/"+idMesa,{estado:estadoMesa},{headers: headers})
   }
 
+  ActualizarQR(id):Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    return this._http.post(url+"/generarQR",{idMesa:id},{headers: headers})
+  }
+
 }

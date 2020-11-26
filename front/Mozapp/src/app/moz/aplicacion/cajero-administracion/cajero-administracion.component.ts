@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { loaderSet } from '../../complementos/loadModify';
+import { alerta, loaderSet } from '../../complementos/loadModify';
 import { AuditoriaService } from '../../servicios/auditoria.service';
 import { MesaService } from "../../servicios/mesa.service";
 import { PersonaService } from "../../servicios/persona.service";
@@ -14,6 +14,7 @@ export class CajeroAdministracionComponent implements OnInit {
   mesas:any[];
   personas:any[];
   estadoMesa:boolean
+  urlQr:String;
 
 
   constructor(
@@ -83,4 +84,29 @@ cargarPersonas(){
     })
 
   }
+  verQrMesa(id){
+    this._mesaService.getMesaID(id).subscribe(res=>{
+      console.log(res);
+      this.urlQr = "data:image/png;base64,"+res[0].QR
+
+    })
+
+
+  }
+
+  actualizarQr(item){
+    loaderSet(true)
+    this._mesaService.ActualizarQR(item).subscribe(res=>{
+      console.log(res.msj)
+      alerta('OK',res.msj);
+      loaderSet(false)
+    },e=>{
+      loaderSet(false)
+    })
+
+   
+
+  }
+
+
 }

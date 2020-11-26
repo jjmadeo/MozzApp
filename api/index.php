@@ -29,6 +29,7 @@ require_once('./modulos/carrusel.php');
 require_once('./modulos/pedido.php');
 require_once('./modulos/notificacion.php');
 require_once('./modulos/carta.php');
+require_once('./modulos/qrGenerate.php');
 
 
 
@@ -178,6 +179,8 @@ if($_SERVER['REQUEST_METHOD']=='GET'){ // consultar datos del servidor
 
 
         break;
+
+        
         
 
         case "cerrarSesion": 
@@ -190,6 +193,22 @@ if($_SERVER['REQUEST_METHOD']=='GET'){ // consultar datos del servidor
             try {
 
                 print_r(json_encode(login($BodyRequest)));
+          
+                json_encode(http_response_code(200));    
+            } catch (Throwable $th) {
+                
+            print_r(json_encode($th->getMessage()));
+          
+            json_encode(http_response_code(404));
+            }
+
+
+        break;
+        case "generarQR":
+
+            try {
+
+                print_r(json_encode(qr($BodyRequest)));
           
                 json_encode(http_response_code(200));    
             } catch (Throwable $th) {
