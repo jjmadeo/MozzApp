@@ -51,8 +51,8 @@ return array("pedido"=>Leer("SELECT c.NOMBRE,c.URLIMG,c.PRECIO,rela.CANTIDAD, re
 }
 
 
-function CerrarMesa($idmesa){
-  $jsonBody= json_decode($idmesa);
+function CerrarMesa($obj){
+  $jsonBody= json_decode($obj);
   $conn = getConnection();
   $resultQuery = null;
   try {
@@ -63,7 +63,23 @@ function CerrarMesa($idmesa){
       //print_r($jsonBody->idmesa);
       $conn->exec("UPDATE `mozapp`.`mesa` SET `OCUPADA` = 0 WHERE `MESAID` = $jsonBody->idmesa;");        
       $pedido = Leer("SELECT p.PEDIDOID pedido FROM mozapp.relamesaemplpedido rela inner join pedido p on rela.RELAID = p.RELAID where p.PEDIDO_COBRADO = 0 and rela.MESAID = $jsonBody->idmesa ;")[0]['pedido'];
-      $conn->exec("UPDATE `mozapp`.`pedido` SET `PEDIDO_COBRADO` =1  WHERE `PEDIDOID` =$pedido");
+      
+      if($jsonBody->descuento !=0 ){
+
+        if( $jsonBody->descuento < 0 || $jsonBody->descuento >=100) {
+         return $resultQuery = array("msj"=>"El descuento no es valido.");
+        } 
+        $total = Leer("SELECT p.TOTAL  FROM mozapp.relamesaemplpedido rela inner join pedido p on rela.RELAID = p.RELAID where p.PEDIDO_COBRADO = 0 and rela.MESAID = $jsonBody->idmesa ;")[0]['TOTAL'];
+
+        $totalGrabar = $total-($total*$jsonBody->descuento/100);
+
+        $conn->exec("UPDATE `mozapp`.`pedido` SET `PEDIDO_COBRADO` =1 ,  `TOTAL` =$totalGrabar  WHERE `PEDIDOID` =$pedido");
+
+      }else{
+        $conn->exec("UPDATE `mozapp`.`pedido` SET `PEDIDO_COBRADO` =1  WHERE `PEDIDOID` =$pedido");
+
+      }
+
            
       $conn->commit();
       $resultQuery = array("msj"=>"Transaccion finalizada con exito.");

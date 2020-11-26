@@ -182,7 +182,6 @@ export class AltaMesaComponent implements OnInit,DoCheck {
 
 
       this._mesaService.getMesaID(this.nmesa).subscribe(res=>{
-        debugger;
 
         if(res[0].HABILITADA ==0 || res[0].OCUPADA==1){
           alerta('ERROR','MESA OCUPADA / INHABILITADA');

@@ -24,8 +24,8 @@
             <td>{{item.nombre}}</td>
             <td>${{item.precio}}</td>
             <td>
-                <button  class="btn badge badge-success mr-1" (click)="emitirAdd(item)">+</button>                                 
-                <button  class=" btn badge badge-danger ml-1" (click)="emitirDelete(item)">-</button> 
+                <button  class="btn btn-success btn-sm mr-1" (click)="emitirAdd(item)">+</button>                                 
+                <button  class=" btn btn-danger btn-sm ml-1" (click)="emitirDelete(item)">-</button> 
             </td>                           
           </tr>
          
@@ -43,6 +43,14 @@
     <div class="row ">
       <div class="col">
         <input type="text" class="form-control" placeholder="Buscar: Ej. papas" [(ngModel)]="inputBuscar" (ngModelChange)='buscarArray()' >
+      </div>
+      <div class="col">
+        <select class="custom-select" id="inputCategoria" name="inputCategoria"   (change)='buscarArrayCategoria($event.target.value)'>
+          <option value='NA'>Seleccione</option>
+          <option *ngFor="let item of categorias" [value]='item.ID'>{{item.NOMBRE}}</option>
+
+         
+        </select>
       </div>
     </div>
     <div class="row">

@@ -33,6 +33,7 @@ import { CajeroCartaComponent } from './moz/aplicacion/cajero-carta/cajero-carta
 import { AlertZoneComponent } from './moz/complementos/alert-zone/alert-zone.component';
 import { ShareService } from './moz/complementos/shereservice/share.service';
 import { CajeroAdministracionComponent } from './moz/aplicacion/cajero-administracion/cajero-administracion.component';
+import { NgSelect2Module } from 'ng-select2';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { CajeroAdministracionComponent } from './moz/aplicacion/cajero-administr
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgSelect2Module
   ],
   providers: [ShareService],
   bootstrap: [AppComponent]

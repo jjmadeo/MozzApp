@@ -9,6 +9,10 @@ import { CartaService } from "../../servicios/carta.service";
 export class CartaComponent implements OnInit {
   carta:any
   cartaFiller:any[]
+  categorias:any[];
+  inputCategoria:any
+
+
 
   @Output() itemCartaAdd:any = new EventEmitter ();
   @Output() itemCartaRem:any = new EventEmitter ();
@@ -25,10 +29,17 @@ export class CartaComponent implements OnInit {
     this._cartaService.getCarta().subscribe(res=>{
        this.carta= JSON.parse(JSON.stringify(res).toLowerCase())
        this.cartaFiller = this.carta
+       console.log(this.cartaFiller)
     },e=>{
       console.log(e);
     })
 
+      this._cartaService.getCategorias().subscribe(res=>{
+        console.log(res)
+        this.categorias = res;
+      },e=>{
+        console.log(e)
+      })
 
    
   }
@@ -49,5 +60,17 @@ export class CartaComponent implements OnInit {
   })
 
   }
+  buscarArrayCategoria(e){
+    this.inputBuscar =''
+    console.log(e)
+    this.cartaFiller  =  this.carta.filter(item=>{
+      if(e==='NA'){
+        return item.id !=0
+      }
+
+      return item.id_categoria === e;
+  })
+  }
+
 
 }

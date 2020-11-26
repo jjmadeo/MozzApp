@@ -13,7 +13,8 @@ export class MesaComponent implements OnInit, DoCheck {
 
   @Input()
   mesaObj:any;
-  notificaciones:any=[]
+  notificaciones:any[] =[]
+  pedidoDeCobro:boolean = false;
 
   constructor(
     private _notificacionService:NotificacionService
@@ -32,8 +33,12 @@ export class MesaComponent implements OnInit, DoCheck {
     if(this.mesaObj.ocupada == 1){
       loaderSet(true);
       this._notificacionService.getNotiMesa(this.mesaObj.id_mesa).subscribe(res=>{
-        this.notificaciones=JSON.parse(JSON.stringify(res).toLowerCase());
+        this.notificaciones=res
         
+       if(this.notificaciones.find(i=>i.id_tipo_noti == 4) != undefined ){
+         this.pedidoDeCobro = true;
+       }
+
         console.log(this.notificaciones)
 
         loaderSet(false);

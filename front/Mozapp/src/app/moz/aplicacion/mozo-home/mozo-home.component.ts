@@ -19,6 +19,7 @@ export class MozoHomeComponent implements OnInit
   fecha: Date = new Date();
   idMozo:number =JSON.parse(localStorage.getItem("sesion")).id
   notificaciones:any[];
+  solicCierre:boolean = false
   constructor(
     private _mesaService: MesaService, private _notificacionService: NotificacionService
   ){ }
@@ -57,7 +58,8 @@ export class MozoHomeComponent implements OnInit
       this.idMesa = mesa.id_mesa
       this._notificacionService.getNotiMesa(mesa.id_mesa).subscribe(res=>{
       this.notificaciones=JSON.parse(JSON.stringify(res));
-      //console.log(this.notificaciones);
+        this.solicCierre = true
+
       },e=>{
       })
       loaderSet(false);
@@ -65,6 +67,8 @@ export class MozoHomeComponent implements OnInit
         loaderSet(false);
       })  
       }else{
+        this.solicCierre = false
+
         this.pedido = [];
         this.total = 0;
         this.idPedido= null;
@@ -101,6 +105,20 @@ export class MozoHomeComponent implements OnInit
     },e=>{
       console.log(e);
     })
+  }
+
+  solicitarCierre(){
+    loaderSet(true);
+    this._notificacionService.altaNotificacion({idPedido:this.idPedido,tipo:4}).subscribe(res=>{
+        console.log(res)
+
+      this.solicCierre=false;
+      loaderSet(false);      
+    },e=>{
+
+      loaderSet(false);
+    }) 
+
   }
 
 

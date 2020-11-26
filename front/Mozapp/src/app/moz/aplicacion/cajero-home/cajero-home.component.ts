@@ -15,6 +15,8 @@ export class CajeroHomeComponent implements OnInit {
     ocupada: number;
     idMesa:number;
 
+    descuentoData:number=0;
+
     renderingMesas:boolean= false
 
   constructor(
@@ -56,7 +58,7 @@ export class CajeroHomeComponent implements OnInit {
       
       this._auditoria.auditoria('ObtenerPedidosMesa','Se solicitaron los pedidos de la mesa => '+mesa.id_mes).subscribe(res=>{});
       
-      console.log(this.idPedido)
+      console.log(this.pedido)
       loaderSet(false);
 
     },e=>{
@@ -78,7 +80,7 @@ export class CajeroHomeComponent implements OnInit {
 
   cerrarMesa(ID){
     loaderSet(true)
-    this._mesaService.cerrarMesa({idmesa:ID}).subscribe(res=>{
+    this._mesaService.cerrarMesa({idmesa:ID,descuento:this.descuentoData}).subscribe(res=>{
       loaderSet(false)
       alerta('OK',res.msj)
       console.log(res)

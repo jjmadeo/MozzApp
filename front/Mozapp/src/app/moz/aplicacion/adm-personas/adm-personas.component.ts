@@ -28,6 +28,7 @@ export class AdmPersonasComponent implements OnInit {
   swichCambiarPassword:boolean;
   contra2:string;
   contra1:string;
+  persona:any;
 
   
   constructor(

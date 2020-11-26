@@ -64,19 +64,22 @@
           <table id="menu" class="table table-sm table-hover">
             <thead>
               <tr>
-                <th scope="col">#</th>
+                <!-- <th scope="col">#</th> -->
                 <th scope="col">Nombre</th>
                 <th scope="col">Cantidad</th>
-                <th scope="col">Eliminar</th>
+                <th scope="col">Precio</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let item of pedidoList">
-                <th scope="row">{{item.elemento.id}}</th>
+                <!-- <th scope="row">{{item.elemento.id}}</th> -->
                 <td>{{item.elemento.nombre}}</td>
-                <td>{{item.cantidad}}</td>
                 <td>
-                    <button  class=" btn badge badge-danger m-1" (click)="eliminarDePedidoList(item)">-</button> 
+                  {{item.cantidad}}
+                  <button  class=" btn badge badge-danger m-1" (click)="eliminarDePedidoList(item)">-</button> 
+                </td>
+                <td>
+                  {{item.elemento.precio}}
                 </td>                           
               </tr>
              

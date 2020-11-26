@@ -101,6 +101,7 @@
         </div>
         <div class="modal-footer">
             <p class="text-left font-weight-bold   rounded " >Total: ${{total}}</p>
+            <button type="button" class="btn btn-danger" [disabled]='!solicCierre' (click)="solicitarCierre()">Solicitar Cuenta</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
       </div>
     </div>

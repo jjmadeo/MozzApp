@@ -46,14 +46,17 @@
                   <tr>
                     <th scope="col">Nombre</th>
                     <th scope="col">Cantidad</th>
-                    <th scope="col">Comentarios</th>
+                    <th scope="col">Precio</th>
+                    <!-- <th scope="col">Comentarios</th> -->
+
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let item of pedido">
                     <td>{{item.nombre}}</td>
                     <td>{{item.cantidad}}</td>
-                    <td>{{item.observacion}}</td>
+                    <td>{{item.precio}}</td>
+                    <!-- <td>{{item.observacion}}</td> -->
                   </tr>
                   
                 </tbody>
@@ -62,7 +65,8 @@
 
         </div>
         <div class="modal-footer">
-            <p class="text-left font-weight-bold   rounded " >Total: ${{total}}</p>
+          <input #descuento="ngModel" type="number" [(ngModel)]="descuentoData" name="descuentoData"  min="1" max="100" maxlength="3"  placeholder='Descuento' class="form-control" >
+          <p class="text-left font-weight-bold   rounded " >Total: ${{total}}</p>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
           <button type="button" class="btn btn-success" [disabled]='!ocupada' (click)="cerrarMesa(idMesa)">Cerrar Mesa</button>
         </div>
