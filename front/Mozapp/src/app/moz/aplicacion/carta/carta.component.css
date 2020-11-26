@@ -1,4 +1,6 @@
-.menu{
-    max-height:420px;
-    overflow-y: auto;
+
+.scrollH{
+    display: -webkit-inline-box;
+    overflow-x: auto;
+    white-space: nowrap;
 }

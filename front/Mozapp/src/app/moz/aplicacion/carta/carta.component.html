@@ -46,21 +46,20 @@
       </div>
       <div class="col">
         <select class="custom-select" id="inputCategoria" name="inputCategoria"   (change)='buscarArrayCategoria($event.target.value)'>
-          <option value='NA'>Seleccione</option>
+          <option value='NA'>Categorias</option>
           <option *ngFor="let item of categorias" [value]='item.ID'>{{item.NOMBRE}}</option>
 
          
         </select>
       </div>
     </div>
-    <div class="row">
-      <!-- <div class="col menu"> -->
-        <div class="item  col  m-3  shadow-lg p-3 mb-5 bg-white rounded"  *ngFor="let item of cartaFiller" style="max-width: 15rem; min-width: 13rem;" >
-          <div class="card" style="max-width: 15rem;">
+    <div class="row ">
+
+        <div class="scrollH">
+          <div class="card m-2" *ngFor="let item of cartaFiller" style="max-width: 15rem;">
             <img src="{{item.urlimg}}" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">{{item.id}} - {{item.nombre}}</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
              
              <div class="row">
                <div class="col-1 ">
@@ -79,6 +78,38 @@
             </div>
           </div>
         </div>
+          
+        
+
+
+
+
+
+
+      <!-- <div class="col menu"> -->
+        <!-- <div class="item  col  m-3  shadow-lg p-3 mb-5 bg-white rounded"  *ngFor="let item of cartaFiller" style="max-width: 15rem; min-width: 13rem;" >
+          <div class="card" style="max-width: 15rem;">
+            <img src="{{item.urlimg}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{item.id}} - {{item.nombre}}</h5>
+             
+             <div class="row">
+               <div class="col-1 ">
+                <button  class="btn  btn-success " (click)="emitirAdd(item)">+</button>                                 
+               </div>
+               <div class="col-1  ml-2">
+                <button  class=" btn  btn-danger  " (click)="emitirDelete(item)">-</button> 
+               </div>
+               <div class="col  ml-1">
+                <button  class=" btn  btn-warning  " disabled>${{item.precio}}</button> 
+
+               </div>
+             </div>
+             
+    
+            </div>
+          </div>
+        </div> -->
       </div>
     </div>
     
