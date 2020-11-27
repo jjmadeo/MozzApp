@@ -8,6 +8,7 @@ front/Mozapp/out-tsc
 front/Mozapp/bazel-out
 
 # dependencies
+api/server.log
 api/modulos/library/phpqrcode/cache/*
 front/Mozapp/node_modules
 front/Mozapp/src/app/moz/servicios/apiConfig.ts
