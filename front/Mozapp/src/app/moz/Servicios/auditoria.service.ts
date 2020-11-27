@@ -19,7 +19,8 @@ export class AuditoriaService {
       log:logParam
   }
 
-    let headers = new HttpHeaders().set('Content-Type','application/json');
+    let headers = new HttpHeaders().set('Content-Type','application/json')
+    .set('token',JSON.parse(localStorage.getItem("sesion")).token);
      return this._http.post(url+"auditoria",body,{headers: headers})
     
    
@@ -28,7 +29,8 @@ export class AuditoriaService {
 
  obtenerAuditoria():Observable<any>{ 
 
-  let headers = new HttpHeaders().set('Content-Type','application/json');
+  let headers = new HttpHeaders().set('Content-Type','application/json')
+  .set('token',JSON.parse(localStorage.getItem("sesion")).token);
    return this._http.get(url+"auditoria",{headers: headers})
 }
 

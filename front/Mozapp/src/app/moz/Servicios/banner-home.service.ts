@@ -14,18 +14,22 @@ export class BannerHomeService {
   ){ }
     
     getCarrusel():Observable<any>{
-      let headers = new HttpHeaders().set('Content-Type','application/json');
-
+      let headers = new HttpHeaders().set('Content-Type','application/json')
+      .set('token','noRequireToken');
       return this._http.get(url+"/carrusel",{headers: headers})
     }
 
     añadirCarrusel(obj):Observable<any>{
-      let headers = new HttpHeaders().set('Content-Type','application/json');
+      let headers = new HttpHeaders().set('Content-Type','application/json')
+      .set('token',JSON.parse(localStorage.getItem("sesion")).token);
+
       return this._http.post(url+"/carrusel",obj,{headers: headers})
     }
 
     eliminarItemCarrusel(id):Observable<any>{
-      let headers = new HttpHeaders().set('Content-Type','application/json');
+      let headers = new HttpHeaders().set('Content-Type','application/json')
+      .set('token',JSON.parse(localStorage.getItem("sesion")).token);
+
       return this._http.delete(url+"/carrusel/"+id,{headers: headers})
     }
 
