@@ -48,3 +48,4 @@ front/Mozapp/typings
 # System Files
 front/Mozapp/.DS_Store
 front/Mozapp/Thumbs.db
+api/server.log
