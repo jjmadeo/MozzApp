@@ -19,7 +19,7 @@
                       <div class="col-12">
                           <label for="validationServerUsername">Usuario </label>
                           <div class="input-group">
-                              <input type="text" class="form-control" name="usuario" #usuario="ngModel"  [(ngModel)]="usuarioData"   required>
+                              <input type="text" class="form-control" maxlength="8" name="usuario" #usuario="ngModel"  [(ngModel)]="usuarioData"   required>
                            <div class="input-group-prepend">
                               <span class="input-group-text" id="inputGroupPrepend3">
                                   <img *ngIf="usuario.valid && usuario.touched" src="" alt="" srcset="../../../assets/check.png">
@@ -33,7 +33,7 @@
                         <div class="col-12">
                           <label for="validationServerUsername">Contraseña </label>
                           <div class="input-group">
-                              <input type="password" class="form-control" name="password" #password="ngModel"  [(ngModel)]="passwordData"   required>
+                              <input type="password" class="form-control" maxlength="20" name="password" #password="ngModel"  [(ngModel)]="passwordData"   required>
                            <div class="input-group-prepend">
                               <span class="input-group-text" id="inputGroupPrepend3">
                                   <img *ngIf="password.valid && password.touched" src="" alt="" srcset="../../../assets/check.png">
