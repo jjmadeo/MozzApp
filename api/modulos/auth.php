@@ -33,9 +33,12 @@ function login($body){
 }
 
 
-function cerrarSesion(){
-    session_start();
-    if(session_destroy()){
+function cerrarSesion($body){
+    $result= json_decode($body);
+
+    $resultQuery = Escribir("update empleado set token = '' where EMPLID = $result->idUsua");
+
+    if($resultQuery > 0){
         return 'Se ah cerrado la sesion correctamente.';
     }else{
         throw new Exception('No se ah podido cerrar la sesion.');

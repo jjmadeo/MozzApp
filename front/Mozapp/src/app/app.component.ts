@@ -52,6 +52,9 @@ export class AppComponent implements DoCheck {
     this.userLogued = this._AuthService.userIsLogued();
     
     this.alertas =  JSON.parse(localStorage.getItem('notificaciones'))
+    if(window.innerHeight > window.innerWidth){
+      alert("Por favor coloque el dispositivo en forma Horizontal");
+      }
 
 
     }

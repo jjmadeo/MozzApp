@@ -199,7 +199,9 @@ if($Token){
             
     
             case "cerrarSesion": 
-                print_r(json_encode(cerrarSesion()));
+                print_r(json_encode(cerrarSesion($BodyRequest)));
+                $BodyRequest = json_decode($BodyRequest);
+                logger("Se ah cerrado sesion del usaurio $BodyRequest->idUsua");
     
     
             break;

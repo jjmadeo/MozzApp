@@ -34,7 +34,7 @@ export class AuthService {
   logOut(){
     let headers = new HttpHeaders().set('Content-Type','application/json')
     .set('token','noRequireToken');
-    return this._http.post(url+"cerrarSesion",{},{headers: headers})
+    return this._http.post(url+"cerrarSesion",{idUsua:JSON.parse(localStorage.getItem("sesion")).id},{headers: headers})
 
   }
 
