@@ -24,7 +24,7 @@ export class AuthService {
 
 
   login(body):Observable<any>{
-     let headers = new HttpHeaders().set('Content-Type','application/json');
+     let headers = new HttpHeaders().set('Content-Type','application/json').set('token','noRequireToken');
       return this._http.post(url+"login",body,{headers: headers})
      
     
@@ -32,8 +32,9 @@ export class AuthService {
   }
 
   logOut(){
-    let headers = new HttpHeaders().set('Content-Type','application/json');
-    return this._http.post(url+"cerrarSesion",{headers: headers})
+    let headers = new HttpHeaders().set('Content-Type','application/json')
+    .set('token','noRequireToken');
+    return this._http.post(url+"cerrarSesion",{},{headers: headers})
 
   }
 

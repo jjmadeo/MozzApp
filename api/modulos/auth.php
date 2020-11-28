@@ -1,20 +1,28 @@
 <?php
 
 require_once('./db.php');
+require_once('./modulos/utils.php');
+
 
 function login($body){
     $result= json_decode($body);
 
-    $usuarioBBDD = Leer("SELECT EMPLID as ID, EMPLNOMB as NOMBRE, EMPLAPLL as APELLIDO, EMPLTURN as TURNO, EMPLUSUA as USUARIO, EMPLCLAV as clave, r.NOMBRE as ROL, r.ROLEID  FROM mozapp.empleado e , mozapp.rol r where e.BAJA = 0 and e.ROLEID =r.ROLEID and EMPLUSUA ='$result->usuario'");
+    $usuarioBBDD = Leer("SELECT EMPLID as ID, EMPLNOMB as NOMBRE, EMPLAPLL as APELLIDO, EMPLTURN as TURNO, EMPLUSUA as USUARIO, EMPLCLAV as clave, r.NOMBRE as ROL, r.ROLEID , token  FROM mozapp.empleado e , mozapp.rol r where e.BAJA = 0 and e.ROLEID =r.ROLEID and EMPLUSUA ='$result->usuario'");
    // return $result->clave."-----".$usuarioBBDD[0]['clave']
 
     if ($usuarioBBDD != null && password_verify($result->clave ,$usuarioBBDD[0]['clave'])) {
         $usuarioBBDD[0]['clave'] = $usuarioBBDD[0]['clave'] ='############################';
-        // session_start();
-        // $_SESSION['usaurio']=$result->usuario;
-        // $_SESSION['userid']=$usuarioBBDD[0]['ID'];
-        // $_SESSION['roleid']=$usuarioBBDD[0]['ROLEID'];
-        // $_SESSION['rol']=$usuarioBBDD[0]['ROL'];
+       
+        $token = genTokenInSession($usuarioBBDD[0]['ID']);
+        if($token == null ){
+            throw new Exception('Error Generando token para el Usuario.');
+
+        }
+
+        $usuarioBBDD[0]['token'] = $token;
+       
+
+
 
 
         return $usuarioBBDD;

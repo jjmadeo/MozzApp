@@ -19,6 +19,9 @@ function ObtenerEmpleado($id){
 }
 
 function ObtenerEmpleados(){
+
+    
+
    
     return  Leer("SELECT EMPLID as ID, EMPLNOMB as NOMBRE, EMPLAPLL as APELLIDO, EMPLTURN as TURNO, EMPLUSUA as USUARIO, r.NOMBRE as ROL,r.ROLEID as rolID  FROM mozapp.empleado e , mozapp.rol r where   e.BAJA = 0 and e.ROLEID =r.ROLEID");
   
