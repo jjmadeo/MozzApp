@@ -14,6 +14,8 @@ export class CajeroHomeComponent implements OnInit {
     idPedido:number;
     ocupada: number;
     idMesa:number;
+    result:number;
+    totalView:number;
 
     descuentoData:number=0;
 
@@ -59,6 +61,7 @@ export class CajeroHomeComponent implements OnInit {
       this._auditoria.auditoria('ObtenerPedidosMesa','Se solicitaron los pedidos de la mesa => '+mesa.id_mes).subscribe(res=>{});
       
       console.log(this.pedido)
+      this.totalView = this.total
       loaderSet(false);
 
     },e=>{
@@ -69,6 +72,7 @@ export class CajeroHomeComponent implements OnInit {
     }else{
       this.pedido = [];
       this.total = 0;
+      this.totalView = this.total;
       this.idPedido= null;
       this.ocupada = 0
 
@@ -87,6 +91,7 @@ export class CajeroHomeComponent implements OnInit {
       this._auditoria.auditoria('CerrarMesa','Se solicto el cierre de la mesa => '+ID).subscribe(res=>{});
 
       this.renderMesas()
+      this.ocupada = 0;
 
     },e=>{
       loaderSet(false)
@@ -95,6 +100,18 @@ export class CajeroHomeComponent implements OnInit {
     })
 }
 
+calcularDescuento(){
+  if(this.descuentoData>0){
+
+   this.totalView =  this.total- (this.total*this.descuentoData/100);
+  }else{
+      this.totalView = this.total;
+  }
+
+
+
+  
+}
 
 renderMesas(){
   loaderSet(true);

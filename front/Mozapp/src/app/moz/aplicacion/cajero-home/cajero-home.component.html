@@ -65,8 +65,8 @@
 
         </div>
         <div class="modal-footer">
-          <input #descuento="ngModel" type="number" [(ngModel)]="descuentoData" name="descuentoData"  min="1" max="100" maxlength="3"  placeholder='Descuento' class="form-control" >
-          <p class="text-left font-weight-bold   rounded " >Total: ${{total}}</p>
+          <input #descuento="ngModel" type="number"  [disabled]='!ocupada' [(ngModel)]="descuentoData" name="descuentoData" (ngModelChange)="calcularDescuento()"  min="1" max="100" maxlength="3"  placeholder='Descuento' class="form-control" >
+          <p class="text-left font-weight-bold   rounded " >Total: ${{ totalView | number:'1.2-2'}}</p>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
           <button type="button" class="btn btn-success" [disabled]='!ocupada' (click)="cerrarMesa(idMesa)">Cerrar Mesa</button>
         </div>

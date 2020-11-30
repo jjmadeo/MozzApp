@@ -53,6 +53,9 @@ if(isset(apache_request_headers()['token'])){
     $Token = obtenerTokenUser(apache_request_headers()['token']);
 
 }
+$re = '/([;\-$%&\(\)=?¡!¿])/';
+$reQuery = '/(from|select|drop|delete|where|)/mi';
+
 
 if($Token){
 
@@ -168,7 +171,12 @@ if($Token){
         
     }elseif ($_SERVER['REQUEST_METHOD']=='POST'){ // crear datos nuevos en el servidor
         $BodyRequest = file_get_contents("php://input");
-    
+        logger("Invocacion URL=> $url:POST");
+        logger("POST:Body=>$BodyRequest");
+        $BodyRequest =preg_replace($re, '', $BodyRequest);
+        $BodyRequest = preg_replace($reQuery, '', $BodyRequest);   
+        logger("POST:Body Sanitizado=>$BodyRequest");
+ 
         switch ($url) {
             case "empleado":
                $var = crearempleado($BodyRequest);
@@ -327,6 +335,11 @@ if($Token){
        // http_response_code(200);
     }elseif ($_SERVER['REQUEST_METHOD']=='PUT') { // actualizar datos existentes.
         $BodyRequest = file_get_contents("php://input");
+        logger("Invocacion URL=> $url:PUT");
+        logger("PIT:input Body=>$BodyRequest");
+        $BodyRequest =preg_replace($re, '', $BodyRequest);
+        $BodyRequest = preg_replace($reQuery, '', $BodyRequest);   
+        logger("PUT:Body Sanitizado=>$BodyRequest");
     
         switch ($url) {
             case "empleado/".$parametroGET:
