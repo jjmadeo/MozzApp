@@ -49,4 +49,11 @@ export class PersonaService {
       return this._http.get(url+"/roles",{headers: headers})
     }
 
+
+    enviarComentarios(obj):Observable<any>{
+      let headers = new HttpHeaders().set('Content-Type','application/json')
+      .set('token','noRequireToken');
+      return this._http.post(url+"/calificar",obj,{headers: headers})
+    }
+
 }

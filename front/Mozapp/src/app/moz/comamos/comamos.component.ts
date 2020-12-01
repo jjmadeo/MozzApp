@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { loaderSet } from '../complementos/loadModify';
+import { alerta, loaderSet } from '../complementos/loadModify';
 import {MesaService} from '../servicios/mesa.service';
 
 
@@ -34,17 +34,22 @@ validarMesa(){
 
   loaderSet(true);
   this._mesaService.getMesaID(this.nmesaData).subscribe(res=>{
+    if(res.length!=0){
+    console.log(res);
     res = JSON.stringify(res[0]).toLowerCase()
     res  = JSON.parse(res);
-
-    console.log(res);
-    if(res.habilitada === "1" && res.ocupada === "0"){
-      this._route.navigate([`comer/altamesa/${this.nmesaData}`]);
-      localStorage.setItem("mesa",`${this.nmesaData}`);
+      if(res.habilitada === "1" && res.ocupada === "0"){
+        this._route.navigate([`comer/altamesa/${this.nmesaData}`]);
+        localStorage.setItem("mesa",`${this.nmesaData}`);
+      }else{
+        this.logginError = true;
+        this.logginErrorText="Mesa Ocupada o inhabilitada"
+      }
     }else{
-      this.logginError = true;
-      this.logginErrorText="Mesa Ocupada o inhabilitada"
+      
+      alerta('ERROR','MESA INVALIDA O OCUPADA')
     }
+   
 
 
     loaderSet(false);

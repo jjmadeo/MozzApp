@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import { ContactForm } from "../../modelos/ContactForm";
+import { alerta, loaderSet } from '../complementos/loadModify';
+import { PersonaService } from '../servicios/persona.service';
 
 
 
@@ -20,14 +22,21 @@ export class ContactoComponent implements OnInit {
    mensajeData:String;
    calificacionNumerica:number
 
-  constructor() { }
+  constructor(private _personaServide:PersonaService) { }
 
   ngOnInit(): void {
   }
 
   EnviarFormContacto(){
-    this.contacto = new ContactForm(this.nombreData,this.apellidoData,this.emailData,this.telefonoData,this.mensajeData);
-    console.log(this.contacto)
+    loaderSet(true)
+    this._personaServide.enviarComentarios({nombre:this.nombreData,email:this.emailData,telefono:this.telefonoData,puntuacion:this.calificacionNumerica,comentario:this.mensajeData }).subscribe(res=>{
+      loaderSet(false)
+      alerta('OK','Comentario enviado');
+    },e=>{
+      loaderSet(false)
+
+    })
+
 
   }
   onSubmit(f:NgForm){

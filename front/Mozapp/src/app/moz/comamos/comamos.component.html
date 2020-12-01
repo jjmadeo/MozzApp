@@ -26,12 +26,12 @@
                                     
                                     <div class="row m-3">
                                         <div class="col">
-                                            <input type="text" class="form-control"  name="nmesa" [ngClass]="{'is-valid': nmesa.valid && nmesa.touched,'is-invalid': !nmesa.valid && nmesa.touched }"  #nmesa="ngModel"  [(ngModel)]="nmesaData"   required>
+                                            <input type="number" class="form-control" min="1"  name="nmesa" [ngClass]="{'is-valid': nmesa.valid && nmesa.touched,'is-invalid': !nmesa.valid && nmesa.touched }"  #nmesa="ngModel"  [(ngModel)]="nmesaData"   required>
                                         </div>
                                     </div>
                                     <div class="row m-3">
                                         <div class="col">
-                                            <button class="btn btn-success" [disabled]='!altaMesa.form.valid' (click)="validarMesa()" >Comenzar pedido</button>
+                                            <button class="btn btn-success" [disabled]='!altaMesa.form.valid || nmesaData<1' (click)="validarMesa()" >Comenzar pedido</button>
                                         </div>
                                     </div>
                                 </div> 
