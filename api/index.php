@@ -451,11 +451,8 @@ if($Token){
                     print_r(json_encode($th->getMessage()));
                     json_encode(http_response_code(404));
                 }
-            break;
+            break;           
             
-            case "test":
-                print_r(json_encode("Test sin parametro"));
-            break;
             default:
             print_r(json_encode(array("MSJ"=>"Error, el metodo DELETE no existe.")));
             http_response_code(404);    
