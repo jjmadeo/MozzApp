@@ -38,14 +38,34 @@ function obtenerTokenUser($token){
 
     if(!isset($publicos[0])){
         logger('si el metodo esta no es publico  verifico que este logueado.');
-        $usuario = Leer("SELECT * FROM mozapp.empleado where token = '$token'");
 
-        if(isset($usuario[0])){
+        $roles=Leer("SELECT valor FROM mozapp.configuracion where tabla ='PRIVATE_URL' and clave like '$buscarQuery'")[0]['valor'];
+        $roles = strval($roles);
+
+        logger(" Roles de la tabla para el  metodo '$buscarQuery'  ROL=> '$roles'");
+        //$arrRoles = explode(".", $role);
+
+        //$rolCoincide = false;
+
+        $usuario = Leer("SELECT * FROM mozapp.empleado where token = '$token'");
+        $rol=(String)$usuario[0]['ROLEID'];
+        logger("rol del usuario a comparar=>$rol ");
+
+        logger("valorFinal=>".strstr((string)$roles, (string)$usuario[0]['ROLEID']));
+
+
+        // foreach ($arrRoles as &$valor) {
+        //     if($usuario[0]['ROLEID'] == $valor){
+        //         $rolCoincide=true;
+        //     }
+        // }
+
+        if(isset($usuario[0]) &&  strstr((string)$roles, (string)$usuario[0]['ROLEID']) !=false ){
             logger('Metodo Privado, Usuario autenticado');
 
             return true;
         }else{
-            logger('Metodo Privado, Usuario no  autenticado');
+            logger('Metodo Privado,No permitido o  Usuario no  autenticado');
 
             return false;
         } 
@@ -72,6 +92,10 @@ function logger($text)
     $contents .="$time\t$hilo\t$text\r";
     file_put_contents('server.log',$contents);
 }
+
+
+
+
 
 
 ?>
