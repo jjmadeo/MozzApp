@@ -93,34 +93,30 @@ function logger($text)
     // file_put_contents('server.log',$contents);
 }
 
-function validarString($string,$sizeMin,$sizeMax)
+function validarString($string,$campo,$sizeMin,$sizeMax)
 {
-    if(isset($Numero))
+    if(isset($string))
     {
         if(filter_var($string, FILTER_SANITIZE_STRING))
         {
-            if(strlen($Nombre)>$sizeMax)
-            {
-            throw new Exception("El campo $string debe tener como máximo $sizeMax caracteres");
-            }
-            if(strlen($Nombre)>$sizeMin)
-            {
-            throw new Exception("El campo $string debe tener como mínimo $sizeMax caracteres");
-            }
+            if(strlen($string)>$sizeMax)throw new Exception("El campo $campo debe tener como máximo $sizeMax caracteres");
+            
+            if(strlen($string)<$sizeMin)throw new Exception("El campo $campo debe tener como mínimo $sizeMin caracteres");
+
             return true;
         }
         else
         {
-        throw new Exception("El campo $string no es una cadena de caracteres.");
+        throw new Exception("El campo no es una cadena de caracteres.");
         }
     }
     else
     {
-        throw new Exception("El campo $string esta vacío.");
+        throw new Exception("El campo esta vacío.");
     }
 }
 
-function validarNum($Numero)
+function validarNum($Numero,$campo)
 {
     if(isset($Numero))
     {
@@ -138,7 +134,7 @@ function validarNum($Numero)
                 return true;
             }
         }
-        throw new Exception("El campo $Numero no es valido, verifique los datos ingresados.");
+        throw new Exception("El campo $campo no es valido, verifique los datos ingresados.");
     }
     else
     {
@@ -146,7 +142,7 @@ function validarNum($Numero)
     }
 }
 
-function validarSelect($select)
+function validarSelect($select, $campo)
 {
     if(isset($select))
     {
@@ -154,7 +150,7 @@ function validarSelect($select)
     }
     else
     {
-        throw new Exception("Debe seleccionar una opcion valida en el campo $select.");
+        throw new Exception("Debe seleccionar una opcion valida en el campo $campo.");
     }
 }
 

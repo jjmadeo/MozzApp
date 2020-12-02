@@ -98,7 +98,8 @@ export class AbmCartaComponent implements OnInit,DoCheck {
         this.renderBannerCarta()
 
       },e=>{
-        alerta('ERROR',e.error.text)
+        alerta('ERROR',e.error);
+        console.log(e);
         loaderSet(false)
   
       })
