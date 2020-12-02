@@ -14,7 +14,10 @@ function generarQR(){
 function qr($obj){
     
     $jsonBody= json_decode($obj);
-    $url="http://127.0.0.1:4200/comer/altamesa/$jsonBody->idMesa";
+    $hostPort= Leer("select valor from configuracion where tabla= 'BASICAS'  and  clave = 'UrlFront'")[0]['valor'];
+    $numeroAleatorio = rand() ;
+
+    $url="http://$hostPort/comer/altamesa/$jsonBody->idMesa?unique=$numeroAleatorio";
     ob_start();
     QRCode::png($url, null);
     $imageString = base64_encode( ob_get_contents() );
