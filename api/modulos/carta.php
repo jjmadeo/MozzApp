@@ -17,7 +17,7 @@ function ObtenerCarta(){
   function altaCarta($body)
   {
     $result= json_decode($body); 
-    if(validarString($result->nombre,2,50) && validarString($result->url,5,500) && validarNum($result->precio,2) && validarSelect($result->categoria)))
+    if(validarString($result->nombre,2,50) && validarString($result->url,5,500) && validarNum($result->precio) && validarSelect($result->categoria)))
     {
       $resultQuery = Escribir("INSERT INTO `mozapp`.`carta` (`NOMBRE`,`URLIMG`,`CATEGORIAID`,`PRECIO`)VALUES('$result->nombre','$result->url',$result->categoria,$result->precio)");
       if($resultQuery >0)

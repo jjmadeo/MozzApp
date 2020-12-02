@@ -100,18 +100,18 @@ function validarString($string,$sizeMin,$sizeMax)
     }
 }
 
-function validarNum($Numero,$tipo)
+function validarNum($Numero)
 {
     if(isset($Numero))
     {
-        if($tipo==1)//Entero
+        if(gettype($Numero)=="integer")//Entero
         {
             if(filter_var($Numero, FILTER_SANITIZE_NUMBER_INT))
             {
                 return true;
             }
         }
-        else if($tipo==2)//flotante
+        else if(gettype($Numero)=="double")//flotante
         {
             if(filter_var($Numero, FILTER_SANITIZE_NUMBER_FLOAT))
             {
