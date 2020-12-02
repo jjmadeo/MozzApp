@@ -8,4 +8,4 @@ export  var config =
 }
 // export var url = config.host+":"+config.port+config.pathJuan;
 // export var url = config.host+":"+config.port+config.pathJose;
- export var url = config.host+":"+config.port+config.pathSalva;
+export var url = config.host+":"+config.port+config.pathSalva;

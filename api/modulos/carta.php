@@ -9,56 +9,49 @@ function ObtenerCarta(){
   }
 
   function cartaCategorias()
-  {
-    
+  {    
     return Leer("SELECT CATEGORIAID ID, NOMBRE FROM mozapp.categoria;");
   }
 
-  function altaCarta($body){
-        $result= json_decode($body);  
-        $resultQuery = Escribir("INSERT INTO `mozapp`.`carta` (`NOMBRE`,`URLIMG`,`CATEGORIAID`,`PRECIO`)VALUES('$result->nombre','$result->url',$result->categoria,$result->precio)");
-
-        if($resultQuery >0){
-          return "nuevo item de carta ingresado.";
-          
-        }
-        
-         throw new Exception("Error al insertar la carta");
-        
-
-    }
+  function altaCarta($body)
+  {
+    $result= json_decode($body);  
+    $resultQuery = Escribir("INSERT INTO `mozapp`.`carta` (`NOMBRE`,`URLIMG`,`CATEGORIAID`,`PRECIO`)VALUES('$result->nombre','$result->url',$result->categoria,$result->precio)");
+    if($resultQuery >0)
+    {
+      return "nuevo item de carta ingresado.";          
+    }        
+    throw new Exception("Error al insertar la carta");
+  }
 
   function actualizarItemCarta($id,$body)   
   {
-    $result= json_decode($body);  
-
+    $result= json_decode($body);
     $resultQuery =  Escribir("UPDATE `mozapp`.`carta`SET `NOMBRE` = '$result->nombre',`URLIMG` = '$result->url',`CATEGORIAID` =$result->categoria ,`PRECIO` = $result->precio  WHERE `PRODID` = $id;");
-    if($resultQuery >0){
-      return "Se ah actualizado el Registro de la carta";
-      
-    }else{
-      throw new Exception("Error al actualizar la carta");
-
+    if($resultQuery >0)
+    {
+      return "Se ah actualizado el Registro de la carta";      
     }
-    
-
+    else
+    {
+      throw new Exception("Error al actualizar la carta");
+    }
   }
 
   function eliminarItemCarta($id)   
   {
     
     $resultQuery =  Escribir("update mozapp.carta set eliminado = 1 where  prodid =$id;");
-    if($resultQuery >0){
-      return "Se ah Eliminado el Registro de la carta";
-      
-    }else{
-      throw new Exception("Error al Eliminar el Registro de la carta");
-
+    if($resultQuery >0)
+    {
+      return "Se ha Eliminado el Registro de la carta";      
     }
-    
+    else
+    {
+      throw new Exception("Error al Eliminar el Registro de la carta");
+    }   
 
   }
-  
 
 // function crearempleado($body){
 //     $result= json_decode($body);
