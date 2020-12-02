@@ -79,18 +79,18 @@ function obtenerTokenUser($token){
 }
 function logger($text)
 {
-    if(!file_exists('server.log')){
-        file_put_contents('server.log','');
+    // if(!file_exists('server.log')){
+    //     file_put_contents('server.log','');
 
        
-    }
-    $hilo =getmypid();
-    $ip= $_SERVER['REMOTE_ADDR'];
-    date_default_timezone_set('America/Argentina/Buenos_Aires');
-    $time = date('d/m/y h:iA',time());
-    $contents = file_get_contents('server.log');
-    $contents .="$time\t$hilo\t$text\r";
-    file_put_contents('server.log',$contents);
+    // }
+    // $hilo =getmypid();
+    // $ip= $_SERVER['REMOTE_ADDR'];
+    // date_default_timezone_set('America/Argentina/Buenos_Aires');
+    // $time = date('d/m/y h:iA',time());
+    // $contents = file_get_contents('server.log');
+    // $contents .="$time\t$hilo\t$text\r";
+    // file_put_contents('server.log',$contents);
 }
 
 
