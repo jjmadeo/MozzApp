@@ -4,8 +4,8 @@ export  var config =
     "port":80,
     "pathJuan":"/TPLab/api/",
     "pathSalva":"/TPlab/MozzApp/api/",
-    "pathJose":"/TPLab/MozzApp/api"
+    "pathJose":"/Mozzapp/api/"
 }
 //export var url = config.host+":"+config.port+config.pathJuan;
-export var url = config.host+":"+config.port+config.pathJose;
-//export var url = config.host+":"+config.port+config.pathSalva;
+// export var url = config.host+":"+config.port+config.pathJose;
+export var url = config.host+":"+config.port+config.pathSalva;
