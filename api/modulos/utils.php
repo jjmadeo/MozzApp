@@ -97,11 +97,11 @@ function validarString($string,$sizeMin,$sizeMax)
 {
     if(filter_var($string, FILTER_SANITIZE_STRING))
     {
-        if(strlen($Nombre)>$sizeMax)
+        if(strlen($string)>$sizeMax)
         {
           throw new Exception("El campo $string debe tener como máximo $sizeMax caracteres");
         }
-        if(strlen($Nombre)>$sizeMin)
+        if(strlen($string)>$sizeMin)
         {
           throw new Exception("El campo $string debe tener como mínimo $sizeMax caracteres");
         }

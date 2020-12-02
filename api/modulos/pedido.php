@@ -1,38 +1,49 @@
 <?php
 
 require_once('./db.php');
+require_once('./modulos/utils.php');
 
 function altaMesaPedido($obj){
     $jsonBody= json_decode($obj);
-    $conn = getConnection();
-    $resultQuery = null;
-    $totalPedido= $jsonBody->pedido->pedidoTotal;
-    try {
-        // set the PDO error mode to exception
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);      
-        $conn->beginTransaction();
 
-        $conn->exec("UPDATE `mozapp`.`mesa` SET `OCUPADA` = 1 WHERE `MESAID` =  $jsonBody->mesaID;");        
-        $relaIDWhitMesa = Leer(" SELECT  relaid as ID FROM mozapp.relamesaemplpedido where  mesaid = $jsonBody->mesaID ;")[0]['ID'];
-        $conn->exec("INSERT INTO `mozapp`.`pedido` (`TOTAL`,`RELAID`)VALUES($totalPedido,$relaIDWhitMesa);");
-        $id_Pedido = $conn->lastInsertId();
-        $listaPedido = $jsonBody->pedido->pedidoList;
-      foreach ( $listaPedido as $item ){
-            $conn->exec("INSERT INTO `mozapp`.`relacartapedido` (`PEDIDOID`,`PRODID`,`CANTIDAD`,`OBSERVACION`) VALUES($id_Pedido,$item->id,$item->cantidad,'$item->observacion');");
-      }
-      //envio notificacion al realizar alta de pedido .
-      $conn->exec("INSERT INTO `mozapp`.`notificacion`(`PEDIDOID`,`ESTADOID`,`TIPO_NOTI_ID`)VALUES($id_Pedido,1,3);");
+    if(gettype($jsonBody->pedido->pedidoTotal)!='double' || $jsonBody->pedido->pedidoTotal < 1) throw new Exception('verifique el valor total del pedido.');
 
-        $conn->commit();
-        $resultQuery = array("msj"=>"Transaccion finalizada con exito.","nPedido"=>$id_Pedido);
-      } catch(PDOException $e) {
-        // roll back the transaction if something failed
-        $conn->rollback();
-        $resultQuery = "Error: " . $e->getMessage();
-      }
-      finally{
-         return $resultQuery;
-      }
+    if(gettype($jsonBody->mesaID)!='integer' || $jsonBody->mesaID <1)  throw new Exception('verifique el valor del numero de mesa.');
+
+    if((count($jsonBody->pedido->pedidoList)>0))throw new Exception('El pedido debe contener productos a preparar');
+    
+
+
+
+    // $conn = getConnection();
+    // $resultQuery = null;
+    // $totalPedido= $jsonBody->pedido->pedidoTotal;
+    // try {
+    //     // set the PDO error mode to exception
+    //     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);      
+    //     $conn->beginTransaction();
+
+    //     $conn->exec("UPDATE `mozapp`.`mesa` SET `OCUPADA` = 1 WHERE `MESAID` =  $jsonBody->mesaID;");        
+    //     $relaIDWhitMesa = Leer(" SELECT  relaid as ID FROM mozapp.relamesaemplpedido where  mesaid = $jsonBody->mesaID ;")[0]['ID'];
+    //     $conn->exec("INSERT INTO `mozapp`.`pedido` (`TOTAL`,`RELAID`)VALUES($totalPedido,$relaIDWhitMesa);");
+    //     $id_Pedido = $conn->lastInsertId();
+    //     $listaPedido = $jsonBody->pedido->pedidoList;
+    //   foreach ( $listaPedido as $item ){
+    //         $conn->exec("INSERT INTO `mozapp`.`relacartapedido` (`PEDIDOID`,`PRODID`,`CANTIDAD`,`OBSERVACION`) VALUES($id_Pedido,$item->id,$item->cantidad,'$item->observacion');");
+    //   }
+    //   //envio notificacion al realizar alta de pedido .
+    //   $conn->exec("INSERT INTO `mozapp`.`notificacion`(`PEDIDOID`,`ESTADOID`,`TIPO_NOTI_ID`)VALUES($id_Pedido,1,3);");
+
+    //     $conn->commit();
+    //     $resultQuery = array("msj"=>"Transaccion finalizada con exito.","nPedido"=>$id_Pedido);
+    //   } catch(PDOException $e) {
+    //     // roll back the transaction if something failed
+    //     $conn->rollback();
+    //     $resultQuery = "Error: " . $e->getMessage();
+    //   }
+    //   finally{
+    //      return $resultQuery;
+    //   }
       
 
 }
