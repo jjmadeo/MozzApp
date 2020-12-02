@@ -97,4 +97,20 @@ function CerrarMesa($obj){
 
 
 
+function calificacion($obj){
+  $jsonBody= json_decode($obj);
+
+  $result =Escribir("INSERT INTO `mozapp`.`calificacion`(`NOMBRE`,`EMAIL`,`TELEFONO`,`PUNTUACION`,`COMENTARIO`)VALUES('$jsonBody->nombre','$jsonBody->email','$jsonBody->telefono',$jsonBody->puntuacion,'$jsonBody->comentario');");
+
+
+  if($result>0){
+    return "Comeratio guardado";
+  }else{
+    throw new Exception('Error al guardar el comentario.');
+  }
+
+}
+
+
+
 ?>

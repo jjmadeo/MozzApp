@@ -157,7 +157,7 @@ eliminarEmpleado(){
 
     
     },err=>{
-      alerta("ERROR","no se ah podido dar de baja el usario.");
+      alerta("ERROR",err.error);
       loaderSet(false);
       this.swichEliminarPersona=false;
 

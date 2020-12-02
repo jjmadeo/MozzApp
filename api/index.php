@@ -245,6 +245,22 @@ if($Token){
     
     
             break;
+            case "calificar":
+    
+                try {
+    
+                    print_r(json_encode(calificacion($BodyRequest)));
+              
+                    json_encode(http_response_code(200));    
+                } catch (Throwable $th) {
+                    
+                print_r(json_encode($th->getMessage()));
+              
+                json_encode(http_response_code(404));
+                }
+    
+    
+            break;
             case "auditoria":
     
                 try {
@@ -435,11 +451,8 @@ if($Token){
                     print_r(json_encode($th->getMessage()));
                     json_encode(http_response_code(404));
                 }
-            break;
+            break;           
             
-            case "test":
-                print_r(json_encode("Test sin parametro"));
-            break;
             default:
             print_r(json_encode(array("MSJ"=>"Error, el metodo DELETE no existe.")));
             http_response_code(404);    
