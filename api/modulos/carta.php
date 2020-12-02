@@ -1,6 +1,7 @@
 <?php
 
 require_once('./db.php');
+require_once('utils.php');
 
 function ObtenerCarta(){
    
@@ -15,13 +16,16 @@ function ObtenerCarta(){
 
   function altaCarta($body)
   {
-    $result= json_decode($body);  
-    $resultQuery = Escribir("INSERT INTO `mozapp`.`carta` (`NOMBRE`,`URLIMG`,`CATEGORIAID`,`PRECIO`)VALUES('$result->nombre','$result->url',$result->categoria,$result->precio)");
-    if($resultQuery >0)
+    $result= json_decode($body); 
+    if(validarString($result->nombre,2,50) && validarString($result->url,5,500) && validarNum($result->precio,2) && validarSelect($result->categoria)))
     {
-      return "nuevo item de carta ingresado.";          
-    }        
-    throw new Exception("Error al insertar la carta");
+      $resultQuery = Escribir("INSERT INTO `mozapp`.`carta` (`NOMBRE`,`URLIMG`,`CATEGORIAID`,`PRECIO`)VALUES('$result->nombre','$result->url',$result->categoria,$result->precio)");
+      if($resultQuery >0)
+      {
+        return "nuevo item de carta ingresado.";          
+      }        
+      throw new Exception("Error al insertar la carta");
+    }
   }
 
   function actualizarItemCarta($id,$body)   

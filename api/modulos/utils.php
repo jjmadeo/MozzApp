@@ -75,38 +75,28 @@ function logger($text)
 
 function validarString($string,$sizeMin,$sizeMax)
 {
-    if(filter_var($string, FILTER_SANITIZE_STRING))
-    {
-        if(strlen($Nombre)>$sizeMax)
-        {
-          throw new Exception("El campo $string debe tener como máximo $sizeMax caracteres");
-        }
-        if(strlen($Nombre)>$sizeMin)
-        {
-          throw new Exception("El campo $string debe tener como mínimo $sizeMax caracteres");
-        }
-        return true;
-    }
-    else
-    {
-      throw new Exception("El campo Nombre de plata esta vacio o no es una cadena de caracteres.");
-    }
-}
-
-function validarInt($Numero)
-{
     if(isset($Numero))
-        if(filter_var($Numero, FILTER_SANITIZE_NUMBER_INT))
+    {
+        if(filter_var($string, FILTER_SANITIZE_STRING))
         {
+            if(strlen($Nombre)>$sizeMax)
+            {
+            throw new Exception("El campo $string debe tener como máximo $sizeMax caracteres");
+            }
+            if(strlen($Nombre)>$sizeMin)
+            {
+            throw new Exception("El campo $string debe tener como mínimo $sizeMax caracteres");
+            }
             return true;
         }
         else
         {
-            throw new Exception("El campo $Numero no es valido, verifique los datos ingresados.");
+        throw new Exception("El campo $string no es una cadena de caracteres.");
         }
+    }
     else
     {
-        throw new Exception("Debe completar el campo $Numero.");
+        throw new Exception("El campo $string esta vacío.");
     }
 }
 
@@ -136,5 +126,16 @@ function validarNum($Numero,$tipo)
     }
 }
 
+function validarSelect($select)
+{
+    if(isset($select))
+    {
+        return true;
+    }
+    else
+    {
+        throw new Exception("Debe seleccionar una opcion valida en el campo $select.");
+    }
+}
 
 ?>

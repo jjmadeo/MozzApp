@@ -137,7 +137,7 @@ export class AbmCartaComponent implements OnInit,DoCheck {
       console.log(res)
       alerta('OK','Curresel grabado')
       f.resetForm();
-      this._auditoria.auditoria('AñadirItemCarrusellPrincipal','Se ah agregado un registro en El Carrusel').subscribe(res=>{});
+      this._auditoria.auditoria('AñadirItemCarrusellPrincipal','Se ha agregado un registro en El Carrusel').subscribe(res=>{});
       this.renderBannerCarta()
       loaderSet(false)
 
