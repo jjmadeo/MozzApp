@@ -58,7 +58,7 @@ logout(){
     localStorage.removeItem("sesion")
     this.router.navigate(['/home']);
   },e=>{
-    console.log(e);
+   // console.log(e);
     alerta('ERROR','No se ah podido cerrar Sesion');
   });
   

@@ -33,9 +33,7 @@ export class MozoHomeComponent implements OnInit
 
       this._mesaService.getmesasEmpleado(this.idMozo).subscribe(res=>{      
         this.mesas=JSON.parse(JSON.stringify(res).toLowerCase());
-        console.log(this.mesas);
       },e=>{
-        console.log(e);
       })
 
 
@@ -101,16 +99,16 @@ export class MozoHomeComponent implements OnInit
   obtenerMesasEmpleado(){
     this._mesaService.getmesasEmpleado(this.idMozo).subscribe(res=>{      
       this.mesas=JSON.parse(JSON.stringify(res).toLowerCase());
-      console.log(this.mesas);
+      //console.log(this.mesas);
     },e=>{
-      console.log(e);
+      //console.log(e);
     })
   }
 
   solicitarCierre(){
     loaderSet(true);
     this._notificacionService.altaNotificacion({idPedido:this.idPedido,tipo:4}).subscribe(res=>{
-        console.log(res)
+        //console.log(res)
 
       this.solicCierre=false;
       loaderSet(false);      

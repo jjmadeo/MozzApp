@@ -21,7 +21,7 @@ export class AdmPersonasComponent implements OnInit {
   passwordDataChange:string;
 
   turnoData:string;
-  rolData:number;
+  rolData:any;
   idUsuario:number;
   swichModificarPersona:boolean;
   swichEliminarPersona:boolean;
@@ -44,11 +44,9 @@ export class AdmPersonasComponent implements OnInit {
     this._personaServices.getROLES().subscribe(res=>{
       
       this.listaRolescombo=res;
-      console.log(this.listaRolescombo)
         loaderSet(false);
     
     },err=>{
-      console.log(err)
       loaderSet(false);
     }
     )
@@ -65,14 +63,12 @@ crearEmpleado(){
     turno:this.turnoData,
     usuario:this.usuarioData,
     clave: this.passwordData,
-    rol:this.rolData
+    rol:parseInt(this.rolData ,10)
 }
-  console.log(empleado);
 
  this._personaServices.altaEmpleado(empleado).subscribe(res=>{
       
-  alerta("OK","usuario grabado correctamente");
-  console.log(res)
+  alerta("OK",res);
   this._auditoria.auditoria('Alta Empleado','Se ah dado de alta al empleado.').subscribe(res=>{});
 
     loaderSet(false);
@@ -80,8 +76,7 @@ crearEmpleado(){
 
 
 },err=>{
-  alerta("ERROR","error al crear empleado");
-  console.log(err)
+  alerta("ERROR",err.error);
   loaderSet(false);
 }
 )
@@ -91,11 +86,9 @@ crearEmpleado(){
 rellenarFormUpdatePersona(item){
 
   if(item.value=='NA') this.idUsuario=0;
-  console.log(this.idUsuario);
 
   let arrAux
     arrAux= this.listaUsercombo.find(i=> item === i.ID)
-    console.log(arrAux);
     this.idUsuario = arrAux.ID
     this.usuarioData =arrAux.USUARIO;
     this.nombreData=arrAux.NOMBRE;
@@ -119,7 +112,7 @@ editarEmpleado(){
     turno:this.turnoData,
     usuario:this.usuarioData,
     clave: this.swichCambiarPassword ? this.passwordDataChange:null,
-    rol:this.rolData
+    rol:parseInt(this.rolData ,10)
 }
   
 loaderSet(true);
@@ -172,13 +165,11 @@ personasCombo(){
   this._personaServices.getEMPL().subscribe(res=>{
       
     this.listaUsercombo=res;
-    console.log(this.listaUsercombo)
       loaderSet(false);
 
       this._auditoria.auditoria('ObtenerEmpleados','Se solicitaron los empleados.').subscribe(res=>{});
   
   },err=>{
-    console.log(err)
     loaderSet(false);
   }
   )

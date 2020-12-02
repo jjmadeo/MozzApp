@@ -28,44 +28,75 @@ function ObtenerEmpleados(){
   }
 
 function crearempleado($body){
-  // session_start();
-  // $usuarioAutenticado=$_SESSION['usaurio'];
-  // $rol=$_SESSION['rol'];
     $result= json_decode($body);
+
+    if(gettype($result->nombre) != 'string' || strlen($result->nombre)>50)throw new Exception('el campo NOMBRE debe ser de tipo string contener 50 caracteres como maximo.');  
+    
+    if(gettype($result->apellido) != 'string' || strlen($result->apellido)>50)throw new Exception('el campo APELLIDO debe contener 50 caracteres como maximo y ser de toipo String.');  
+    
+    
+    if(!(strcmp($result->turno,"TM") ==0 || strcmp($result->turno,"TT") ==0) )throw new Exception('solo se admiten valores TM y TT');  
+
+    if(gettype($result->usuario) != 'string' || strlen($result->usuario)>8)throw new Exception('el campo USUARIO debe contener 8 caracteres como maximo y ser de tipo string');  
+   
+    if(gettype($result->clave) != 'string' || strlen($result->clave)>20)throw new Exception('el campo CLAVE debe contener 20 caracteres como maximo.');  
+    
+    if(gettype($result->rol) != 'integer')throw new Exception('el campo ROL debe ser de tipo entero');  
+
 
     $usuarioBBDD = Leer("SELECT EMPLUSUA as usuario  FROM mozapp.empleado e  where   EMPLUSUA ='$result->usuario'");
 
 
     if(isset($usuarioBBDD[0]['usuario'])){
-      return "Usuario existente";
+      throw new Exception ("Usuario existente");
     }
 
     $result->clave = password_hash($result->clave,PASSWORD_DEFAULT);
-    return Escribir(" INSERT INTO `empleado` (`EMPLNOMB`,`EMPLAPLL`,`EMPLTURN`,`EMPLUSUA`,`EMPLCLAV`,`ROLEID`)VALUES('$result->nombre','$result->apellido','$result->turno','$result->usuario','$result->clave',$result->rol)");
-   //return Escribir(" INSERT INTO empleado ('EMPLNOMB','EMPLAPLL','EMPLTURN','EMPLUSUA','EMPLCLAV','ROLEID') VALUES('$result=>nombre','$result=>apellido','$result=>turno','$result=>usuario','$result=>clave',$result=>rol)");
+    $resultQuery= Escribir(" INSERT INTO `empleado` (`EMPLNOMB`,`EMPLAPLL`,`EMPLTURN`,`EMPLUSUA`,`EMPLCLAV`,`ROLEID`)VALUES('$result->nombre','$result->apellido','$result->turno','$result->usuario','$result->clave',$result->rol)");
+    if($resultQuery>0){
+      return'Usaurio Grabado correctamente';
+    }
+    else{
+      throw new Exception ("Error al grabar usuario.");
+    }
 
 }
 
 
 function actualizarEmpleado($body,$id){
-  // session_start();
-  // $usuarioAutenticado=$_SESSION['usaurio'];
-  // $rol=$_SESSION['rol'];
+  
     $result= json_decode($body);
 
+   if(gettype($result->nombre) != 'string' || strlen($result->nombre)>50)throw new Exception('el campo NOMBRE debe ser de tipo string contener 50 caracteres como maximo.');  
+    
+    if(gettype($result->apellido) != 'string' || strlen($result->apellido)>50)throw new Exception('el campo APELLIDO debe contener 50 caracteres como maximo y ser de toipo String.');  
+    
+    
+    if(!(strcmp($result->turno,"TM") ==0 || strcmp($result->turno,"TT") ==0) )throw new Exception('solo se admiten valores TM y TT');  
+
+    if(gettype($result->usuario) != 'string' || strlen($result->usuario)>8)throw new Exception('el campo USUARIO debe contener 8 caracteres como maximo y ser de tipo string');  
+   
+    
+    if(gettype($result->rol) != 'integer')throw new Exception('el campo ROL debe ser de tipo entero');
+
     if($result->clave !== null){
+      if(gettype($result->clave) != 'string' || strlen($result->clave)>20)throw new Exception('el campo CLAVE debe contener 20 caracteres como maximo.');  
+
       $result->clave = password_hash($result->clave,PASSWORD_DEFAULT);
-      return Escribir(" update `empleado` set `EMPLNOMB`='$result->nombre',`EMPLAPLL`='$result->apellido',`EMPLTURN`='$result->turno',`EMPLUSUA`='$result->usuario',`EMPLCLAV`='$result->clave',`ROLEID`= '$result->rol' where emplid = $id");
+      $resultQuery = Escribir(" update `empleado` set `EMPLNOMB`='$result->nombre',`EMPLAPLL`='$result->apellido',`EMPLTURN`='$result->turno',`EMPLUSUA`='$result->usuario',`EMPLCLAV`='$result->clave',`ROLEID`= '$result->rol' where emplid = $id");
     }else{
-      return Escribir(" update `empleado` set `EMPLNOMB`='$result->nombre',`EMPLAPLL`='$result->apellido',`EMPLTURN`='$result->turno',`EMPLUSUA`='$result->usuario',`ROLEID`= '$result->rol' where emplid = $id");
+      $resultQuery =  Escribir(" update `empleado` set `EMPLNOMB`='$result->nombre',`EMPLAPLL`='$result->apellido',`EMPLTURN`='$result->turno',`EMPLUSUA`='$result->usuario',`ROLEID`= '$result->rol' where emplid = $id");
 
     }
 
+    if($resultQuery >0){
+      return 'Se ah modificado el empleado';
+    }
+    else{
+      throw new Exception('No se ha podido modificar el empleado.');
+    }
     
-    // $result->clave = password_hash($result->clave,PASSWORD_DEFAULT);
-    // return Escribir(" update `empleado` set `EMPLNOMB`='$result->nombre',`EMPLAPLL`='$result->apellido',`EMPLTURN`='$result->turno',`EMPLUSUA`='$result->usuario',`EMPLCLAV`='$result->clave',`ROLEID`= '$result->rol' where emplid = $id");
-   //return Escribir(" INSERT INTO empleado ('EMPLNOMB','EMPLAPLL','EMPLTURN','EMPLUSUA','EMPLCLAV','ROLEID') VALUES('$result=>nombre','$result=>apellido','$result=>turno','$result=>usuario','$result=>clave',$result=>rol)");
-
+    
 }
 
 function actualizarMesaEmpleado($urlid,$body){
@@ -73,6 +104,9 @@ function actualizarMesaEmpleado($urlid,$body){
   // $usuarioAutenticado=$_SESSION['usaurio'];
   // $rol=$_SESSION['rol'];
   $result= json_decode($body);
+
+  if(!$result->id_empl > 0 ) throw new Exception('el id de la mesa tiene que ser mayor a 0');
+
 
    $resultQuery = Escribir("update mozapp.relamesaemplpedido set EMPLID = $result->id_empl, FECHA_HORA = current_timestamp()  where MESAID =$urlid");
 

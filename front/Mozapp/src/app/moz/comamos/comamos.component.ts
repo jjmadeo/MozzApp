@@ -35,7 +35,7 @@ validarMesa(){
   loaderSet(true);
   this._mesaService.getMesaID(this.nmesaData).subscribe(res=>{
     if(res.length!=0){
-    console.log(res);
+    //console.log(res);
     res = JSON.stringify(res[0]).toLowerCase()
     res  = JSON.parse(res);
       if(res.habilitada === "1" && res.ocupada === "0"){

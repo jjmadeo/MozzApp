@@ -10,40 +10,39 @@ function altaMesaPedido($obj){
 
     if(gettype($jsonBody->mesaID)!='integer' || $jsonBody->mesaID <1)  throw new Exception('verifique el valor del numero de mesa.');
 
-    if((count($jsonBody->pedido->pedidoList)>0))throw new Exception('El pedido debe contener productos a preparar');
-    
+    if(!(count($jsonBody->pedido->pedidoList)>0))throw new Exception('El pedido debe contener productos a preparar');
 
 
+    $conn = getConnection();
+    $resultQuery = null;
+    $totalPedido= $jsonBody->pedido->pedidoTotal;
+    try {
+        // set the PDO error mode to exception
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);      
+        $conn->beginTransaction();
 
-    // $conn = getConnection();
-    // $resultQuery = null;
-    // $totalPedido= $jsonBody->pedido->pedidoTotal;
-    // try {
-    //     // set the PDO error mode to exception
-    //     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);      
-    //     $conn->beginTransaction();
+        $conn->exec("UPDATE `mozapp`.`mesa` SET `OCUPADA` = 1 WHERE `MESAID` =  $jsonBody->mesaID;");        
+        $relaIDWhitMesa = Leer(" SELECT  relaid as ID FROM mozapp.relamesaemplpedido where  mesaid = $jsonBody->mesaID ;")[0]['ID'];
+        $conn->exec("INSERT INTO `mozapp`.`pedido` (`TOTAL`,`RELAID`)VALUES($totalPedido,$relaIDWhitMesa);");
+        $id_Pedido = $conn->lastInsertId();
+        $listaPedido = $jsonBody->pedido->pedidoList;
+      foreach ( $listaPedido as $item ){
 
-    //     $conn->exec("UPDATE `mozapp`.`mesa` SET `OCUPADA` = 1 WHERE `MESAID` =  $jsonBody->mesaID;");        
-    //     $relaIDWhitMesa = Leer(" SELECT  relaid as ID FROM mozapp.relamesaemplpedido where  mesaid = $jsonBody->mesaID ;")[0]['ID'];
-    //     $conn->exec("INSERT INTO `mozapp`.`pedido` (`TOTAL`,`RELAID`)VALUES($totalPedido,$relaIDWhitMesa);");
-    //     $id_Pedido = $conn->lastInsertId();
-    //     $listaPedido = $jsonBody->pedido->pedidoList;
-    //   foreach ( $listaPedido as $item ){
-    //         $conn->exec("INSERT INTO `mozapp`.`relacartapedido` (`PEDIDOID`,`PRODID`,`CANTIDAD`,`OBSERVACION`) VALUES($id_Pedido,$item->id,$item->cantidad,'$item->observacion');");
-    //   }
-    //   //envio notificacion al realizar alta de pedido .
-    //   $conn->exec("INSERT INTO `mozapp`.`notificacion`(`PEDIDOID`,`ESTADOID`,`TIPO_NOTI_ID`)VALUES($id_Pedido,1,3);");
+            $conn->exec("INSERT INTO `mozapp`.`relacartapedido` (`PEDIDOID`,`PRODID`,`CANTIDAD`,`OBSERVACION`) VALUES($id_Pedido,$item->id,$item->cantidad,'$item->observacion');");
+      }
+      //envio notificacion al realizar alta de pedido .
+      $conn->exec("INSERT INTO `mozapp`.`notificacion`(`PEDIDOID`,`ESTADOID`,`TIPO_NOTI_ID`)VALUES($id_Pedido,1,3);");
 
-    //     $conn->commit();
-    //     $resultQuery = array("msj"=>"Transaccion finalizada con exito.","nPedido"=>$id_Pedido);
-    //   } catch(PDOException $e) {
-    //     // roll back the transaction if something failed
-    //     $conn->rollback();
-    //     $resultQuery = "Error: " . $e->getMessage();
-    //   }
-    //   finally{
-    //      return $resultQuery;
-    //   }
+        $conn->commit();
+        $resultQuery = array("msj"=>"Transaccion finalizada con exito.","nPedido"=>$id_Pedido);
+      } catch(PDOException $e) {
+        // roll back the transaction if something failed
+        $conn->rollback();
+        $resultQuery = "Error: " . $e->getMessage();
+      }
+      finally{
+         return $resultQuery;
+      }
       
 
 }
@@ -64,6 +63,11 @@ return array("pedido"=>Leer("SELECT c.NOMBRE,c.URLIMG,c.PRECIO,rela.CANTIDAD, re
 
 function CerrarMesa($obj){
   $jsonBody= json_decode($obj);
+
+  if(gettype($jsonBody->idmesa)!='integer' || $jsonBody->idmesa <1)  throw new Exception('verifique el valor del numero de mesa.');
+
+
+
   $conn = getConnection();
   $resultQuery = null;
   try {
@@ -110,6 +114,16 @@ function CerrarMesa($obj){
 
 function calificacion($obj){
   $jsonBody= json_decode($obj);
+  if(strlen($jsonBody->nombre)>50)throw new Exception('el campo nombre debe contener 50 caracteres como maximo.');  
+
+  if(strlen($jsonBody->email)>50)throw new Exception('el campo email debe contener 50 caracteres como maximo.');
+  
+  if(strlen($jsonBody->telefono)>20)throw new Exception('el campo telefono debe contener 20 caracteres como maximo.');
+  
+  if(strlen($jsonBody->comentario)>500)throw new Exception('el campo Comentario debe contener 50 caracteres como maximo.');
+
+  if(!($jsonBody->puntuacion>0 && $jsonBody->puntuacion <11) )  throw new Exception('el campo puntuacion debe contener valores entre 1 y 10');
+
 
   $result =Escribir("INSERT INTO `mozapp`.`calificacion`(`NOMBRE`,`EMAIL`,`TELEFONO`,`PUNTUACION`,`COMENTARIO`)VALUES('$jsonBody->nombre','$jsonBody->email','$jsonBody->telefono',$jsonBody->puntuacion,'$jsonBody->comentario');");
 

@@ -7,6 +7,11 @@ require_once('./modulos/utils.php');
 function login($body){
     $result= json_decode($body);
 
+    if(gettype($result->usuario) != 'string' || strlen($result->usuario)>8)throw new Exception('Verifique el Usuario');  
+    if(gettype($result->clave) != 'string' || strlen($result->clave)>20)throw new Exception('Verifique la password');  
+
+
+
     $usuarioBBDD = Leer("SELECT EMPLID as ID, EMPLNOMB as NOMBRE, EMPLAPLL as APELLIDO, EMPLTURN as TURNO, EMPLUSUA as USUARIO, EMPLCLAV as clave, r.NOMBRE as ROL, r.ROLEID , token  FROM mozapp.empleado e , mozapp.rol r where e.BAJA = 0 and e.ROLEID =r.ROLEID and EMPLUSUA ='$result->usuario'");
    // return $result->clave."-----".$usuarioBBDD[0]['clave']
 

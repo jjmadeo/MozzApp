@@ -21,7 +21,6 @@ export class MesaComponent implements OnInit, DoCheck {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.mesaObj)
     this.obtenerNotificaciones();
   }
   ngDoCheck(): void {
@@ -39,7 +38,6 @@ export class MesaComponent implements OnInit, DoCheck {
          this.pedidoDeCobro = true;
        }
 
-        console.log(this.notificaciones)
 
         loaderSet(false);
 

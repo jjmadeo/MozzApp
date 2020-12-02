@@ -30,7 +30,6 @@ export class AdminHomeComponent implements OnInit {
         loaderSet(false);
 
     },err=>{
-      console.log(err)
       loaderSet(false);
     })
 

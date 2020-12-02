@@ -80,8 +80,8 @@ export class AuthAdminGuard implements CanActivate {
 
 
 
-    console.log(state.url)
-    console.log(rol)
+    //console.log(state.url)
+   // console.log(rol)
 
     
     return false;

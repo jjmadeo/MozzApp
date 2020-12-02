@@ -179,14 +179,25 @@ if($Token){
  
         switch ($url) {
             case "empleado":
-               $var = crearempleado($BodyRequest);
-                if($var>0){
-                    print_r(json_encode(array("MSJ"=>"Usuario Grabado")));
-                    http_response_code(200);
-                }else{
-                    print_r(json_encode(array("MSJ"=>$var)));
-                    http_response_code(400);    
+                try {
+    
+                    print_r(json_encode(crearempleado($BodyRequest)));
+              
+                    json_encode(http_response_code(200));    
+                } catch (Throwable $th) {
+                    
+                print_r(json_encode($th->getMessage()));
+              
+                json_encode(http_response_code(404));
                 }
+            //    $var = crearempleado($BodyRequest);
+            //     if($var>0){
+            //         print_r(json_encode(array("MSJ"=>"Usuario Grabado")));
+            //         http_response_code(200);
+            //     }else{
+            //         print_r(json_encode(array("MSJ"=>$var)));
+            //         http_response_code(400);    
+            //     }
                 
             break;
             
@@ -207,9 +218,23 @@ if($Token){
             
     
             case "cerrarSesion": 
-                print_r(json_encode(cerrarSesion($BodyRequest)));
-                $BodyRequest = json_decode($BodyRequest);
-                logger("Se ah cerrado sesion del usaurio $BodyRequest->idUsua");
+
+
+                try {
+    
+                    print_r(json_encode(cerrarSesion($BodyRequest)));
+              
+                    json_encode(http_response_code(200));    
+                } catch (Throwable $th) {
+                    
+                print_r(json_encode($th->getMessage()));
+              
+                json_encode(http_response_code(404));
+                }
+    
+                // print_r(json_encode(cerrarSesion($BodyRequest)));
+                // $BodyRequest = json_decode($BodyRequest);
+                // logger("Se ah cerrado sesion del usaurio $BodyRequest->idUsua");
     
     
             break;
@@ -359,7 +384,17 @@ if($Token){
     
         switch ($url) {
             case "empleado/".$parametroGET:
-                print_r(json_encode(actualizarEmpleado($BodyRequest,$parametroGET)));
+                try {
+    
+                    print_r(json_encode(actualizarEmpleado($BodyRequest,$parametroGET)));
+              
+                    json_encode(http_response_code(200));    
+                } catch (Throwable $th) {
+                    
+                print_r(json_encode($th->getMessage()));
+              
+                json_encode(http_response_code(404));
+                }            
             break;
             
             case "carta/".$parametroGET:

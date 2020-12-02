@@ -90,7 +90,6 @@ export class AltaMesaComponent implements OnInit,DoCheck {
         })
     }
   
-    console.log(this._route.snapshot.paramMap.get('id')+"-"+this._route.snapshot.paramMap.get('name'))
 
     
       this.pedidoList = []
@@ -102,7 +101,6 @@ export class AltaMesaComponent implements OnInit,DoCheck {
 
     loaderSet(true);
     this._notificacionService.altaNotificacion({idPedido:this.nPedido,tipo:1}).subscribe(res=>{
-        console.log(res)
 
 
       loaderSet(false);
@@ -166,8 +164,7 @@ export class AltaMesaComponent implements OnInit,DoCheck {
   }
 
   enviarPedido(){
-    console.log(this.pedidoList)
-    this.mesaRequestJSON.mesaID = this.nmesa;
+    this.mesaRequestJSON.mesaID = parseInt(this.nmesa,10);
     this.mesaRequestJSON.pedido.pedidoTotal = this.total;
     let arrAux=[];
     
@@ -192,7 +189,6 @@ export class AltaMesaComponent implements OnInit,DoCheck {
             //this.pedidoEnviado =  true;
             this.mozoDelayButtom=true;
             this.cuentaDelayButtom = true
-            console.log(res)
             this.nPedido = res.nPedido
 
 
@@ -207,7 +203,6 @@ export class AltaMesaComponent implements OnInit,DoCheck {
       
             loaderSet(false)
           },e=>{
-            console.log(e);
                 alerta('ERROR','No se puede generar el pedido');
                 
 
@@ -216,7 +211,6 @@ export class AltaMesaComponent implements OnInit,DoCheck {
         }
 
       },e=>{
-        console.log(e)
         alerta('ERROR','Verifique numero de mesa');
       })
 
@@ -239,7 +233,6 @@ export class AltaMesaComponent implements OnInit,DoCheck {
     this.cuentaDelayButtom=false;
     this.mozoDelayButtom=false;
     this._notificacionService.altaNotificacion({idPedido:this.nPedido,tipo:2}).subscribe(res=>{
-        console.log(res)
       loaderSet(false);
       localStorage.removeItem('mesa');
       localStorage.removeItem('pedidoEnviado');

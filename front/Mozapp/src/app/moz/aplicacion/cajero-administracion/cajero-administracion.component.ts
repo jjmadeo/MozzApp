@@ -50,7 +50,6 @@ cargarPersonas(){
     loaderSet(true)
     this._mesaService.getMesas().subscribe(res=>{
       this.mesas =  JSON.parse(JSON.stringify(res).toLowerCase())
-      console.log(this.mesas)
       this._auditoria.auditoria('ObtenerMesas','Se ha solicitado la lista de Mesas').subscribe(res=>{});
 
       loaderSet(false)
@@ -62,7 +61,6 @@ cargarPersonas(){
   }
   actualizarRelaMesas(idEMPL,MESAID){
     this._personaService.asignarMesa(MESAID,idEMPL).subscribe(res=>{
-      console.log(res);
       this._auditoria.auditoria('ReasignarMesa',`Se ah reasignado la mesa ${MESAID} al empleado ${idEMPL}`).subscribe(res=>{});
 
       this.cargarMesas()
@@ -76,7 +74,6 @@ cargarPersonas(){
     this._mesaService.habilitarMesa(item.id_mesa,estado).subscribe(res=>{
       this._auditoria.auditoria('ActualizarEstadoMesa',`Se ah modificado  la mesa ${item.id_mesa} al estado  ${estado}`).subscribe(res=>{});
 
-      console.log(res);
       this.cargarMesas()
       this.cargarPersonas()
       loaderSet(false)
@@ -86,7 +83,6 @@ cargarPersonas(){
   }
   verQrMesa(id){
     this._mesaService.getMesaID(id).subscribe(res=>{
-      console.log(res);
       this.urlQr = "data:image/png;base64,"+res[0].QR
 
     })
@@ -97,7 +93,6 @@ cargarPersonas(){
   actualizarQr(item){
     loaderSet(true)
     this._mesaService.ActualizarQR(item).subscribe(res=>{
-      console.log(res.msj)
       alerta('OK',res.msj);
       loaderSet(false)
     },e=>{

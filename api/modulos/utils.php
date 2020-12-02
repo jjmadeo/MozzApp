@@ -49,9 +49,7 @@ function obtenerTokenUser($token){
 
         $usuario = Leer("SELECT * FROM mozapp.empleado where token = '$token'");
         $rol=(String)$usuario[0]['ROLEID'];
-        logger("rol del usuario a comparar=>$rol ");
 
-        logger("valorFinal=>".strstr((string)$roles, (string)$usuario[0]['ROLEID']));
 
 
         // foreach ($arrRoles as &$valor) {

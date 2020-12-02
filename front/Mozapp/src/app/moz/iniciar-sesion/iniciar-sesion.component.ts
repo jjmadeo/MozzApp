@@ -33,7 +33,7 @@ export class IniciarSesionComponent implements OnInit {
    users:any;
 
   enviar():void{
-    console.log(this.passwordData, this.usuarioData);
+   // console.log(this.passwordData, this.usuarioData);
   }
 
   ngOnInit(): void {

@@ -35,7 +35,6 @@ export class CajeroHomeComponent implements OnInit {
       this.renderingMesas=true
       this._mesaService.getMesas().subscribe(res=>{
         this.mesas = JSON.parse(JSON.stringify(res).toLowerCase());
-        console.log(this.mesas);
 
       },e=>{
 
@@ -60,7 +59,6 @@ export class CajeroHomeComponent implements OnInit {
       
       this._auditoria.auditoria('ObtenerPedidosMesa','Se solicitaron los pedidos de la mesa => '+mesa.id_mes).subscribe(res=>{});
       
-      console.log(this.pedido)
       this.totalView = this.total
       loaderSet(false);
 
@@ -84,10 +82,10 @@ export class CajeroHomeComponent implements OnInit {
 
   cerrarMesa(ID){
     loaderSet(true)
+      ID = parseInt(ID,10);
     this._mesaService.cerrarMesa({idmesa:ID,descuento:this.descuentoData}).subscribe(res=>{
       loaderSet(false)
       alerta('OK',res.msj)
-      console.log(res)
       this._auditoria.auditoria('CerrarMesa','Se solicto el cierre de la mesa => '+ID).subscribe(res=>{});
 
       this.renderMesas()
@@ -95,7 +93,6 @@ export class CajeroHomeComponent implements OnInit {
 
     },e=>{
       loaderSet(false)
-      console.log(e)
       alerta('ERROR',e)
     })
 }
@@ -117,7 +114,6 @@ renderMesas(){
   loaderSet(true);
       this._mesaService.getMesas().subscribe(res=>{
         this.mesas = JSON.parse(JSON.stringify(res).toLowerCase());
-        console.log(this.mesas);
         this._auditoria.auditoria('ObtenerMesas','Se solicito la lista de mesas.').subscribe(res=>{});
 
         loaderSet(false);
