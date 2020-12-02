@@ -137,13 +137,13 @@
                         <div class="row" >
                               <div class="col">
                                 <label for="validationServerUsername">Nombre</label>                           
-                                    <input type="text" class="form-control" [disabled]='swichBanner'  name="nombre" #nombre="ngModel" [ngClass]="{'is-valid': nombre.valid && nombre.touched,'is-invalid': !nombre.valid && nombre.touched }"  [(ngModel)]="nombreBannerData"   required>
+                                    <input type="text" class="form-control" [disabled]='swichBanner' maxlength="50" name="nombre" #nombre="ngModel" [ngClass]="{'is-valid': nombre.valid && nombre.touched,'is-invalid': !nombre.valid && nombre.touched }"  [(ngModel)]="nombreBannerData"   required>
                               </div>
                         </div>
                         <div class="row" >
                             <div class="col">
                                 <label for="validationServerUsername">Descripccion </label>
-                                    <input type="text" class="form-control " [disabled]='swichBanner'  [ngClass]="{'is-valid': descripccion.valid && descripccion.touched,'is-invalid': !descripccion.valid && descripccion.touched }"  name="descripccion" #descripccion="ngModel"  [(ngModel)]="descripccionBannerData" required>
+                                    <input type="text" class="form-control " [disabled]='swichBanner' maxlength="50" [ngClass]="{'is-valid': descripccion.valid && descripccion.touched,'is-invalid': !descripccion.valid && descripccion.touched }"  name="descripccion" #descripccion="ngModel"  [(ngModel)]="descripccionBannerData" required>
                                  
                               </div>  
                         </div>
@@ -152,7 +152,7 @@
                             <div class="col">
     
                                 <label for="validationServerUsername">URL </label>
-                                <input type="text" class="form-control " [disabled]='swichBanner'   [ngClass]="{'is-valid': precio.valid && precio.touched,'is-invalid': !precio.valid && precio.touched }"  name="precio" #precio="ngModel"  [(ngModel)]="urlBannerData" required>
+                                <input type="text" class="form-control " maxlength="500" [disabled]='swichBanner'   [ngClass]="{'is-valid': precio.valid && precio.touched,'is-invalid': !precio.valid && precio.touched }"  name="precio" #precio="ngModel"  [(ngModel)]="urlBannerData" required>
                              
                             </div>
                             
